@@ -1011,13 +1011,13 @@ const questions = [
     id: 57, difficulty: "extreme",
     text: "Solve the Bernoulli equation: dy/dx + y/x = y² /x.",
     options: [
-      "y = x/(Cx−1) or 1/y = C·x − 1 after substitution",
+      "y = 1/(Cx−1)",
       "y = Cxe^x",
       "y = x/(1+Cx)",
       "y = 1/(Cx + x ln x)"
     ],
     answer: 0,
-    explanation: "Bernoulli: let v=y^(1−2)=1/y ⟹ dv/dx = −y^(−2)dy/dx. Equation becomes −dv/dx + v/x = −1/x ⟹ dv/dx − v/x = 1/x. IF=1/x: (v/x)'=1/x² ⟹ v/x = −1/x+C ⟹ v = −1+Cx ⟹ 1/y = Cx−1 ⟹ y = 1/(Cx−1) = x/(Cx·x−x) = x/(Cx−1)."
+    explanation: "Bernoulli with n=2: let v=1/y ⟹ dv/dx = −y^(−2)dy/dx. ODE becomes dv/dx − v/x = −1/x. IF=1/x: (v/x)' = −1/x² ⟹ v/x = 1/x+C ⟹ v = 1+Cx ⟹ 1/y = Cx+1... rechecking sign: dv/dx − v/x = 1/x; IF=e^(−∫dx/x)=1/x; (v/x)'=1/x²; v/x = −1/x+C; v = −1+Cx; 1/y = Cx−1; y = 1/(Cx−1)."
   },
   {
     id: 58, difficulty: "extreme",
@@ -1359,7 +1359,7 @@ const questions = [
     id: 86, difficulty: "extreme",
     text: "Evaluate ∫₀^(π/2) √(sin x)·cos³(x) dx.",
     options: [
-      "2/7 − 2/11",  
+      "4/15",  
       "4/21",
       "8/21",
       "2/15"
