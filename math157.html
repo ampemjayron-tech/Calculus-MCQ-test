@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH 157 — Functions, Limits &amp; Continuity MCQ Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .quiz-content {
+            padding: 30px;
+            display: none;
+        }
+
+        .quiz-content.active {
+            display: block;
+        }
+
+        .question-number {
+            color: #11998e;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: #11998e;
+            background: #f0fdf8;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #11998e;
+            background: #e0f7f0;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #11998e;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: #28a745;
+        }
+
+        .option.incorrect .option-letter {
+            background: #dc3545;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-feedback {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .feedback.incorrect-feedback {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(17, 153, 142, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #5a6268;
+        }
+
+        .start-screen {
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .start-screen h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .start-screen p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .test-info {
+            background: #f0fdf8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #11998e;
+            text-align: left;
+        }
+
+        .test-info li {
+            margin: 8px 0;
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .results-screen {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .score-circle-subtitle {
+            font-size: 16px;
+        }
+
+        .results-details {
+            background: #f0fdf8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #11998e;
+        }
+
+        .results-details p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .results-details strong {
+            color: #11998e;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section-a { background: #e3f2fd; color: #0d47a1; }
+        .section-b { background: #fce4ec; color: #880e4f; }
+        .section-c { background: #e8f5e9; color: #1b5e20; }
+        .section-d { background: #fff3e0; color: #e65100; }
+        .section-e { background: #f3e5f5; color: #4a148c; }
+        .section-f { background: #e0f7fa; color: #006064; }
+        .section-g { background: #fff8e1; color: #f57f17; }
+        .section-h { background: #fbe9e7; color: #bf360c; }
+        .section-i { background: #e8eaf6; color: #1a237e; }
+        .section-j { background: #e0f2f1; color: #004d40; }
+
+        .start-screen .btn-primary {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .results-screen .btn-primary {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 MATH 157 — Functions, Limits &amp; Continuity</h1>
+            <p>KNUST Interactive MCQ Quiz</p>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="quiz-content active">
+            <div class="start-screen">
+                <h2>Welcome to the MATH 157 Assessment Quiz</h2>
+                <p>Test your knowledge on functions, limits, continuity, and the Fundamental Theorem of Calculus.</p>
+
+                <div class="test-info">
+                    <ul>
+                        <li><strong>Total Questions:</strong> 76</li>
+                        <li><strong>Sections:</strong> A (Function Evaluation), B (Domain), C (Basic Limits), D (Piecewise &amp; Absolute Value Limits), E (Limits at Infinity), F (Trigonometric Limits), G–H–I (Continuity), J (Fundamental Theorem of Calculus)</li>
+                        <li><strong>Time Limit:</strong> No time limit</li>
+                        <li><strong>Instant Feedback:</strong> Get immediate feedback on each answer</li>
+                        <li><strong>Score Tracking:</strong> See your performance at the end</li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-primary" onclick="startQuiz()">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="quiz-content">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">
+                    Question <span id="currentQuestion">1</span> of <span id="totalQuestions">76</span>
+                </div>
+            </div>
+
+            <div class="section-badge" id="sectionBadge"></div>
+
+            <div class="question-number" id="questionNumber"></div>
+            <div class="question-text" id="questionText"></div>
+
+            <div class="options" id="optionsContainer"></div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn" style="display:none;">&#8592; Previous</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">Next &#8594;</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="quiz-content">
+            <div class="results-screen">
+                <h2>Quiz Completed!</h2>
+                <div class="score-circle">
+                    <div id="finalScore">0</div>
+                    <div class="score-circle-subtitle">/ 76</div>
+                </div>
+
+                <div class="results-details">
+                    <p><strong>Correct Answers:</strong> <span id="correctCount">0</span></p>
+                    <p><strong>Wrong Answers:</strong> <span id="wrongCount">0</span></p>
+                    <p><strong>Accuracy:</strong> <span id="accuracy">0</span>%</p>
+                    <p><strong>Questions Attempted:</strong> <span id="attemptedCount">0</span> / 76</p>
+                </div>
+
+                <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // ── SECTION A: Function Evaluation ───────────────────────────────────
+            {
+                section: "A",
+                sectionLabel: "Section A — Function Evaluation",
+                question: "Let f(x) = 2x + 3. What is f(0)?",
+                options: ["0", "1", "3", "5"],
+                correct: 2,
+                explanation: "Substitute x = 0: f(0) = 2(0) + 3 = 3"
+            },
+            {
+                section: "A",
+                sectionLabel: "Section A — Function Evaluation",
+                question: "Let f(x) = 2x + 3. What is f(1)?",
+                options: ["3", "4", "5", "6"],
+                correct: 2,
+                explanation: "f(1) = 2(1) + 3 = 5"
+            },
+            {
+                section: "A",
+                sectionLabel: "Section A — Function Evaluation",
+                question: "Let f(x) = 2x + 3. What is f(−3)?",
+                options: ["−9", "−3", "0", "9"],
+                correct: 1,
+                explanation: "f(−3) = 2(−3) + 3 = −6 + 3 = −3"
+            },
+            {
+                section: "A",
+                sectionLabel: "Section A — Function Evaluation",
+                question: "Let f(x) = 2x + 3. What is f(a)?",
+                options: ["2a", "2a + 1", "2a + 3", "a + 3"],
+                correct: 2,
+                explanation: "Replace x with a: f(a) = 2a + 3"
+            },
+            {
+                section: "A",
+                sectionLabel: "Section A — Function Evaluation",
+                question: "Given f : x → (3x − 1)/(x − 3) on {−2, −1, 0, 1, 2}. What is f(−1)?",
+                options: ["1", "4/4", "−1", "1/2"],
+                correct: 0,
+                explanation: "f(−1) = (−3 − 1)/(−1 − 3) = −4/−4 = 1"
+            },
+            {
+                section: "A",
+                sectionLabel: "Section A — Function Evaluation",
+                question: "Given f : x → (3x − 1)/(x − 3) on {−2, −1, 0, 1, 2}. What is f(2)?",
+                options: ["1", "−5", "5", "−1"],
+                correct: 1,
+                explanation: "f(2) = (6 − 1)/(2 − 3) = 5/(−1) = −5"
+            },
+            {
+                section: "A",
+                sectionLabel: "Section A — Function Evaluation",
+                question: "For f : x → (3x − 1)/(x − 3), which value of x makes the function undefined?",
+                options: ["x = 1", "x = 0", "x = 3", "x = −3"],
+                correct: 2,
+                explanation: "The denominator x − 3 = 0 when x = 3"
+            },
+
+            // ── SECTION B: Domain of a Function ──────────────────────────────────
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of f(x) = (1 − 2x) / √(2x − 1)?",
+                options: ["x ≥ 1/2", "x > 1/2", "x < 1/2", "All real numbers"],
+                correct: 1,
+                explanation: "√(2x − 1) must be real AND non-zero (it is in the denominator), so 2x − 1 > 0 ⟹ x > 1/2"
+            },
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of f : x → (x + 5)/(x − 3)?",
+                options: ["x ≠ 5", "All real numbers", "x ≠ 3", "x > 3"],
+                correct: 2,
+                explanation: "Denominator x − 3 ≠ 0 ⟹ x ≠ 3"
+            },
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of f(x) = 1 − 2x?",
+                options: ["x ≥ 0", "x > 0", "x ≠ 1/2", "All real numbers"],
+                correct: 3,
+                explanation: "f is a linear (polynomial) function — defined for all x ∈ ℝ"
+            },
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of g : x → √(2x − 1)?",
+                options: ["x > 1/2", "x ≥ 1/2", "x ≥ 1", "x > 0"],
+                correct: 1,
+                explanation: "2x − 1 ≥ 0 ⟹ x ≥ 1/2"
+            },
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of g : x → x / √(2x − 1)?",
+                options: ["x ≥ 1/2", "x > 1/2", "All real numbers", "x > 0"],
+                correct: 1,
+                explanation: "√(2x − 1) in the denominator requires 2x − 1 > 0 ⟹ x > 1/2"
+            },
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of g(x) = √(1 − x²)?",
+                options: ["[0, 1]", "(−1, 1)", "[−1, 1]", "(−∞, 1]"],
+                correct: 2,
+                explanation: "1 − x² ≥ 0 ⟹ x² ≤ 1 ⟹ −1 ≤ x ≤ 1"
+            },
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of f(x) = √(5x − 2)?",
+                options: ["x ≥ 2", "x > 2/5", "x ≥ 2/5", "x ≥ 5/2"],
+                correct: 2,
+                explanation: "5x − 2 ≥ 0 ⟹ x ≥ 2/5"
+            },
+            {
+                section: "B",
+                sectionLabel: "Section B — Domain of a Function",
+                question: "What is the largest possible domain of f(x) = √(x − 2) / (x² − 4)?",
+                options: ["x ≥ 2", "x > 2", "x ≥ 2 and x ≠ −2", "x > 2 and x ≠ −2"],
+                correct: 1,
+                explanation: "Need x − 2 ≥ 0 (⟹ x ≥ 2) AND x² − 4 ≠ 0 (⟹ x ≠ ±2). Combined: x > 2"
+            },
+
+            // ── SECTION C: Basic Limit Evaluation ────────────────────────────────
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→1) (x² − 1)/(x − 1).",
+                options: ["0", "1", "2", "Does not exist"],
+                correct: 2,
+                explanation: "(x² − 1)/(x − 1) = (x + 1)(x − 1)/(x − 1) = x + 1 → 1 + 1 = 2"
+            },
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→4) (2x + 3).",
+                options: ["7", "9", "11", "14"],
+                correct: 2,
+                explanation: "Direct substitution: 2(4) + 3 = 11"
+            },
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→1) (x² − 1)/(x + 1).",
+                options: ["0", "1", "−1", "2"],
+                correct: 0,
+                explanation: "(1 − 1)/(1 + 1) = 0/2 = 0"
+            },
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→2) (x² − 4)/(x − 2).",
+                options: ["0", "2", "4", "Does not exist"],
+                correct: 2,
+                explanation: "Factor: (x + 2)(x − 2)/(x − 2) = x + 2 → 2 + 2 = 4"
+            },
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→4) (x² − 7x + 10)/(x² − 4).",
+                options: ["−1/6", "−1/2", "1/6", "0"],
+                correct: 0,
+                explanation: "Factor: (x − 2)(x − 5)/((x − 2)(x + 2)) = (x − 5)/(x + 2) → (4 − 5)/(4 + 2) = −1/6"
+            },
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→1) (x³ − 1)/(x − 1).",
+                options: ["1", "2", "3", "0"],
+                correct: 2,
+                explanation: "(x³ − 1)/(x − 1) = x² + x + 1 → 1 + 1 + 1 = 3"
+            },
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→9) (9 − x)/(3 − √x).",
+                options: ["3", "6", "9", "Does not exist"],
+                correct: 1,
+                explanation: "9 − x = (3 − √x)(3 + √x), so the expression = 3 + √x → 3 + 3 = 6"
+            },
+            {
+                section: "C",
+                sectionLabel: "Section C — Basic Limit Evaluation",
+                question: "Evaluate lim(x→3) (9 − x²)/(4 − √(x² + 7)).",
+                options: ["4", "6", "8", "Does not exist"],
+                correct: 2,
+                explanation: "Rationalize the denominator by multiplying by (4 + √(x² + 7)). Simplifies to 4 + √(x² + 7) → 4 + 4 = 8"
+            },
+
+            // ── SECTION D: Limits with Piecewise & Absolute Value ─────────────────
+            {
+                section: "D",
+                sectionLabel: "Section D — Piecewise & Absolute Value Limits",
+                question: "Evaluate lim(x→2) (x + 3)(x² − 5).",
+                options: ["−5", "5", "10", "−10"],
+                correct: 0,
+                explanation: "(2 + 3)(4 − 5) = 5 · (−1) = −5"
+            },
+            {
+                section: "D",
+                sectionLabel: "Section D — Piecewise & Absolute Value Limits",
+                question: "Let f(x) = 1 − x for x ≤ 2, and f(x) = 4 for x > 2. Does lim(x→2) f(x) exist?",
+                options: ["Yes, limit = −1", "Yes, limit = 4", "Yes, limit = 1", "No, it does not exist"],
+                correct: 3,
+                explanation: "LHL = 1 − 2 = −1; RHL = 4. Since −1 ≠ 4, the limit does not exist"
+            },
+            {
+                section: "D",
+                sectionLabel: "Section D — Piecewise & Absolute Value Limits",
+                question: "Evaluate lim(x→0) |x| / x.",
+                options: ["0", "1", "−1", "Does not exist"],
+                correct: 3,
+                explanation: "LHL = −1 (x < 0 gives |x|/x = −x/x = −1); RHL = 1. Limit DNE"
+            },
+            {
+                section: "D",
+                sectionLabel: "Section D — Piecewise & Absolute Value Limits",
+                question: "Let f(x) = x + 1 for x ≠ 1, and f(1) = π. Evaluate lim(x→1) f(x).",
+                options: ["π", "1", "2", "Does not exist"],
+                correct: 2,
+                explanation: "The limit depends on behaviour near x = 1, not the value AT x = 1. x + 1 → 2"
+            },
+            {
+                section: "D",
+                sectionLabel: "Section D — Piecewise & Absolute Value Limits",
+                question: "Let f(x) = √(x − 4) for x > 4, and f(x) = 8 − 2x for x < 4. Does lim(x→4) f(x) exist?",
+                options: ["No", "Yes, limit = 4", "Yes, limit = 0", "Yes, limit = 8"],
+                correct: 2,
+                explanation: "RHL = √(4 − 4) = 0; LHL = 8 − 8 = 0. Both equal 0, so limit = 0"
+            },
+            {
+                section: "D",
+                sectionLabel: "Section D — Piecewise & Absolute Value Limits",
+                question: "Let f(x) = (x − 1)/(x² − 1) for x ≠ 1, and f(1) = 2. Evaluate lim(x→1) f(x).",
+                options: ["2", "1/2", "1", "0"],
+                correct: 1,
+                explanation: "(x − 1)/((x − 1)(x + 1)) = 1/(x + 1) → 1/(1 + 1) = 1/2  (note: f(1) = 2 is irrelevant to the limit)"
+            },
+            {
+                section: "D",
+                sectionLabel: "Section D — Piecewise & Absolute Value Limits",
+                question: "Which of the following is true about lim(x→0) |x|?",
+                options: ["Limit = −1", "Limit = 1", "Limit = 0", "Limit does not exist"],
+                correct: 2,
+                explanation: "Both LHL and RHL = 0, confirming lim(x→0) |x| = 0"
+            },
+
+            // ── SECTION E: Limits at Infinity ─────────────────────────────────────
+            {
+                section: "E",
+                sectionLabel: "Section E — Limits at Infinity",
+                question: "Evaluate lim(x→∞) 1/xⁿ (n > 0).",
+                options: ["∞", "1", "n", "0"],
+                correct: 3,
+                explanation: "As x → ∞, 1/xⁿ → 0 for any positive n"
+            },
+            {
+                section: "E",
+                sectionLabel: "Section E — Limits at Infinity",
+                question: "Evaluate lim(x→0) 1/xⁿ.",
+                options: ["0", "∞ (limit does not exist)", "n", "1"],
+                correct: 1,
+                explanation: "1/xⁿ grows without bound as x → 0. We write lim = ∞ to mean the limit DNE in the usual sense"
+            },
+            {
+                section: "E",
+                sectionLabel: "Section E — Limits at Infinity",
+                question: "Evaluate lim(x→∞) (5x² − 1)/(2x² + 1).",
+                options: ["5", "2", "5/2", "1/2"],
+                correct: 2,
+                explanation: "Divide numerator and denominator by x²: (5 − 1/x²)/(2 + 1/x²) → 5/2"
+            },
+            {
+                section: "E",
+                sectionLabel: "Section E — Limits at Infinity",
+                question: "Evaluate lim(x→∞) 7x/(x − 4).",
+                options: ["4", "7", "0", "Does not exist"],
+                correct: 1,
+                explanation: "Divide by x: 7/(1 − 4/x) → 7/1 = 7"
+            },
+            {
+                section: "E",
+                sectionLabel: "Section E — Limits at Infinity",
+                question: "Evaluate lim(x→∞) (2x³ − 7x + 3)/(x³ + 2).",
+                options: ["1", "3", "7", "2"],
+                correct: 3,
+                explanation: "Highest power is x³; ratio of leading coefficients = 2/1 = 2"
+            },
+            {
+                section: "E",
+                sectionLabel: "Section E — Limits at Infinity",
+                question: "Evaluate lim(x→∞) 3x/(x + 2).",
+                options: ["0", "1", "2", "3"],
+                correct: 3,
+                explanation: "Divide by x: 3/(1 + 2/x) → 3"
+            },
+
+            // ── SECTION F: Trigonometric Limits ──────────────────────────────────
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Which of the following limits is equal to 1?",
+                options: ["lim(x→0) sin(x)", "lim(x→0) cos(x)", "lim(x→0) sin(x)/x", "lim(x→0) cos(x)/x"],
+                correct: 2,
+                explanation: "The standard result: lim(x→0) sin(x)/x = 1"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) cos(x).",
+                options: ["0", "1", "−1", "∞"],
+                correct: 1,
+                explanation: "Direct substitution: cos(0) = 1"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) tan(x)/x.",
+                options: ["0", "∞", "1/2", "1"],
+                correct: 3,
+                explanation: "tan x / x = (sin x / cos x) / x = (sin x / x) · (1/cos x) → 1 · 1 = 1"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) sin(2x)/x.",
+                options: ["0", "1", "2", "Does not exist"],
+                correct: 2,
+                explanation: "Rewrite as 2 · sin(2x)/(2x). As 2x → 0, sin(2x)/(2x) → 1, so limit = 2"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) sec(x).",
+                options: ["0", "1", "∞", "−1"],
+                correct: 1,
+                explanation: "sec(0) = 1/cos(0) = 1/1 = 1"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) (cos x + sin x).",
+                options: ["0", "1", "2", "√2"],
+                correct: 1,
+                explanation: "cos(0) + sin(0) = 1 + 0 = 1"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) (2 tan x − x)/(sin 2x).",
+                options: ["0", "1/4", "1/2", "1"],
+                correct: 2,
+                explanation: "Near x = 0: 2 tan x − x ≈ 2x − x = x and sin 2x ≈ 2x. Ratio → x/2x = 1/2"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) (√2 − sin x)/(cos x).",
+                options: ["0", "1", "√2", "Does not exist"],
+                correct: 2,
+                explanation: "Direct substitution: (√2 − 0)/1 = √2"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) sin(5x)/x.",
+                options: ["1", "5", "1/5", "0"],
+                correct: 1,
+                explanation: "Rewrite as 5 · sin(5x)/(5x). As 5x → 0, sin(5x)/(5x) → 1, so limit = 5"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) cot(x)/cot(2x).",
+                options: ["1", "1/2", "2", "0"],
+                correct: 2,
+                explanation: "cot x / cot 2x = (cos x · sin 2x)/(sin x · cos 2x) = (cos x · 2 sin x cos x)/(sin x · cos 2x) = 2cos²x/cos 2x → 2/1 = 2"
+            },
+            {
+                section: "F",
+                sectionLabel: "Section F — Trigonometric Limits",
+                question: "Evaluate lim(x→0) cos(x)/x.",
+                options: ["1", "∞ (does not exist)", "0", "−1"],
+                correct: 2,
+                explanation: "From the standard trig limit table: lim(x→0) cos(x)/x = 0"
+            },
+
+            // ── SECTION G: Continuity — Definition & Conditions ──────────────────
+            {
+                section: "G",
+                sectionLabel: "Section G — Continuity: Definition & Conditions",
+                question: "A function f is continuous at x = a if which THREE conditions are met?",
+                options: [
+                    "f(a) defined; lim exists; lim = f(a)",
+                    "f(a) = 0; lim = 0; f is differentiable",
+                    "f(a) defined; f(a) = 0; lim exists",
+                    "f is a polynomial; f(a) ≠ 0; lim is finite"
+                ],
+                correct: 0,
+                explanation: "All three: f(a) defined, lim(x→a) f(x) exists, and lim(x→a) f(x) = f(a)"
+            },
+            {
+                section: "G",
+                sectionLabel: "Section G — Continuity: Definition & Conditions",
+                question: "Which type of function is continuous for ALL real x without exception?",
+                options: ["Rational function", "Polynomial function", "Radical function", "Logarithmic function"],
+                correct: 1,
+                explanation: "Every polynomial is continuous on ℝ (no denominators or radicals to worry about)"
+            },
+            {
+                section: "G",
+                sectionLabel: "Section G — Continuity: Definition & Conditions",
+                question: "A rational function f(x) = p(x)/q(x) is discontinuous at values where:",
+                options: ["p(x) = 0", "q(x) = 0", "p(x) = q(x)", "f(x) > 1"],
+                correct: 1,
+                explanation: "Division by zero occurs whenever q(x) = 0"
+            },
+            {
+                section: "G",
+                sectionLabel: "Section G — Continuity: Definition & Conditions",
+                question: "Show that f(x) = 1 − √(1 − x²) is continuous on [−1, 1]. At x = 0, f(0) = ?",
+                options: ["0", "1", "−1", "√2 − 1"],
+                correct: 0,
+                explanation: "f(0) = 1 − √(1 − 0) = 1 − 1 = 0 (the function is defined everywhere on [−1, 1])"
+            },
+            {
+                section: "G",
+                sectionLabel: "Section G — Continuity: Definition & Conditions",
+                question: "Verify continuity of f(x) = (x² − 4)/(x − 2) at x = 2. What can you conclude?",
+                options: [
+                    "Continuous, since lim = f(2) = 4",
+                    "Discontinuous, since f(2) is undefined",
+                    "Continuous, since lim does not exist",
+                    "Discontinuous, since lim does not exist"
+                ],
+                correct: 1,
+                explanation: "f(2) is undefined (0/0), so Condition 1 fails — the function is discontinuous at x = 2"
+            },
+
+            // ── SECTION H: Continuity at a Given Point ────────────────────────────
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Is f(x) = 3x − 2 continuous at x = −2?",
+                options: ["No, f(−2) is undefined", "Yes", "No, the limit does not exist", "No, lim ≠ f(−2)"],
+                correct: 1,
+                explanation: "f(−2) = −8; lim(x→−2)(3x − 2) = −8. All 3 conditions satisfied"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Is f(x) = 2x + 6 continuous at x = −3?",
+                options: ["No", "Yes, and f(−3) = 0", "Yes, and f(−3) = 6", "No, lim does not exist"],
+                correct: 1,
+                explanation: "f(−3) = 2(−3) + 6 = 0; lim = 0. Continuous"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Is h(x) = x² − x − 6 continuous at x = 3?",
+                options: ["No, h(3) is undefined", "No, lim ≠ h(3)", "Yes, h(3) = 0", "Yes, h(3) = 6"],
+                correct: 2,
+                explanation: "h(3) = 9 − 3 − 6 = 0; lim(x→3)(x² − x − 6) = 0. Continuous"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Is g(x) = (x + 1)/(x − 3) continuous at x = 3?",
+                options: ["Yes", "No, g(3) is undefined", "No, lim does not exist", "Both B and C"],
+                correct: 3,
+                explanation: "g(3) = 4/0 is undefined, and the limit is ±∞. Discontinuous"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Is g(x) = (x − 5)/(x + 2) continuous at x = −2?",
+                options: ["Yes", "No, lim ≠ g(−2)", "No, g(−2) is undefined", "No, lim does not exist"],
+                correct: 2,
+                explanation: "x + 2 = 0 at x = −2, so g(−2) is undefined — discontinuous"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "For f(x) = (x² − 25)/(x − 5), evaluate lim(x→5) f(x).",
+                options: ["0", "5", "10", "Does not exist"],
+                correct: 2,
+                explanation: "(x² − 25)/(x − 5) = (x + 5)(x − 5)/(x − 5) = x + 5 → 5 + 5 = 10"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Is f(x) = (x² − 25)/(x − 5) continuous at x = 5?",
+                options: ["Yes", "No, lim does not exist", "No, f(5) is undefined", "No, lim = 10 ≠ f(5)"],
+                correct: 2,
+                explanation: "f(5) = 0/0 is undefined — first condition for continuity fails"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Is f(x) = (x² − 25)/(x − 5) continuous at x = 0?",
+                options: ["Yes, f(0) = 5 and lim = 5", "No, f(0) is undefined", "No, lim = 0", "Yes, f(0) = 0"],
+                correct: 0,
+                explanation: "f(0) = (0 − 25)/(0 − 5) = −25/−5 = 5; lim(x→0)(x + 5) = 5. All conditions met"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Let f(x) = x + 2 for x ≤ 1, and f(x) = x² + 3 for x > 1. Is f continuous at x = 1?",
+                options: ["Yes", "No — LHL ≠ RHL", "No — f(1) is undefined", "No — lim does not equal f(1)"],
+                correct: 1,
+                explanation: "LHL = 1 + 2 = 3; RHL = 1 + 3 = 4. Since 3 ≠ 4, the limit does not exist — discontinuous"
+            },
+            {
+                section: "H",
+                sectionLabel: "Section H — Continuity at a Given Point",
+                question: "Let f(x) = x − 3 for x ≤ 0, and f(x) = x² + x − 3 for x > 0. Is f continuous at x = 0?",
+                options: ["Yes", "No — LHL ≠ RHL", "No — f(0) is undefined", "No — lim ≠ f(0)"],
+                correct: 0,
+                explanation: "f(0) = −3; LHL = 0 − 3 = −3; RHL = 0 + 0 − 3 = −3. All equal, so continuous"
+            },
+
+            // ── SECTION I: Continuity on Intervals ───────────────────────────────
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval(s) is f(x) = (2x + 1)/((x − 1)(2x + 1)) continuous?",
+                options: ["ℝ", "x ≠ 1", "(−∞, −½) ∪ (−½, 1) ∪ (1, ∞)", "(−∞, 1) ∪ (1, ∞)"],
+                correct: 2,
+                explanation: "Denominator = 0 when x = 1 and when 2x + 1 = 0 ⟹ x = −1/2. Exclude both"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval is f(x) = (1.12)^x continuous?",
+                options: ["x > 0", "x ≥ 0", "All real numbers", "x > 1"],
+                correct: 2,
+                explanation: "Every exponential function is continuous on ℝ"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval is f(x) = √(x − 7) continuous?",
+                options: ["(7, ∞)", "[7, ∞)", "(−∞, 7]", "x ≠ 7"],
+                correct: 1,
+                explanation: "Need x − 7 ≥ 0 ⟹ x ≥ 7. Continuous on [7, ∞)"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval is f(x) = 7x² − 3.2x + 0.5 continuous?",
+                options: ["x ≥ 0", "x > 0", "x ≠ 0", "All real numbers"],
+                correct: 3,
+                explanation: "A polynomial is continuous everywhere on ℝ"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval(s) is f(x) = (x + 1)/((x + 1)(x − 3)) continuous?",
+                options: ["x ≠ 3", "(−∞, −1) ∪ (−1, 3) ∪ (3, ∞)", "(−3, ∞)", "ℝ"],
+                correct: 1,
+                explanation: "Denominator = 0 at x = −1 and x = 3. Both excluded"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval is f(x) = 4x³ − 2x² + 1.3x − 5 continuous?",
+                options: ["x > 0", "x ≠ 0", "x ≥ 1", "All real numbers"],
+                correct: 3,
+                explanation: "A cubic polynomial is continuous on all of ℝ"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval is f(x) = √(2x + 3) continuous?",
+                options: ["x ≥ 3/2", "x > −3/2", "x ≥ −3/2", "x > 3/2"],
+                correct: 2,
+                explanation: "2x + 3 ≥ 0 ⟹ x ≥ −3/2. Continuous on [−3/2, ∞)"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval is f(x) = e^(−0.25x) continuous?",
+                options: ["x > 0", "x ≥ 0", "x ≠ 0", "All real numbers"],
+                correct: 3,
+                explanation: "Exponential functions are continuous on ℝ for all real x"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval is f(x) = −2.1 + ln(x + 3) continuous?",
+                options: ["x > 3", "x ≥ −3", "x > −3", "All real numbers"],
+                correct: 2,
+                explanation: "ln(x + 3) requires x + 3 > 0 ⟹ x > −3. Continuous on (−3, ∞)"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval(s) is f(x) = (3x − 7)/(2x + 1) continuous?",
+                options: ["ℝ", "x ≠ 7/3", "(−∞, −½) ∪ (−½, ∞)", "x > −1/2"],
+                correct: 2,
+                explanation: "Denominator 2x + 1 = 0 ⟹ x = −1/2. Exclude this value"
+            },
+            {
+                section: "I",
+                sectionLabel: "Section I — Continuity on Intervals",
+                question: "On which interval(s) is f(x) = (2x − 3)/((2x − 3)(x + 4)) continuous?",
+                options: ["x ≠ 3/2", "x ≠ −4", "(−∞, −4) ∪ (−4, 3/2) ∪ (3/2, ∞)", "x ≠ 3/2 and x ≠ 4"],
+                correct: 2,
+                explanation: "Denominator = 0 when 2x − 3 = 0 (x = 3/2) or x + 4 = 0 (x = −4). Both excluded"
+            },
+
+            // ── SECTION J: Fundamental Theorem of Calculus ───────────────────────
+            {
+                section: "J",
+                sectionLabel: "Section J — Fundamental Theorem of Calculus",
+                question: "The Fundamental Theorem of Calculus states ∫[a to b] f(x)dx = ?",
+                options: ["f(b) + f(a)", "F(b) − F(a)", "F′(b) − F′(a)", "f(b) − f(a)"],
+                correct: 1,
+                explanation: "If F is an antiderivative of f, then ∫[a to b] f(x) dx = F(b) − F(a)"
+            },
+            {
+                section: "J",
+                sectionLabel: "Section J — Fundamental Theorem of Calculus",
+                question: "According to the Fundamental Theorem of Calculus, d/dx [∫[a to x] f(t) dt] = ?",
+                options: ["f(a)", "F(x)", "f(x)", "F(x) − F(a)"],
+                correct: 2,
+                explanation: "Differentiating the integral with respect to its upper limit gives back the integrand f(x)"
+            },
+            {
+                section: "J",
+                sectionLabel: "Section J — Fundamental Theorem of Calculus",
+                question: "What does the Fundamental Theorem of Calculus tell us about differentiation and integration?",
+                options: [
+                    "They give the same result",
+                    "They are unrelated operations",
+                    "They are inverse (reverse) operations",
+                    "Integration is the limit of differentiation"
+                ],
+                correct: 2,
+                explanation: "The theorem shows differentiation and integration are inverse operations of each other"
+            }
+        ];
+
+        // ── State ─────────────────────────────────────────────────────────────────
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        // ── Section badge colours ──────────────────────────────────────────────────
+        const sectionClass = {
+            A: 'section-a',
+            B: 'section-b',
+            C: 'section-c',
+            D: 'section-d',
+            E: 'section-e',
+            F: 'section-f',
+            G: 'section-g',
+            H: 'section-h',
+            I: 'section-i',
+            J: 'section-j'
+        };
+
+        // ── Screens ───────────────────────────────────────────────────────────────
+        function showScreen(id) {
+            document.querySelectorAll('.quiz-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            document.getElementById('totalQuestions').textContent = quizData.length;
+            showScreen('quizScreen');
+            renderQuestion();
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        // ── Render ────────────────────────────────────────────────────────────────
+        function renderQuestion() {
+            const q = quizData[currentQuestionIndex];
+            const total = quizData.length;
+            const idx = currentQuestionIndex;
+
+            // Progress
+            document.getElementById('progressFill').style.width = ((idx + 1) / total * 100) + '%';
+            document.getElementById('currentQuestion').textContent = idx + 1;
+
+            // Section badge
+            const badge = document.getElementById('sectionBadge');
+            badge.textContent = q.sectionLabel;
+            badge.className = 'section-badge ' + (sectionClass[q.section] || '');
+
+            // Question
+            document.getElementById('questionNumber').textContent = 'Question ' + (idx + 1);
+            document.getElementById('questionText').textContent = q.question;
+
+            // Options
+            const letters = ['A', 'B', 'C', 'D'];
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            const answered = userAnswers[idx] !== null;
+
+            q.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option' + (answered ? ' disabled' : '');
+
+                if (answered) {
+                    if (i === q.correct) div.classList.add('correct');
+                    else if (i === userAnswers[idx]) div.classList.add('incorrect');
+                }
+
+                div.innerHTML = '<span class="option-letter">' + letters[i] + '</span>' + opt;
+                if (!answered) div.addEventListener('click', () => selectAnswer(i));
+                container.appendChild(div);
+            });
+
+            // Feedback
+            const feedback = document.getElementById('feedback');
+            if (answered) {
+                const correct = userAnswers[idx] === q.correct;
+                feedback.className = 'feedback show ' + (correct ? 'correct-feedback' : 'incorrect-feedback');
+                feedback.innerHTML = (correct ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.explanation;
+            } else {
+                feedback.className = 'feedback';
+                feedback.innerHTML = '';
+            }
+
+            // Navigation buttons
+            document.getElementById('prevBtn').style.display = idx > 0 ? 'block' : 'none';
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.textContent = idx === total - 1 ? 'Finish Quiz' : 'Next →';
+        }
+
+        function selectAnswer(optionIndex) {
+            if (userAnswers[currentQuestionIndex] !== null) return;
+            userAnswers[currentQuestionIndex] = optionIndex;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ── Results ───────────────────────────────────────────────────────────────
+        function showResults() {
+            let correct = 0;
+            let attempted = 0;
+            userAnswers.forEach((ans, i) => {
+                if (ans !== null) {
+                    attempted++;
+                    if (ans === quizData[i].correct) correct++;
+                }
+            });
+
+            const wrong = attempted - correct;
+            const accuracy = attempted > 0 ? Math.round(correct / attempted * 100) : 0;
+
+            document.getElementById('finalScore').textContent = correct;
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('wrongCount').textContent = wrong;
+            document.getElementById('accuracy').textContent = accuracy;
+            document.getElementById('attemptedCount').textContent = attempted;
+
+            showScreen('resultsScreen');
+        }
+    </script>
+</body>
+</html>
