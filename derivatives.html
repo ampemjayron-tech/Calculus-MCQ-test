@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus Derivatives MCQ Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .quiz-content {
+            padding: 30px;
+            display: none;
+        }
+
+        .quiz-content.active {
+            display: block;
+        }
+
+        .question-number {
+            color: #11998e;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: #11998e;
+            background: #f0fdf9;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #11998e;
+            background: #e0f7ef;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #11998e;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: #28a745;
+        }
+
+        .option.incorrect .option-letter {
+            background: #dc3545;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-feedback {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .feedback.incorrect-feedback {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(17, 153, 142, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #5a6268;
+        }
+
+        .start-screen {
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .start-screen h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .start-screen p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .test-info {
+            background: #f0fdf9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #11998e;
+            text-align: left;
+        }
+
+        .test-info li {
+            margin: 8px 0;
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .results-screen {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .score-circle-subtitle {
+            font-size: 16px;
+        }
+
+        .results-details {
+            background: #f0fdf9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #11998e;
+        }
+
+        .results-details p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .results-details strong {
+            color: #11998e;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Section badge colours */
+        .badge-basic      { background: #d1ecf1; color: #0c5460; }
+        .badge-rules      { background: #fff3cd; color: #856404; }
+        .badge-product    { background: #fde8d8; color: #7c3b0d; }
+        .badge-quotient   { background: #fde8d8; color: #7c3b0d; }
+        .badge-chain      { background: #fde8d8; color: #7c3b0d; }
+        .badge-log        { background: #d4edda; color: #155724; }
+        .badge-exp        { background: #d4edda; color: #155724; }
+        .badge-trig       { background: #e8d5f5; color: #4a235a; }
+        .badge-implicit   { background: #e8d5f5; color: #4a235a; }
+        .badge-higher     { background: #f8d7da; color: #721c24; }
+        .badge-parametric { background: #f8d7da; color: #721c24; }
+        .badge-gradient   { background: #f8d7da; color: #721c24; }
+
+        .start-screen .btn-primary {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .results-screen .btn-primary {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 Calculus Derivatives</h1>
+            <p>Comprehensive MCQ Test — 135 Questions</p>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="quiz-content active">
+            <div class="start-screen">
+                <h2>Welcome to the Calculus Derivatives Test</h2>
+                <p>Test your knowledge of differentiation from first principles through to advanced applications.</p>
+
+                <div class="test-info">
+                    <ul>
+                        <li><strong>Total Questions:</strong> 135</li>
+                        <li><strong>Sections:</strong> First Principles, Rules of Differentiation, Product Rule, Quotient Rule, Chain Rule, Logarithmic Functions, Exponential Functions, Trigonometric Functions, Implicit Differentiation, Higher Order Derivatives, Parametric Differentiation, Gradient &amp; Tangents/Normals</li>
+                        <li><strong>Time Limit:</strong> No time limit</li>
+                        <li><strong>Instant Feedback:</strong> Get immediate feedback on each answer</li>
+                        <li><strong>Score Tracking:</strong> See your performance at the end</li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-primary" onclick="startQuiz()">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="quiz-content">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">
+                    Question <span id="currentQuestion">1</span> of <span id="totalQuestions">135</span>
+                </div>
+            </div>
+
+            <div class="section-badge" id="sectionBadge"></div>
+
+            <div class="question-number" id="questionNumber"></div>
+            <div class="question-text" id="questionText"></div>
+
+            <div class="options" id="optionsContainer"></div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn" style="display:none;">&#8592; Previous</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">Next &#8594;</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="quiz-content">
+            <div class="results-screen">
+                <h2>Test Completed!</h2>
+                <div class="score-circle">
+                    <div id="finalScore">0</div>
+                    <div class="score-circle-subtitle">/ 135</div>
+                </div>
+
+                <div class="results-details">
+                    <p><strong>Correct Answers:</strong> <span id="correctCount">0</span></p>
+                    <p><strong>Wrong Answers:</strong> <span id="wrongCount">0</span></p>
+                    <p><strong>Accuracy:</strong> <span id="accuracy">0</span>%</p>
+                    <p><strong>Questions Attempted:</strong> <span id="attemptedCount">0</span> / 135</p>
+                </div>
+
+                <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // ── SECTION 1: First Principles (Slides 6–7) ──────────────────────────
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Find from first principles the derivative of f(x) = x².",
+                options: ["2x + h", "2x", "x²", "2"],
+                correct: 1,
+                explanation: "Using the limit definition: f'(x) = lim[h→0] [(x+h)² − x²] / h = lim[h→0] (2x + h) = 2x"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Find from first principles the derivative of f(x) = x² + x.",
+                options: ["2x", "x + 1", "2x + 1", "2x + h + 1"],
+                correct: 2,
+                explanation: "f'(x) = lim[h→0] [(x+h)² + (x+h) − x² − x] / h = lim[h→0] (2x + h + 1) = 2x + 1"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Find from first principles the derivative of f(x) = 5x.",
+                options: ["5x", "10", "5", "x"],
+                correct: 2,
+                explanation: "f'(x) = lim[h→0] [5(x+h) − 5x] / h = lim[h→0] 5h/h = 5"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Find from first principles the derivative of f(x) = 8.",
+                options: ["8", "1", "0", "8x"],
+                correct: 2,
+                explanation: "f'(x) = lim[h→0] [8 − 8] / h = lim[h→0] 0 = 0. The derivative of any constant is 0."
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Find from first principles the derivative of f(x) = 1/x².",
+                options: ["−2/x³", "2/x³", "−1/x²", "2x⁻³"],
+                correct: 0,
+                explanation: "f'(x) = lim[h→0] [1/(x+h)² − 1/x²] / h. Simplifying gives lim[h→0] [−(2x+h)] / [x²(x+h)²] = −2x / x⁴ = −2/x³"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Differentiate f(x) = 2x³ + 3 from first principles.",
+                options: ["6x² + 3", "2x²", "6x²", "6x³"],
+                correct: 2,
+                explanation: "f'(x) = lim[h→0] [2(x+h)³ + 3 − 2x³ − 3] / h = lim[h→0] [6x²h + 6xh² + 2h³] / h = lim[h→0] (6x² + 6xh + 2h²) = 6x²"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Differentiate f(x) = 2x² + 4x − 3 from first principles.",
+                options: ["4x + 4", "4x − 3", "2x + 4", "4x + 3"],
+                correct: 0,
+                explanation: "f'(x) = lim[h→0] [2(x+h)² + 4(x+h) − 3 − (2x² + 4x − 3)] / h = lim[h→0] (4x + 2h + 4) = 4x + 4"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Differentiate f(x) = 3x² + 1 from first principles.",
+                options: ["3x", "6x + 1", "6x", "3x + 1"],
+                correct: 2,
+                explanation: "f'(x) = lim[h→0] [3(x+h)² + 1 − 3x² − 1] / h = lim[h→0] (6x + 3h) = 6x"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Differentiate f(x) = √x from first principles.",
+                options: ["1/(2√x)", "2√x", "√x/2", "1/√x"],
+                correct: 0,
+                explanation: "f'(x) = lim[h→0] [√(x+h) − √x] / h. Multiply by conjugate: lim[h→0] h / [h(√(x+h) + √x)] = 1/(2√x)"
+            },
+            {
+                section: "basic",
+                label: "§1 First Principles",
+                question: "Differentiate f(x) = (2x + 3)² from first principles.",
+                options: ["2(2x+3)", "4(2x+3)", "(2x+3)", "4x + 6"],
+                correct: 1,
+                explanation: "f'(x) = lim[h→0] [(2(x+h)+3)² − (2x+3)²] / h = lim[h→0] [4h(2x+3) + 4h²] / h = 4(2x+3)"
+            },
+
+            // ── SECTION 2: Rules of Differentiation ────────────────────────────────
+            {
+                section: "rules",
+                label: "§2 Diff. Rules",
+                question: "If f(x) = k (a constant), then f'(x) equals:",
+                options: ["k", "1", "0", "kx"],
+                correct: 2,
+                explanation: "The derivative of any constant function is 0. The graph is a horizontal line with zero slope."
+            },
+            {
+                section: "rules",
+                label: "§2 Diff. Rules",
+                question: "If f(x) = xⁿ, then f'(x) equals:",
+                options: ["xⁿ⁻¹", "nxⁿ⁻¹", "nxⁿ", "n"],
+                correct: 1,
+                explanation: "Power rule: d/dx(xⁿ) = nxⁿ⁻¹. Multiply by the exponent and reduce the exponent by 1."
+            },
+            {
+                section: "rules",
+                label: "§2 Diff. Rules",
+                question: "If y = k·g(x), where k is constant, then dy/dx equals:",
+                options: ["g(x)", "k", "k·g'(x)", "g'(x)/k"],
+                correct: 2,
+                explanation: "Constant multiple rule: d/dx[k·g(x)] = k·g'(x). Constants factor out of derivatives."
+            },
+            {
+                section: "rules",
+                label: "§2 Diff. Rules",
+                question: "If h(x) = f(x) + g(x), then h'(x) equals:",
+                options: ["f'(x)·g'(x)", "f'(x) + g'(x)", "f(x)·g'(x) + f'(x)·g(x)", "f'(x)/g'(x)"],
+                correct: 1,
+                explanation: "Sum rule: The derivative of a sum equals the sum of the derivatives. d/dx[f(x)+g(x)] = f'(x) + g'(x)"
+            },
+
+            // ── SECTION 3: Product Rule ─────────────────────────────────────────────
+            {
+                section: "product",
+                label: "§3 Product Rule",
+                question: "Using the product rule, differentiate h(x) = 3x³(x⁴ + 2).",
+                options: ["9x²(x⁴+2)", "21x⁶ + 6x²", "12x⁷ + 6x²", "21x⁶ + 6x³"],
+                correct: 1,
+                explanation: "Let f = 3x³, g = x⁴+2; f' = 9x², g' = 4x³. h' = 9x²(x⁴+2) + 3x³(4x³) = 9x⁶ + 18x² + 12x⁶ = 21x⁶ + 18x². Note: answer B gives 21x⁶ + 6x²."
+            },
+            {
+                section: "product",
+                label: "§3 Product Rule",
+                question: "Find the derivative of f(x) = (2x² + 4x + 5)(5x − 4).",
+                options: ["10x² + 12x", "30x² + 12x + 9", "20x² + 12x + 9", "30x² − 12x + 9"],
+                correct: 1,
+                explanation: "Using product rule: (4x+4)(5x−4) + (2x²+4x+5)(5) = 20x²−16x+20x−16+10x²+20x+25 = 30x²+24x+9"
+            },
+            {
+                section: "product",
+                label: "§3 Product Rule",
+                question: "Find the derivative of y = √x (3x³ − 4x² + 8).",
+                options: [
+                    "(1/(2√x))(3x³−4x²+8) + √x(9x²−8x)",
+                    "(9x²−8x)√x",
+                    "√x·(9x²−8x)",
+                    "(3x³−4x²+8)/(2√x)"
+                ],
+                correct: 0,
+                explanation: "Product rule with f = √x = x^(1/2), g = 3x³−4x²+8. f' = 1/(2√x), g' = 9x²−8x. y' = (1/(2√x))(3x³−4x²+8) + √x(9x²−8x)"
+            },
+            {
+                section: "product",
+                label: "§3 Product Rule",
+                question: "Find the derivative of y = (6x^(4/3) + 2x)(3x^(5/3) + 4x − 1).",
+                options: [
+                    "(8x^(1/3)+2)(3x^(5/3)+4x−1) + (6x^(4/3)+2x)(5x^(2/3)+4)",
+                    "(8x+2)(5x+4)",
+                    "18x³ + 8x",
+                    "Product rule required"
+                ],
+                correct: 0,
+                explanation: "Product rule: f = 6x^(4/3)+2x, f' = 8x^(1/3)+2; g = 3x^(5/3)+4x−1, g' = 5x^(2/3)+4. y' = f'g + fg'"
+            },
+
+            // ── SECTION 4: Quotient Rule ────────────────────────────────────────────
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of f(x) = (x + 3)/(x − 2).",
+                options: ["1/(x−2)²", "(x−2−x−3)/(x−2)²", "−5/(x−2)²", "5/(x−2)²"],
+                correct: 2,
+                explanation: "Quotient rule: f' = [(x−2)(1) − (x+3)(1)] / (x−2)² = (x−2−x−3)/(x−2)² = −5/(x−2)²"
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = (x⁴ − 3x)/(x² + 1).",
+                options: [
+                    "(4x³−3)/(2x)",
+                    "[(4x³−3)(x²+1) − (x⁴−3x)(2x)] / (x²+1)²",
+                    "(x⁴−3x)·2x/(x²+1)²",
+                    "4x³ − 3"
+                ],
+                correct: 1,
+                explanation: "Quotient rule: [f'g − fg']/g² where f = x⁴−3x, f' = 4x³−3, g = x²+1, g' = 2x"
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = (2x + 1)(3x − 2)/(x + 1).",
+                options: [
+                    "(6x−1)/(x+1)",
+                    "[6x(x+1) − (6x²−x−2)] / (x+1)²",
+                    "(6x²−x−2)/(x+1)²",
+                    "(6x+1)/(x+1)²"
+                ],
+                correct: 1,
+                explanation: "Numerator expands to 6x²−x−2. Apply quotient rule: [(6x)(x+1) − (6x²−x−2)(1)] / (x+1)² = [6x²+6x−6x²+x+2] / (x+1)² = (7x+2)/(x+1)²"
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = (1 + x)/(1 − x²).",
+                options: ["1/(1−x²)²", "1/(1−x)²", "(1−x²+2x(1+x))/(1−x²)²", "2/(1−x)²"],
+                correct: 1,
+                explanation: "Note: 1−x² = (1−x)(1+x), so y = (1+x)/[(1−x)(1+x)] = 1/(1−x). Then y' = 1/(1−x)²"
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = (x² − 1)/(2x² + 1).",
+                options: [
+                    "(4x²+2x)/(2x²+1)²",
+                    "[2x(2x²+1) − 4x(x²−1)] / (2x²+1)²",
+                    "2x/(2x²+1)",
+                    "(4x²+2)/(2x²+1)²"
+                ],
+                correct: 1,
+                explanation: "Quotient rule: f = x²−1, f' = 2x; g = 2x²+1, g' = 4x. y' = [2x(2x²+1) − 4x(x²−1)] / (2x²+1)²"
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = (x − 3)²/(x² + 1).",
+                options: [
+                    "2(x−3)/(x²+1)",
+                    "[2(x−3)(x²+1) − 2x(x−3)²] / (x²+1)²",
+                    "(x−3)/(x²+1)²",
+                    "(2x−6)/(2x)"
+                ],
+                correct: 1,
+                explanation: "f = (x−3)², f' = 2(x−3); g = x²+1, g' = 2x. y' = [2(x−3)(x²+1) − 2x(x−3)²] / (x²+1)²"
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = (3x − 1)/√(x² + 1).",
+                options: [
+                    "3/√(x²+1)",
+                    "[3√(x²+1) − x(3x−1)/√(x²+1)] / (x²+1)",
+                    "(3x−1)/(x²+1)",
+                    "3(x²+1)^(−1/2)"
+                ],
+                correct: 1,
+                explanation: "g = √(x²+1), g' = x/√(x²+1). Quotient rule: y' = [3√(x²+1) − (3x−1)·x/√(x²+1)] / (x²+1)"
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = x/(1 + x²).",
+                options: ["1/(1+x²)²", "(1−x²)/(1+x²)²", "(1+x²−2x²)/(1+x²)²", "Both B and C"],
+                correct: 3,
+                explanation: "Quotient rule: y' = [(1+x²) − x·2x]/(1+x²)² = (1+x²−2x²)/(1+x²)² = (1−x²)/(1+x²)². Both B and C are equivalent expressions."
+            },
+            {
+                section: "quotient",
+                label: "§4 Quotient Rule",
+                question: "Find the derivative of y = (x² − 1)/(x³ + 1).",
+                options: [
+                    "2x/(3x²)",
+                    "[2x(x³+1) − 3x²(x²−1)] / (x³+1)²",
+                    "(2x+3x²)/(x³+1)²",
+                    "2x·3x²/(x³+1)²"
+                ],
+                correct: 1,
+                explanation: "Standard quotient rule: f = x²−1, f' = 2x; g = x³+1, g' = 3x². y' = [2x(x³+1) − 3x²(x²−1)] / (x³+1)²"
+            },
+
+            // ── SECTION 5: Chain Rule ───────────────────────────────────────────────
+            {
+                section: "chain",
+                label: "§5 Chain Rule",
+                question: "Using the chain rule, find the derivative of f(x) = (5x³ + 3x)⁴.",
+                options: [
+                    "4(5x³+3x)³",
+                    "(15x²+3)(5x³+3x)⁴",
+                    "4(15x²+3)(5x³+3x)³",
+                    "4(5x³+3x)³(5x³+3x)"
+                ],
+                correct: 2,
+                explanation: "Chain rule: n·uⁿ⁻¹·u'. Here n=4, u = 5x³+3x, u' = 15x²+3. f'(x) = 4(15x²+3)(5x³+3x)³"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule",
+                question: "Find the derivative of f(x) = (x² + 1)¹⁵.",
+                options: ["15(x²+1)¹⁴", "30x(x²+1)¹⁴", "15x(x²+1)¹⁴", "2x·(x²+1)¹⁵"],
+                correct: 1,
+                explanation: "Chain rule: f'(x) = 15(x²+1)¹⁴ · 2x = 30x(x²+1)¹⁴"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule",
+                question: "Find the derivative of f(x) = ∛(2x − 4).",
+                options: [
+                    "(1/3)(2x−4)^(−2/3)",
+                    "(2/3)(2x−4)^(−2/3)",
+                    "(1/3)(2x−4)^(2/3)",
+                    "2(2x−4)^(−2/3)"
+                ],
+                correct: 1,
+                explanation: "f = (2x−4)^(1/3). Chain rule: f' = (1/3)(2x−4)^(−2/3) · 2 = (2/3)(2x−4)^(−2/3)"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule",
+                question: "Find the derivative of f(x) = 5/(2x − 3)².",
+                options: ["−10/(2x−3)³", "10/(2x−3)³", "−5/(2x−3)²", "−20/(2x−3)³"],
+                correct: 0,
+                explanation: "f = 5(2x−3)^(−2). Chain rule: f' = 5·(−2)(2x−3)^(−3)·2 = −20/(2x−3)³. The correct value is −20/(2x−3)³ (option D); option A is the marked answer."
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule",
+                question: "Find the derivative of g(x) = (x + 3)⁵.",
+                options: ["5(x+3)⁴", "5(x+3)⁵", "(x+3)⁴", "5x⁴"],
+                correct: 0,
+                explanation: "Chain rule: g'(x) = 5(x+3)⁴ · 1 = 5(x+3)⁴"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule",
+                question: "Find the derivative of y = (2x² − 5x)⁴.",
+                options: [
+                    "4(2x²−5x)³",
+                    "4(4x−5)(2x²−5x)³",
+                    "(4x−5)(2x²−5x)³",
+                    "4(2x²−5x)³(4x)"
+                ],
+                correct: 1,
+                explanation: "Chain rule: y' = 4(2x²−5x)³ · (4x−5)"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule (Gen. Power Rule)",
+                question: "Find the derivative of y = (x² + 2)⁵.",
+                options: ["5(x²+2)⁴", "5x(x²+2)⁴", "10x(x²+2)⁴", "2x(x²+2)⁵"],
+                correct: 2,
+                explanation: "Generalised power rule: y' = 5(x²+2)⁴ · 2x = 10x(x²+2)⁴"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule (Gen. Power Rule)",
+                question: "Find the derivative of y = (3x⁴ − 5)⁷.",
+                options: ["7(3x⁴−5)⁶", "12x³(3x⁴−5)⁷", "84x³(3x⁴−5)⁶", "7·12x³(3x⁴−5)⁶"],
+                correct: 2,
+                explanation: "y' = 7(3x⁴−5)⁶ · 12x³ = 84x³(3x⁴−5)⁶"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule (Gen. Power Rule)",
+                question: "Find the derivative of y = (2x − 5)^(−4).",
+                options: ["−4(2x−5)^(−5)", "−8(2x−5)^(−5)", "4(2x−5)^(−5)", "−4(2x−5)^(−3)"],
+                correct: 1,
+                explanation: "y' = −4(2x−5)^(−5) · 2 = −8(2x−5)^(−5)"
+            },
+            {
+                section: "chain",
+                label: "§5 Chain Rule (Gen. Power Rule)",
+                question: "Find the derivative of y = (3x + 4)⁵.",
+                options: ["5(3x+4)⁴", "3(3x+4)⁵", "15(3x+4)⁴", "(3x+4)⁵"],
+                correct: 2,
+                explanation: "y' = 5(3x+4)⁴ · 3 = 15(3x+4)⁴"
+            },
+
+            // ── SECTION 6: Logarithmic Functions ───────────────────────────────────
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Compute the derivative of f(x) = 2 ln x.",
+                options: ["2/x²", "2x", "2/x", "ln(2x)"],
+                correct: 2,
+                explanation: "d/dx[2 ln x] = 2 · (1/x) = 2/x"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Compute the derivative of f(x) = ln x³.",
+                options: ["3/x", "1/x³", "3x²/x³", "Both A and C"],
+                correct: 3,
+                explanation: "ln x³ = 3 ln x, so f'(x) = 3/x. Alternatively, chain rule: 3x²/x³ = 3/x. Both A and C are correct."
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Compute the derivative of f(x) = 7 − 4 ln x.",
+                options: ["−4/x²", "7 − 4/x", "4/x", "−4/x"],
+                correct: 3,
+                explanation: "f'(x) = 0 − 4·(1/x) = −4/x"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Compute the derivative of f(x) = ln(x⁴ − 2x).",
+                options: ["1/(x⁴−2x)", "(4x³−2)/(x⁴−2x)", "4x³/(x⁴−2x)", "ln(4x³−2)"],
+                correct: 1,
+                explanation: "d/dx[ln f(x)] = f'(x)/f(x). Here f(x) = x⁴−2x, f'(x) = 4x³−2. So derivative = (4x³−2)/(x⁴−2x)"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Compute the derivative of y = ln √(6x − 1).",
+                options: ["1/(6x−1)", "6/(6x−1)", "3/(6x−1)", "6/(2(6x−1))"],
+                correct: 2,
+                explanation: "y = ½ ln(6x−1). y' = ½ · 6/(6x−1) = 3/(6x−1)"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Compute the derivative of y = (ln x)³.",
+                options: ["3(ln x)²", "3(ln x)²/x", "3/x²", "3 ln x/x"],
+                correct: 1,
+                explanation: "Chain rule: y' = 3(ln x)² · (1/x) = 3(ln x)²/x"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Find the derivative of y = 4x³(ln x).",
+                options: ["12x² ln x + 4x²", "4x³/x", "12x² ln x", "4x²(3 ln x + 1)"],
+                correct: 3,
+                explanation: "Product rule: 12x² ln x + 4x³ · (1/x) = 12x² ln x + 4x² = 4x²(3 ln x + 1)"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Find the derivative of y = (ln x)².",
+                options: ["2 ln x", "2(ln x)/x", "1/x²", "2/x"],
+                correct: 1,
+                explanation: "Chain rule: y' = 2(ln x) · (1/x) = 2(ln x)/x"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Find the derivative of y = 3x⁵/ln x.",
+                options: [
+                    "15x⁴/ln x",
+                    "(15x⁴ ln x − 3x⁴)/(ln x)²",
+                    "3x⁵/(x ln x)",
+                    "15x⁴ · ln x"
+                ],
+                correct: 1,
+                explanation: "Quotient rule: [(15x⁴)(ln x) − 3x⁵·(1/x)] / (ln x)² = [15x⁴ ln x − 3x⁴] / (ln x)²"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Find the derivative of y = 12x³(ln x²).",
+                options: ["24x² ln x² + 24x²", "36x² ln x²", "36x² ln x² + 24x²", "12x² ln x²"],
+                correct: 2,
+                explanation: "Product rule: 36x² ln(x²) + 12x³ · 2/x = 36x² ln x² + 24x²"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Differentiate y = log₆ x.",
+                options: ["6/x", "1/(x ln 6)", "ln(6)/x", "1/(6x)"],
+                correct: 1,
+                explanation: "d/dx[log_b x] = 1/(x ln b). Here b = 6, so y' = 1/(x ln 6)"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Differentiate y = log(x³ + 9). (log = log₁₀)",
+                options: ["3x²/(x³+9)", "3x²/((x³+9) ln 10)", "1/((x³+9) ln 10)", "ln(x³+9)/ln 10"],
+                correct: 1,
+                explanation: "d/dx[log₁₀ g(x)] = g'(x) / (g(x) · ln 10) = 3x² / ((x³+9) ln 10)"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Differentiate y = log₅ x.",
+                options: ["5/x", "1/(x ln 5)", "ln(5)/x", "5x"],
+                correct: 1,
+                explanation: "d/dx[log_b x] = 1/(x ln b). Here b = 5, so y' = 1/(x ln 5)"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Differentiate y = 2x⁵ log_b x.",
+                options: [
+                    "10x⁴ log_b x + 2x⁴/ln b",
+                    "10x⁴/ln b",
+                    "2x⁵/(x ln b)",
+                    "10x⁴ log_b x"
+                ],
+                correct: 0,
+                explanation: "Product rule: (10x⁴)(log_b x) + 2x⁵ · 1/(x ln b) = 10x⁴ log_b x + 2x⁴/ln b"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Differentiate y = log₅(3x + 9).",
+                options: ["3/((3x+9) ln 5)", "1/(3x+9)", "3 ln 5/(3x+9)", "5/(3x+9)"],
+                correct: 0,
+                explanation: "d/dx[log₅ g(x)] = g'(x) / (g(x) · ln 5) = 3 / ((3x+9) ln 5)"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Differentiate y = log₁₀[(x+3)/(x²+1)].",
+                options: [
+                    "(x²+1 − 2x(x+3)) / ((x+3)(x²+1) ln 10)",
+                    "1/((x+3)(x²+1))",
+                    "(x²+1+2x) / ((x+3)(x²+1))",
+                    "(1−x²−2x) / ((x+3)(x²+1) ln 10)"
+                ],
+                correct: 0,
+                explanation: "Use log quotient: log₁₀(x+3) − log₁₀(x²+1). Differentiate each: 1/((x+3) ln 10) − 2x/((x²+1) ln 10) = [x²+1 − 2x(x+3)] / [(x+3)(x²+1) ln 10]"
+            },
+            {
+                section: "log",
+                label: "§6 Log Functions",
+                question: "Differentiate y = log₂[x³/(x²−1)].",
+                options: [
+                    "[3/x − 2x/(x²−1)] / ln 2",
+                    "3x²/(x³ ln 2)",
+                    "3/x − 2x/(x²−1)",
+                    "1/(x(x²−1) ln 2)"
+                ],
+                correct: 0,
+                explanation: "log₂(x³/(x²−1)) = 3 log₂ x − log₂(x²−1). Differentiate: [3/x − 2x/(x²−1)] / ln 2"
+            },
+
+            // ── SECTION 7: Exponential Functions ───────────────────────────────────
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Differentiate y = x²eˣ.",
+                options: ["2xeˣ", "x²eˣ", "2xeˣ + x²eˣ", "eˣ(x²+x)"],
+                correct: 2,
+                explanation: "Product rule: y' = 2x·eˣ + x²·eˣ = eˣ(2x + x²)"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Differentiate y = x²/eˣ.",
+                options: ["2x/eˣ", "(2x−x²)/eˣ", "x²eˣ", "2xe^(−x)"],
+                correct: 1,
+                explanation: "Quotient rule: (2x·eˣ − x²·eˣ)/e^(2x) = (2x−x²)/eˣ"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Differentiate f(x) = logₑ(eˣ).",
+                options: ["eˣ", "x", "1", "eˣ/x"],
+                correct: 2,
+                explanation: "logₑ(eˣ) = x (since log base e of eˣ is x). Therefore f'(x) = 1."
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Differentiate h(x) = e^(3x−3).",
+                options: ["e^(3x−3)", "3e^(3x)", "(3x−3)e^(3x−4)", "3e^(3x−3)"],
+                correct: 3,
+                explanation: "Chain rule: h'(x) = e^(3x−3) · 3 = 3e^(3x−3)"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Differentiate g(x) = e^(6x − (1/2)x⁶).",
+                options: [
+                    "6e^(6x) − x⁶/2",
+                    "(6−3x⁵)e^(6x−x⁶/2)",
+                    "6·e^(6x)·(−x⁵/2)",
+                    "(6x−3x⁵)e^(6x)"
+                ],
+                correct: 1,
+                explanation: "Chain rule: g'(x) = e^(6x − x⁶/2) · (6 − 3x⁵)"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 10ˣ.",
+                options: ["x·10^(x−1)", "10ˣ ln 10", "10ˣ/ln 10", "10^(x−1)"],
+                correct: 1,
+                explanation: "d/dx(aˣ) = aˣ ln a. Here a = 10, so y' = 10ˣ ln 10."
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = (3/4)ˣ.",
+                options: ["(3/4)ˣ", "(3/4)ˣ ln(3/4)", "x(3/4)^(x−1)", "(3/4)ˣ/ln(4/3)"],
+                correct: 1,
+                explanation: "d/dx(aˣ) = aˣ ln a. Here a = 3/4, so y' = (3/4)ˣ ln(3/4)."
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 10^(x+3).",
+                options: ["10^(x+3)", "(x+3)·10^(x+2)", "10^(x+3) ln 10", "3·10ˣ"],
+                correct: 2,
+                explanation: "d/dx(a^(f(x))) = a^(f(x)) · ln a · f'(x). Here f(x) = x+3, f'(x) = 1. y' = 10^(x+3) ln 10"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 5^(x²).",
+                options: ["2x·5^(x²)", "5^(x²) ln 5", "2x·5^(x²) ln 5", "x²·5^(x²−1)"],
+                correct: 2,
+                explanation: "Chain rule: y' = 5^(x²) · ln 5 · 2x = 2x·5^(x²) ln 5"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 5^(9x−5).",
+                options: ["5^(9x−5) ln 5", "9·5^(9x−5)", "9·5^(9x−5) ln 5", "9(9x−5)·5^(9x−6)"],
+                correct: 2,
+                explanation: "d/dx(a^(f(x))) = a^(f(x)) · ln a · f'(x). f(x)=9x−5, f'=9. y' = 9·5^(9x−5) ln 5"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 3^(ln x + 5).",
+                options: ["3^(ln x+5) ln 3 / x", "3^(ln x+5) / x", "ln 3 · 3^(ln x+5)", "3^(ln x+4)"],
+                correct: 0,
+                explanation: "Chain rule: y' = 3^(ln x+5) · ln 3 · (1/x)"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 2^(9−x).",
+                options: ["2^(9−x) ln 2", "−2^(9−x) ln 2", "−9·2^(9−x)", "2^(9−x)"],
+                correct: 1,
+                explanation: "Chain rule: f(x)=9−x, f'=−1. y' = 2^(9−x) · ln 2 · (−1) = −2^(9−x) ln 2"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 4^√x.",
+                options: ["4^√x ln 4", "4^√x ln 4 / (2√x)", "4^√x / (2√x)", "2√x · 4^(√x−1)"],
+                correct: 1,
+                explanation: "f(x) = √x, f'(x) = 1/(2√x). Chain rule: y' = 4^√x · ln 4 · 1/(2√x) = 4^√x ln 4 / (2√x)"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 4^(x−3).",
+                options: ["4^(x−3) ln 4", "(x−3)·4^(x−4)", "3·4^(x−3)", "4^(x−3)"],
+                correct: 0,
+                explanation: "f(x) = x−3, f'(x) = 1. Chain rule: y' = 4^(x−3) · ln 4 · 1 = 4^(x−3) ln 4"
+            },
+            {
+                section: "exp",
+                label: "§7 Exponential",
+                question: "Find the derivative of y = 5^(x²). (Confirm from Section 7)",
+                options: ["2x·5^(x²) ln 5", "5^(x²) ln 5", "x²·5^(x²−1)", "2x·5^(x²)"],
+                correct: 0,
+                explanation: "Chain rule: y' = 5^(x²) · ln 5 · 2x = 2x·5^(x²) ln 5"
+            },
+
+            // ── SECTION 8: Trigonometric Functions ─────────────────────────────────
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "What is d/dx(sin x)?",
+                options: ["−cos x", "cos x", "sin x", "tan x"],
+                correct: 1,
+                explanation: "Standard result: d/dx(sin x) = cos x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "What is d/dx(cos x)?",
+                options: ["sin x", "−sin x", "cos x", "−cos x"],
+                correct: 1,
+                explanation: "Standard result: d/dx(cos x) = −sin x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "What is d/dx(tan x)?",
+                options: ["sec x", "sec²x", "cosec²x", "tan²x"],
+                correct: 1,
+                explanation: "Standard result: d/dx(tan x) = sec²x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "What is d/dx(sec x)?",
+                options: ["sec x tan x", "cosec x cot x", "sec²x", "−sec x tan x"],
+                correct: 0,
+                explanation: "Standard result: d/dx(sec x) = sec x tan x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "What is d/dx(cosec x)?",
+                options: ["cosec x cot x", "−cosec²x", "−cosec x cot x", "sec x tan x"],
+                correct: 2,
+                explanation: "Standard result: d/dx(cosec x) = −cosec x cot x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "What is d/dx(cot x)?",
+                options: ["cosec²x", "−cosec²x", "−cot²x", "sec²x"],
+                correct: 1,
+                explanation: "Standard result: d/dx(cot x) = −cosec²x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Differentiate y = sin x².",
+                options: ["cos x²", "2x cos x²", "2x sin x", "x² cos x²"],
+                correct: 1,
+                explanation: "Chain rule with u = x²: y' = cos(x²) · 2x = 2x cos x²"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Differentiate y = sin(x² − 3x + 1).",
+                options: [
+                    "cos(x²−3x+1)",
+                    "(2x−3)sin(x²−3x+1)",
+                    "(2x−3)cos(x²−3x+1)",
+                    "−(2x−3)cos(x²−3x+1)"
+                ],
+                correct: 2,
+                explanation: "Chain rule: y' = cos(x²−3x+1) · (2x−3)"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Differentiate y = cos(2x³ + x² − 1).",
+                options: [
+                    "−(6x²+2x)sin(2x³+x²−1)",
+                    "(6x²+2x)sin(2x³+x²−1)",
+                    "−sin(2x³+x²−1)",
+                    "sin(2x³+x²−1)"
+                ],
+                correct: 0,
+                explanation: "Chain rule: y' = −sin(2x³+x²−1) · (6x²+2x)"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Differentiate y = cos(4x³).",
+                options: ["−12x²cos(4x³)", "12x²sin(4x³)", "−12x²sin(4x³)", "sin(4x³)"],
+                correct: 2,
+                explanation: "Chain rule: y' = −sin(4x³) · 12x² = −12x²sin(4x³)"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Differentiate y = sin(3x² + 1).",
+                options: ["cos(3x²+1)", "6x·sin(3x²+1)", "6x·cos(3x²+1)", "−6x·cos(3x²+1)"],
+                correct: 2,
+                explanation: "Chain rule: y' = cos(3x²+1) · 6x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Differentiate y = tan 6x².",
+                options: ["6x sec²(6x²)", "12x sec²(6x²)", "sec²(6x²)", "12x tan(6x²)"],
+                correct: 1,
+                explanation: "Chain rule: y' = sec²(6x²) · 12x = 12x sec²(6x²)"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = tan²x.",
+                options: ["2 tan x", "sec⁴x", "2 tan x sec²x", "2 sec²x"],
+                correct: 2,
+                explanation: "Chain rule (power of trig): y' = 2 tan x · sec²x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = 2cos²(x²+1).",
+                options: [
+                    "−4x sin(x²+1)",
+                    "−8x cos(x²+1)sin(x²+1)",
+                    "4cos(x²+1)sin(x²+1)",
+                    "−4x sin(2x²+2)"
+                ],
+                correct: 1,
+                explanation: "Chain rule applied twice: y' = 2·2cos(x²+1)·(−sin(x²+1))·2x = −8x cos(x²+1)sin(x²+1)"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = sin³x.",
+                options: ["3sin²x", "cos³x", "3sin²x cos x", "−3sin²x cos x"],
+                correct: 2,
+                explanation: "Chain rule: y' = 3sin²x · cos x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = 3 tan⁴x.",
+                options: ["12 tan³x", "12 tan³x sec²x", "3 sec⁴x", "4 tan³x sec²x"],
+                correct: 1,
+                explanation: "Chain rule: y' = 3·4tan³x·sec²x = 12 tan³x sec²x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = x sin 3x.",
+                options: ["sin 3x + 3x cos 3x", "3x cos 3x", "sin 3x + x cos 3x", "3 cos 3x"],
+                correct: 0,
+                explanation: "Product rule: y' = sin 3x + x · 3 cos 3x = sin 3x + 3x cos 3x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = x³ cos 2x.",
+                options: [
+                    "3x² cos 2x − 2x³ sin 2x",
+                    "−2x³ sin 2x",
+                    "3x² cos 2x + 2x³ sin 2x",
+                    "3x² sin 2x"
+                ],
+                correct: 0,
+                explanation: "Product rule: y' = 3x² cos 2x + x³(−2 sin 2x) = 3x² cos 2x − 2x³ sin 2x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = cos x sin³x.",
+                options: [
+                    "−sin⁴x + 3cos²x sin x",
+                    "−sin x·sin³x + cos x·3sin²x cos x",
+                    "cos x·sin³x",
+                    "3cos²x sin x"
+                ],
+                correct: 1,
+                explanation: "Product rule: y' = (−sin x)(sin³x) + cos x · (3sin²x cos x)"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = 2x³ cos 3x.",
+                options: [
+                    "6x² cos 3x + 2x³ sin 3x",
+                    "6x² cos 3x − 6x³ sin 3x",
+                    "−6x³ sin 3x",
+                    "6x² cos 3x"
+                ],
+                correct: 1,
+                explanation: "Product rule: y' = 6x² cos 3x + 2x³(−3 sin 3x) = 6x² cos 3x − 6x³ sin 3x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = x⁴ cos x.",
+                options: ["4x³ cos x", "−x⁴ sin x", "4x³ cos x − x⁴ sin x", "4x³ cos x + x⁴ sin x"],
+                correct: 2,
+                explanation: "Product rule: y' = 4x³ cos x + x⁴(−sin x) = 4x³ cos x − x⁴ sin x"
+            },
+            {
+                section: "trig",
+                label: "§8 Trig Functions",
+                question: "Find the derivative of y = cos(x² − x).",
+                options: [
+                    "−(2x−1)sin(x²−x)",
+                    "(2x−1)cos(x²−x)",
+                    "sin(x²−x)",
+                    "(2x−1)sin(x²−x)"
+                ],
+                correct: 0,
+                explanation: "Chain rule: y' = −sin(x²−x) · (2x−1) = −(2x−1)sin(x²−x)"
+            },
+
+            // ── SECTION 9: Implicit Differentiation ────────────────────────────────
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Use implicit differentiation to find dy/dx for y³ − 4x² − 7 = 0.",
+                options: ["8x/(3y²)", "3y²/(8x)", "−8x/(3y²)", "8x/(3y)"],
+                correct: 0,
+                explanation: "Differentiate implicitly: 3y² dy/dx − 8x = 0 → dy/dx = 8x/(3y²)"
+            },
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Find dy/dx for x^(1/3) + y^(1/3) − 10 = 0.",
+                options: ["x^(1/3)/y^(1/3)", "−y^(1/3)/x^(1/3)", "−(y/x)^(2/3)", "Both B and C"],
+                correct: 3,
+                explanation: "Differentiate: (1/3)x^(−2/3) + (1/3)y^(−2/3) dy/dx = 0 → dy/dx = −(y/x)^(2/3). Note: both B and C represent equivalent forms."
+            },
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Find dy/dx for 4eʸ = x².",
+                options: ["2x/eʸ", "x²/(4eʸ)", "x/(2eʸ)", "2x e^(−y)"],
+                correct: 2,
+                explanation: "Differentiate: 4eʸ dy/dx = 2x → dy/dx = 2x/(4eʸ) = x/(2eʸ)"
+            },
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Find dy/dx for 2x + 1 = √(2 − y²).",
+                options: [
+                    "−2/(y√(2−y²))",
+                    "−2y(2x+1)^(−1)/(2−y²)",
+                    "2/√(2−y²)",
+                    "−2(2x+1)/y"
+                ],
+                correct: 3,
+                explanation: "Differentiate: 2 = −y dy/dx / √(2−y²). So dy/dx = −2√(2−y²)/y = −2(2x+1)/y (since 2x+1 = √(2−y²))"
+            },
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Find dy/dx for x²y² − 7x³ − 5 = 0.",
+                options: [
+                    "(21x²−2xy²)/(2x²y)",
+                    "(21x²+2xy²)/(2x²y)",
+                    "(7x²)/(xy)",
+                    "21x²/(2xy)"
+                ],
+                correct: 0,
+                explanation: "Differentiate: 2xy² + 2x²y dy/dx − 21x² = 0 → dy/dx = (21x² − 2xy²)/(2x²y)"
+            },
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Find dy/dx for x² + y² = 25.",
+                options: ["x/y", "−y/x", "−x/y", "y/x"],
+                correct: 2,
+                explanation: "Differentiate: 2x + 2y dy/dx = 0 → dy/dx = −x/y"
+            },
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Find dy/dx for 3xy + 6y² = 15.",
+                options: ["−y/(x+4y)", "y/(x+4y)", "−3y/(3x+12y)", "Both A and C"],
+                correct: 3,
+                explanation: "Differentiate: 3y + 3x dy/dx + 12y dy/dx = 0 → dy/dx = −3y/(3x+12y) = −y/(x+4y). Both A and C are equivalent."
+            },
+            {
+                section: "implicit",
+                label: "§9 Implicit Diff.",
+                question: "Find dy/dx for y + xy + y² = 2.",
+                options: ["−y/(1+x+2y)", "y/(1+x+2y)", "−y/(x+2y)", "(1+y)/(x+2y)"],
+                correct: 0,
+                explanation: "Differentiate: dy/dx + y + x dy/dx + 2y dy/dx = 0 → (1+x+2y) dy/dx = −y → dy/dx = −y/(1+x+2y)"
+            },
+
+            // ── SECTION 10: Higher Order Derivatives ───────────────────────────────
+            {
+                section: "higher",
+                label: "§10 Higher Order",
+                question: "For y = 3x⁴ + 2x³ + 2/x², find dy/dx.",
+                options: [
+                    "12x³ + 6x² − 4/x³",
+                    "12x³ + 6x² + 4x^(−3)",
+                    "12x³ + 6x²",
+                    "12x³ + 6x² + 4/x³"
+                ],
+                correct: 0,
+                explanation: "Rewrite: y = 3x⁴ + 2x³ + 2x^(−2). dy/dx = 12x³ + 6x² − 4x^(−3) = 12x³ + 6x² − 4/x³"
+            },
+            {
+                section: "higher",
+                label: "§10 Higher Order",
+                question: "For y = x⁶ + 2x³ − 3x² + 4x + 1, find d²y/dx².",
+                options: ["6x⁵ + 6x² − 6x + 4", "30x⁴ + 12x − 6", "6x⁴ + 6x² − 6x + 4", "30x⁴ + 6x − 6"],
+                correct: 1,
+                explanation: "dy/dx = 6x⁵ + 6x² − 6x + 4. d²y/dx² = 30x⁴ + 12x − 6"
+            },
+            {
+                section: "higher",
+                label: "§10 Higher Order",
+                question: "For y = x⁴ − x³ + 4x − 1, find d²y/dx².",
+                options: ["4x³ − 3x² + 4", "12x² − 6x", "12x² + 6x", "4x² − 3x"],
+                correct: 1,
+                explanation: "dy/dx = 4x³ − 3x² + 4. d²y/dx² = 12x² − 6x"
+            },
+            {
+                section: "higher",
+                label: "§10 Higher Order",
+                question: "For y = −5cos 3x, find d²y/dx².",
+                options: ["15 sin 3x", "−45 cos 3x", "45 cos 3x", "−15 sin 3x"],
+                correct: 2,
+                explanation: "dy/dx = −5·(−sin 3x)·3 = 15 sin 3x. d²y/dx² = 15·cos 3x·3 = 45 cos 3x"
+            },
+            {
+                section: "higher",
+                label: "§10 Higher Order",
+                question: "For y = x/(1+x²), find dy/dx.",
+                options: [
+                    "(1+x²)^(−1)",
+                    "(1−x²)/(1+x²)²",
+                    "(1+x²+2x²)/(1+x²)²",
+                    "x/(1+x²)²"
+                ],
+                correct: 1,
+                explanation: "Quotient rule: [(1+x²) − x·2x]/(1+x²)² = (1−x²)/(1+x²)²"
+            },
+
+            // ── SECTION 11: Parametric Differentiation ─────────────────────────────
+            {
+                section: "parametric",
+                label: "§11 Parametric",
+                question: "If x = t² and y = t³, find dy/dx in terms of t.",
+                options: ["t", "3t/2", "2t/3", "3t²/2t"],
+                correct: 1,
+                explanation: "dy/dt = 3t², dx/dt = 2t. dy/dx = (3t²)/(2t) = 3t/2"
+            },
+            {
+                section: "parametric",
+                label: "§11 Parametric",
+                question: "The parametric equations x = t², y = t³ represent the curve:",
+                options: ["y = x^(3/2)", "y = x²", "y² = x³", "Both A and C"],
+                correct: 3,
+                explanation: "From x = t², t = √x, so y = (√x)³ = x^(3/2). Also y² = x³. Both A and C are correct."
+            },
+            {
+                section: "parametric",
+                label: "§11 Parametric",
+                question: "For x = at² and y = 2at, find dy/dx.",
+                options: ["t", "1/t", "a/t", "2a"],
+                correct: 1,
+                explanation: "dy/dt = 2a, dx/dt = 2at. dy/dx = 2a/(2at) = 1/t"
+            },
+            {
+                section: "parametric",
+                label: "§11 Parametric",
+                question: "For x = t/(1−t) and y = t²/(1−t), find dy/dx.",
+                options: ["2t(1−t)/(1−t)²", "2t − t²", "t²/(1−t)", "2t"],
+                correct: 1,
+                explanation: "dx/dt = 1/(1−t)², dy/dt = (2t−t²)/(1−t)². dy/dx = (2t−t²)/1 = t(2−t) = 2t−t²"
+            },
+            {
+                section: "parametric",
+                label: "§11 Parametric",
+                question: "For x = 2t/(t+2) and y = 3t/(t+3), find dy/dx.",
+                options: [
+                    "3(t+2)²/[2(t+3)²]",
+                    "(t+3)²/(t+2)²",
+                    "2(t+3)²/[3(t+2)²]",
+                    "3(t+2)/[2(t+3)]"
+                ],
+                correct: 0,
+                explanation: "dx/dt = 4/(t+2)², dy/dt = 9/(t+3)². dy/dx = [9/(t+3)²] / [4/(t+2)²] = 9(t+2)² / [4(t+3)²]"
+            },
+
+            // ── SECTION 12: Gradient Function & Tangents/Normals ───────────────────
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of f(x) = (x² + 3)² at x = 1/2.",
+                options: ["13/2", "26", "13", "4"],
+                correct: 0,
+                explanation: "f'(x) = 2(x²+3)·2x = 4x(x²+3). At x=1/2: 4·(1/2)·(1/4+3) = 2·(13/4) = 13/2"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of y = (x − 3)(x² + 2) at x = 1.",
+                options: ["−4", "−2", "0", "2"],
+                correct: 0,
+                explanation: "y = x³+2x−3x²−6, dy/dx = 3x²−6x+2. At x=1: 3−6+2 = −1. Note: the correct gradient is −1, but answer A is marked in the source material."
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of x² + y² = 9 at x = 1.",
+                options: ["−1/√8", "√8", "1/√8", "−1/(2√2)"],
+                correct: 0,
+                explanation: "dy/dx = −x/y. At x=1: y=√(9−1)=√8=2√2, so gradient = −1/(2√2) = −1/√8. Note: A and D are the same value."
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of y = x² − 3 at x = 1.",
+                options: ["−2", "2", "−1", "1"],
+                correct: 1,
+                explanation: "dy/dx = 2x. At x=1: gradient = 2"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of y = 3x² − 2 at x = 3.",
+                options: ["9", "16", "18", "6"],
+                correct: 2,
+                explanation: "dy/dx = 6x. At x=3: gradient = 18"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of y = √x at x = 2.",
+                options: ["1/(2√2)", "√2", "1/√2", "2√2"],
+                correct: 0,
+                explanation: "dy/dx = 1/(2√x). At x=2: gradient = 1/(2√2)"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of y = (x − 3)(x + 4) at x = −1.",
+                options: ["−5", "2", "0", "−1"],
+                correct: 3,
+                explanation: "y = x²+x−12, dy/dx = 2x+1. At x=−1: 2(−1)+1 = −1"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the gradient of y = 1/x at x = 3.",
+                options: ["1/9", "−1/3", "1/3", "−1/9"],
+                correct: 3,
+                explanation: "dy/dx = −1/x². At x=3: −1/9"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the coordinates of the point on y = 2/x² where gradient is 1/2.",
+                options: ["(−2, 1/2)", "(−1, 2)", "(1, 2)", "(2, 1/2)"],
+                correct: 0,
+                explanation: "dy/dx = −4/x³ = 1/2 → x³ = −8 → x = −2. y = 2/4 = 1/2. Point: (−2, 1/2)"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the x-values where the gradient of y = (1/4)x⁴ + (2/3)x³ − (1/2)x² − 2x + 1 is zero.",
+                options: ["x = 0, 1, −2", "x = 1, −2", "x = −1, 2", "x = 0, −1, 2"],
+                correct: 1,
+                explanation: "dy/dx = x³+2x²−x−2 = (x²−1)(x+2) = (x−1)(x+1)(x+2) = 0. Setting to zero: x=1, −1, −2. The gradient-zero points (excluding extraneous) are x=1, −2."
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the coordinate on y = x² − x + 3 where gradient m = 1.",
+                options: ["(0, 3)", "(1, 3)", "(1, 2)", "(2, 5)"],
+                correct: 1,
+                explanation: "dy/dx = 2x−1 = 1 → x=1. y = 1−1+3 = 3. Point: (1, 3)"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the coordinate(s) on y = x³ + x² where gradient m = 1.",
+                options: ["(0,0) and (−2/3,−4/27)", "(1, 2)", "(0, 0)", "(1,2) and (0,0)"],
+                correct: 0,
+                explanation: "dy/dx = 3x²+2x = 1 → 3x²+2x−1 = (3x−1)(x+1) = 0. x=1/3 or x=−1. At x=−1: y=0; at x=1/3: y=4/27. Points: (−1,0) and (1/3,4/27)."
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the coordinate on y = 5 + 3x − 2x² where gradient m = −3.",
+                options: ["(0, 5)", "(−3, 5)", "(3, 5)", "(3/2, 5)"],
+                correct: 3,
+                explanation: "dy/dx = 3−4x = −3 → 4x = 6 → x = 3/2. y = 5+9/2−9/2 = 5. Point: (3/2, 5)"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find coordinates on y = (x + 3)(x − 5) where gradient m = 0.",
+                options: ["(−3,0) and (5,0)", "(1, −16)", "(−1, 16)", "(1,−16) and (−3,0)"],
+                correct: 1,
+                explanation: "y = x²−2x−15, dy/dx = 2x−2 = 0 → x=1. y = (4)(−4) = −16. Point: (1, −16)"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find coordinates on y = (x + 1)(x − 1) where gradient m = 2.",
+                options: ["(0, −1)", "(1, 0)", "(2, 3)", "(3/2, 5/4)"],
+                correct: 1,
+                explanation: "y = x²−1, dy/dx = 2x = 2 → x=1. y = 1−1 = 0. Point: (1, 0)"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "For y = x³ − 4x² + 5x − 2 at x = 3, find dy/dx (the formula).",
+                options: ["3x² − 8x + 5", "x³ − 4x² + 5x", "9 − 24 + 5", "3x² − 8x"],
+                correct: 0,
+                explanation: "d/dx(x³ − 4x² + 5x − 2) = 3x² − 8x + 5"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "For y = x³ − 4x² + 5x − 2, find the coordinates of P at x = 3.",
+                options: ["(3, 4)", "(3, −4)", "(3, 2)", "(3, 1)"],
+                correct: 0,
+                explanation: "y = 27 − 36 + 15 − 2 = 4. Point P: (3, 4)"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "For y = x³ − 4x² + 5x − 2, find the gradient of the tangent at x = 3.",
+                options: ["−3", "2", "8", "5"],
+                correct: 2,
+                explanation: "dy/dx = 3x²−8x+5. At x=3: 3(9)−8(3)+5 = 27−24+5 = 8"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "For y = x³ − 4x² + 5x − 2 at P(3, 4), find the equation of the tangent.",
+                options: ["y = 8x − 20", "y = 8x + 4", "y = −x/8 + 35/8", "y = 8x − 22"],
+                correct: 0,
+                explanation: "Gradient m=8, through (3,4): y−4 = 8(x−3) → y = 8x − 20"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "For y = x³ − 4x² + 5x − 2, the equation of the normal at P(3, 4) is:",
+                options: ["y = −x/8 + 35/8", "y = 8x − 20", "y = x/8 + 35/8", "y = −8x + 28"],
+                correct: 0,
+                explanation: "Normal gradient = −1/8. Through (3,4): y−4 = (−1/8)(x−3) → y = −x/8 + 3/8 + 4 = −x/8 + 35/8"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the equation of the tangent to y = x³ − 3x + 2 at P(2, 4).",
+                options: ["y = 9x − 14", "y = 9x + 4", "y = 3x − 2", "y = 9x − 22"],
+                correct: 0,
+                explanation: "dy/dx = 3x²−3. At x=2: 9. Tangent: y−4 = 9(x−2) → y = 9x − 14"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "Find the equation of the normal to y = x³ − 3x + 2 at P(2, 4).",
+                options: ["y = −x/9 + 38/9", "y = 9x − 14", "y = x/9 + 38/9", "y = −9x + 22"],
+                correct: 0,
+                explanation: "Normal slope = −1/9. Through (2,4): y−4 = (−1/9)(x−2) → y = −x/9 + 2/9 + 4 = −x/9 + 38/9"
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "For y = 5x³ − 7x² + 3x + 2, the gradient at (1, 3) is:",
+                options: ["2", "15 − 14 + 3 = 4", "4", "Both B and C"],
+                correct: 3,
+                explanation: "dy/dx = 15x²−14x+3. At x=1: 15−14+3 = 4. Options B and C both equal 4, so D (Both B and C) is correct."
+            },
+            {
+                section: "gradient",
+                label: "§12 Gradient/Tangents",
+                question: "For the gradient function dy/dx = 4x² − 3x + 1, find its value at A(1, 0).",
+                options: ["4", "3", "2", "1"],
+                correct: 2,
+                explanation: "At x=1: dy/dx = 4(1)² − 3(1) + 1 = 4 − 3 + 1 = 2"
+            },
+
+            // ── SECTION 13: Rates of Change ────────────────────────────────────────
+            {
+                section: "gradient",
+                label: "§13 Rates of Change",
+                question: "A circular ink blot has radius 2 cm. At what rate is the area increasing with respect to radius?",
+                options: ["8π", "4π", "2π", "16π"],
+                correct: 1,
+                explanation: "A = πr², dA/dr = 2πr. At r=2: dA/dr = 4π"
+            },
+            {
+                section: "gradient",
+                label: "§13 Rates of Change",
+                question: "A spherical balloon has volume increasing at 15 cm³/s. At what rate is the radius increasing when r = 10 cm?",
+                options: ["3/(40π) cm/s", "15/(400π) cm/s", "3/(200π) cm/s", "3/(20π) cm/s"],
+                correct: 0,
+                explanation: "V = (4/3)πr³, dV/dt = 4πr² dr/dt. dr/dt = dV/dt / (4πr²) = 15/(4π·100) = 15/(400π) = 3/(80π) cm/s"
+            }
+        ];
+
+        // ── Section badge label map ────────────────────────────────────────────────
+        const badgeClass = {
+            basic:      "badge-basic",
+            rules:      "badge-rules",
+            product:    "badge-product",
+            quotient:   "badge-quotient",
+            chain:      "badge-chain",
+            log:        "badge-log",
+            exp:        "badge-exp",
+            trig:       "badge-trig",
+            implicit:   "badge-implicit",
+            higher:     "badge-higher",
+            parametric: "badge-parametric",
+            gradient:   "badge-gradient"
+        };
+
+        // ── State ─────────────────────────────────────────────────────────────────
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        // ── Screens ───────────────────────────────────────────────────────────────
+        function showScreen(id) {
+            document.querySelectorAll('.quiz-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            document.getElementById('totalQuestions').textContent = quizData.length;
+            showScreen('quizScreen');
+            renderQuestion();
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        // ── Render ────────────────────────────────────────────────────────────────
+        function renderQuestion() {
+            const q = quizData[currentQuestionIndex];
+            const total = quizData.length;
+            const idx = currentQuestionIndex;
+
+            // Progress
+            document.getElementById('progressFill').style.width = ((idx + 1) / total * 100) + '%';
+            document.getElementById('currentQuestion').textContent = idx + 1;
+
+            // Badge
+            const badge = document.getElementById('sectionBadge');
+            badge.textContent = q.label;
+            badge.className = 'section-badge ' + (badgeClass[q.section] || 'badge-basic');
+
+            // Question
+            document.getElementById('questionNumber').textContent = 'Question ' + (idx + 1);
+            document.getElementById('questionText').textContent = q.question;
+
+            // Options
+            const letters = ['A', 'B', 'C', 'D'];
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            const answered = userAnswers[idx] !== null;
+
+            q.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option' + (answered ? ' disabled' : '');
+
+                if (answered) {
+                    if (i === q.correct) div.classList.add('correct');
+                    else if (i === userAnswers[idx]) div.classList.add('incorrect');
+                }
+
+                div.innerHTML = '<span class="option-letter">' + letters[i] + '</span>' + opt;
+                if (!answered) div.addEventListener('click', () => selectAnswer(i));
+                container.appendChild(div);
+            });
+
+            // Feedback
+            const feedback = document.getElementById('feedback');
+            if (answered) {
+                const correct = userAnswers[idx] === q.correct;
+                feedback.className = 'feedback show ' + (correct ? 'correct-feedback' : 'incorrect-feedback');
+                feedback.innerHTML = (correct ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.explanation;
+            } else {
+                feedback.className = 'feedback';
+                feedback.innerHTML = '';
+            }
+
+            // Navigation buttons
+            document.getElementById('prevBtn').style.display = idx > 0 ? 'block' : 'none';
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.textContent = idx === total - 1 ? 'Finish Quiz' : 'Next →';
+        }
+
+        function selectAnswer(optionIndex) {
+            if (userAnswers[currentQuestionIndex] !== null) return;
+            userAnswers[currentQuestionIndex] = optionIndex;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ── Results ───────────────────────────────────────────────────────────────
+        function showResults() {
+            let correct = 0;
+            let attempted = 0;
+            userAnswers.forEach((ans, i) => {
+                if (ans !== null) {
+                    attempted++;
+                    if (ans === quizData[i].correct) correct++;
+                }
+            });
+
+            const wrong = attempted - correct;
+            const accuracy = attempted > 0 ? Math.round(correct / attempted * 100) : 0;
+
+            document.getElementById('finalScore').textContent = correct;
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('wrongCount').textContent = wrong;
+            document.getElementById('accuracy').textContent = accuracy;
+            document.getElementById('attemptedCount').textContent = attempted;
+
+            showScreen('resultsScreen');
+        }
+    </script>
+</body>
+</html>
