@@ -1005,8 +1005,8 @@ const questions = [
 // ============================================================
 // STATE
 // ============================================================
-let answered = 0, correct = 0, wrong = 0;
-const userAnswers = {};
+let answered = 0, correct = 0, wrong = 0, submitted = false;
+let userAnswers = {};
 
 // ============================================================
 // BUILD UI
@@ -1082,7 +1082,7 @@ function selectOption(el, qid, idx) {
 }
 
 function updateScoreboard() {
-  const pct = answered === 0 ? '—' : Math.round((correct / answered) * 100) + '%';
+  const pct = !submitted ? '—' : Math.round((correct / questions.length) * 100) + '%';
   document.getElementById('answeredCount').textContent = answered;
   document.getElementById('correctCount').textContent  = correct;
   document.getElementById('wrongCount').textContent    = wrong;
@@ -1095,7 +1095,7 @@ function updateScoreboard() {
 
 function submitQuiz() {
   // Reveal all answers
-  correct = 0; wrong = 0;
+  correct = 0; wrong = 0; submitted = true;
   questions.forEach(q => {
     const opts = document.querySelectorAll(`#opts-${q.id} .option`);
     const chosen = userAnswers[q.id];
@@ -1144,8 +1144,8 @@ function submitQuiz() {
 }
 
 function restartQuiz() {
-  Object.keys(userAnswers).forEach(k => delete userAnswers[k]);
-  answered = 0; correct = 0; wrong = 0;
+  userAnswers = {};
+  answered = 0; correct = 0; wrong = 0; submitted = false;
   document.getElementById('result-panel').style.display = 'none';
   buildQuiz();
   updateScoreboard();
