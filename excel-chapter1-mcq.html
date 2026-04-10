@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microsoft Excel – Chapter 1 MCQ Quiz</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #0d47a1;
+      --accent: #00897b;
+      --success: #2e7d32;
+      --error: #c62828;
+      --warn: #e65100;
+      --bg: #f0f4ff;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #5f6368;
+      --border: #dadce0;
+      --radius: 10px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a73e8 0%, #00897b 100%);
+      min-height: 100vh;
+      padding: 16px;
+      color: var(--text);
+    }
+
+    /* ── Layout ────────────────────────────────── */
+    .shell {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── Header ─────────────────────────────────── */
+    .app-header {
+      background: linear-gradient(135deg, #1a73e8 0%, #00897b 100%);
+      color: #fff;
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .app-header h1 { font-size: clamp(1.3rem, 3vw, 1.9rem); margin-bottom: 6px; }
+    .app-header p  { font-size: .9rem; opacity: .9; }
+
+    /* ── Setup Screen ────────────────────────────── */
+    .setup-body { padding: 28px 32px; }
+    .setup-body h2 { font-size: 1.3rem; margin-bottom: 16px; color: var(--primary-dark); }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 520px) { .option-grid { grid-template-columns: 1fr; } }
+
+    .mode-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .mode-card:hover { border-color: var(--primary); background: #e8f0fe; }
+    .mode-card.selected { border-color: var(--primary); background: #e8f0fe; }
+    .mode-card input { margin-right: 8px; accent-color: var(--primary); }
+    .mode-card strong { display: block; margin-bottom: 4px; }
+    .mode-card span { font-size: .82rem; color: var(--muted); }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: .95rem;
+    }
+    .toggle-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); }
+
+    .topics-section { margin-bottom: 20px; }
+    .topics-section h3 { font-size: 1rem; margin-bottom: 10px; color: var(--primary-dark); }
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px;
+    }
+    .topic-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .88rem;
+      background: #f8f9fa;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .topic-item:hover { background: #e8f0fe; }
+    .topic-item input { accent-color: var(--primary); }
+    .topic-item .count { margin-left: auto; background: var(--primary); color: #fff; border-radius: 20px; padding: 1px 7px; font-size: .75rem; font-weight: 600; }
+
+    .select-all-row { margin-bottom: 10px; }
+    .link-btn { background: none; border: none; color: var(--primary); cursor: pointer; font-size: .88rem; text-decoration: underline; }
+    .link-btn:hover { color: var(--primary-dark); }
+
+    .start-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1a73e8 0%, #00897b 100%);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+      margin-top: 8px;
+    }
+    .start-btn:hover { opacity: .9; transform: translateY(-1px); }
+    .start-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    .q-preview { font-size: .88rem; color: var(--muted); text-align: center; margin-top: 8px; }
+
+    /* ── Progress Bar ────────────────────────────── */
+    .progress-wrap {
+      padding: 14px 32px;
+      background: #f8f9fa;
+      border-bottom: 1px solid var(--border);
+    }
+    .progress-track {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #1a73e8, #00897b);
+      border-radius: 4px;
+      transition: width .35s ease;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* ── Question Screen ─────────────────────────── */
+    .quiz-body { padding: 28px 32px; }
+
+    .topic-tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: var(--primary);
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .opt-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      font-size: .95rem;
+      cursor: pointer;
+      transition: border-color .18s, background .18s, transform .12s;
+      color: var(--text);
+    }
+    .opt-btn:hover:not(:disabled):not(.locked) {
+      border-color: var(--primary);
+      background: #e8f0fe;
+      transform: translateX(4px);
+    }
+    .opt-btn:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+    .opt-btn:disabled { cursor: not-allowed; }
+
+    .opt-badge {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: .82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .opt-btn.chosen { border-color: var(--primary); background: #e8f0fe; }
+    .opt-btn.chosen .opt-badge { background: var(--primary); }
+
+    .opt-btn.correct { border-color: var(--success); background: #e8f5e9; color: var(--success); }
+    .opt-btn.correct .opt-badge { background: var(--success); }
+
+    .opt-btn.wrong { border-color: var(--error); background: #ffebee; color: var(--error); }
+    .opt-btn.wrong .opt-badge { background: var(--error); }
+
+    .opt-btn.show-correct { border-color: var(--success); background: #e8f5e9; color: var(--success); }
+    .opt-btn.show-correct .opt-badge { background: var(--success); }
+
+    .explanation {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      font-size: .9rem;
+      line-height: 1.6;
+      display: none;
+    }
+    .explanation.show { display: block; }
+    .explanation.correct-exp { background: #e8f5e9; border-left: 4px solid var(--success); color: #1b5e20; }
+    .explanation.wrong-exp  { background: #ffebee; border-left: 4px solid var(--error);   color: #b71c1c; }
+
+    .nav-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .nav-row .nav-btn {
+      flex: 1;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity .2s, transform .12s;
+    }
+    .nav-btn.primary { background: linear-gradient(135deg, #1a73e8 0%, #00897b 100%); color: #fff; }
+    .nav-btn.secondary { background: #e0e0e0; color: var(--text); }
+    .nav-btn:hover:not(:disabled) { opacity: .88; transform: translateY(-1px); }
+    .nav-btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+    /* keyboard hint */
+    .kbd-hint { font-size: .75rem; color: var(--muted); margin-top: 10px; text-align: center; }
+    kbd { background: #e8eaed; border: 1px solid #bbb; border-radius: 3px; padding: 1px 5px; font-size: .75rem; }
+
+    /* ── Results Screen ──────────────────────────── */
+    .results-body { padding: 32px; text-align: center; }
+    .results-body h2 { font-size: 1.6rem; margin-bottom: 8px; }
+
+    .score-ring {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) calc(var(--pct) * 1%), #e0e0e0 0%);
+      margin: 20px auto;
+      position: relative;
+    }
+    .score-ring::after {
+      content: '';
+      position: absolute;
+      inset: 16px;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .score-inner { position: relative; z-index: 1; text-align: center; }
+    .score-num { font-size: 2rem; font-weight: 800; color: var(--primary); display: block; }
+    .score-label { font-size: .75rem; color: var(--muted); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+
+    .stat-box {
+      background: #f8f9fa;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 8px;
+    }
+    .stat-box .num { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+    .stat-box .lbl { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+
+    .grade-badge {
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .results-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .results-actions button {
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+    .btn-review { background: linear-gradient(135deg, #1a73e8 0%, #00897b 100%); color: #fff; }
+    .btn-restart { background: #e0e0e0; color: var(--text); }
+
+    /* ── Review Screen ───────────────────────────── */
+    .review-body { padding: 24px 32px; }
+    .review-body h2 { font-size: 1.3rem; margin-bottom: 16px; }
+    .review-filter { margin-bottom: 14px; }
+    .review-filter select { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: .9rem; }
+
+    .review-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    .review-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      background: #f8f9fa;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+    .review-head:hover { background: #e8f0fe; }
+    .review-head .dot {
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot.correct-dot { background: var(--success); }
+    .dot.wrong-dot   { background: var(--error); }
+    .dot.skip-dot    { background: #9e9e9e; }
+    .review-head .arrow { margin-left: auto; transition: transform .2s; }
+    .review-head.open .arrow { transform: rotate(180deg); }
+
+    .review-detail {
+      display: none;
+      padding: 14px 16px;
+      font-size: .88rem;
+      line-height: 1.6;
+      border-top: 1px solid var(--border);
+    }
+    .review-detail.open { display: block; }
+    .review-detail .your-ans { color: var(--error); font-weight: 600; }
+    .review-detail .correct-ans { color: var(--success); font-weight: 600; }
+    .review-detail .exp-text { margin-top: 8px; background: #f8f9fa; border-radius: 6px; padding: 10px 12px; }
+
+    .review-back {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #1a73e8 0%, #00897b 100%);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* ── Toast ───────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #333;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-size: .9rem;
+      transition: transform .3s;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 600px) {
+      .setup-body, .quiz-body, .results-body, .review-body { padding: 18px; }
+      .progress-wrap { padding: 12px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="card">
+    <header class="app-header" role="banner">
+      <h1>💻 Microsoft Excel – Chapter 1</h1>
+      <p>Interactive MCQ Quiz &nbsp;|&nbsp; Spreadsheet Fundamentals</p>
+    </header>
+
+    <!-- ══════════ SETUP PAGE ══════════ -->
+    <section id="setupPage" class="page active" aria-label="Quiz setup">
+      <div class="setup-body">
+        <h2>Configure your quiz</h2>
+
+        <!-- Mode -->
+        <div style="margin-bottom:20px">
+          <p style="font-weight:600;margin-bottom:10px;color:var(--primary-dark)">Quiz Mode</p>
+          <div class="option-grid">
+            <label class="mode-card selected" id="practiceCard">
+              <input type="radio" name="mode" value="practice" checked />
+              <strong>🎯 Practice</strong>
+              <span>Immediate feedback after each answer with explanation</span>
+            </label>
+            <label class="mode-card" id="examCard">
+              <input type="radio" name="mode" value="exam" />
+              <strong>📝 Exam</strong>
+              <span>No feedback until the end — simulates real test conditions</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div style="margin-bottom:20px">
+          <p style="font-weight:600;margin-bottom:10px;color:var(--primary-dark)">Options</p>
+          <label class="toggle-row">
+            <input type="checkbox" id="shuffleQ" />
+            Shuffle questions
+          </label>
+          <label class="toggle-row">
+            <input type="checkbox" id="shuffleA" />
+            Shuffle answer options
+          </label>
+        </div>
+
+        <!-- Topics -->
+        <div class="topics-section">
+          <p style="font-weight:600;margin-bottom:6px;color:var(--primary-dark)">Filter by Topic</p>
+          <div class="select-all-row">
+            <button class="link-btn" id="selectAllBtn" onclick="setAllTopics(true)">Select all</button>
+            &nbsp;/&nbsp;
+            <button class="link-btn" id="clearAllBtn" onclick="setAllTopics(false)">Clear all</button>
+          </div>
+          <div class="topic-grid" id="topicGrid">
+            <!-- populated by JS -->
+          </div>
+        </div>
+
+        <p class="q-preview" id="qPreview"></p>
+        <button class="start-btn" id="startBtn" onclick="startQuiz()">Start Quiz ▶</button>
+      </div>
+    </section>
+
+    <!-- ══════════ QUIZ PAGE ══════════ -->
+    <section id="quizPage" class="page" aria-label="Quiz questions">
+      <div class="progress-wrap" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" id="progressBar">
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        <div class="progress-meta">
+          <span id="qCounter">Question 1 of …</span>
+          <span id="scoreCounter">Score: 0</span>
+        </div>
+      </div>
+
+      <div class="quiz-body">
+        <div class="topic-tag" id="topicTag" aria-label="Question topic"></div>
+        <p class="question-text" id="questionText" role="heading" aria-level="2"></p>
+        <ul class="options-list" id="optionsList" role="list"></ul>
+        <div class="explanation" id="explanation" role="alert" aria-live="polite"></div>
+
+        <div class="nav-row">
+          <button class="nav-btn secondary" id="prevBtn" onclick="goQuestion(-1)" disabled aria-label="Previous question">← Prev</button>
+          <button class="nav-btn primary"   id="nextBtn" onclick="goQuestion(1)"  aria-label="Next question / Submit">Next →</button>
+        </div>
+        <p class="kbd-hint">
+          <kbd>1</kbd>–<kbd>4</kbd> select option &nbsp;·&nbsp;
+          <kbd>Enter</kbd> confirm / next &nbsp;·&nbsp;
+          <kbd>←</kbd> <kbd>→</kbd> navigate
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════ RESULTS PAGE ══════════ -->
+    <section id="resultsPage" class="page" aria-label="Quiz results">
+      <div class="results-body">
+        <h2>Quiz Complete! 🎉</h2>
+        <div class="score-ring" id="scoreRing" style="--pct:0">
+          <div class="score-inner">
+            <span class="score-num" id="scoreNum">0%</span>
+            <span class="score-label">score</span>
+          </div>
+        </div>
+        <div class="grade-badge" id="gradeBadge"></div>
+        <div class="stats-grid">
+          <div class="stat-box"><div class="num" id="statCorrect">0</div><div class="lbl">Correct</div></div>
+          <div class="stat-box"><div class="num" id="statWrong">0</div><div class="lbl">Wrong</div></div>
+          <div class="stat-box"><div class="num" id="statSkipped">0</div><div class="lbl">Skipped</div></div>
+        </div>
+        <div class="results-actions">
+          <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+          <button class="btn-restart" onclick="showSetup()">↩ New Quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ REVIEW PAGE ══════════ -->
+    <section id="reviewPage" class="page" aria-label="Answer review">
+      <div class="review-body">
+        <h2>Answer Review</h2>
+        <div class="review-filter">
+          <label for="reviewFilter" style="font-size:.88rem;margin-right:8px">Show:</label>
+          <select id="reviewFilter" onchange="renderReview()" aria-label="Filter review items">
+            <option value="all">All questions</option>
+            <option value="wrong">Wrong / Skipped only</option>
+            <option value="correct">Correct only</option>
+          </select>
+        </div>
+        <div id="reviewList"></div>
+        <button class="review-back" onclick="showResults()">← Back to Results</button>
+      </div>
+    </section>
+  </div><!-- /.card -->
+</div><!-- /.shell -->
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   QUESTION BANK
+   Each entry: { id, topic, question, options, answer (0-indexed), explanation }
+═══════════════════════════════════════════════════════════ */
+const QUESTIONS = [
+
+  /* ── 1. MS OFFICE SUITE ───────────────────────────────── */
+  { id:1, topic:"MS Office Suite",
+    question:"Which application in the Microsoft Office suite is used as a spreadsheet application?",
+    options:["Microsoft Word","Microsoft Access","Microsoft PowerPoint","Microsoft Excel"],
+    answer:3, explanation:"Excel is the spreadsheet application in the Microsoft Office suite. Word is a word processor, Access is a database management application, and PowerPoint is presentation software." },
+
+  { id:2, topic:"MS Office Suite",
+    question:"Microsoft Access is best described as:",
+    options:["A word processor for creating documents","A database management application for creating and maintaining databases","A spreadsheet application","Presentation software"],
+    answer:1, explanation:"Microsoft Access is the database management application in the Office suite, used for creating and maintaining databases." },
+
+  { id:3, topic:"MS Office Suite",
+    question:"Microsoft Word is primarily described as:",
+    options:["A database management application","A presentation software","A word processor for creating professional documents","A spreadsheet application"],
+    answer:2, explanation:"Microsoft Word is a word processor for creating professional documents." },
+
+  { id:4, topic:"MS Office Suite",
+    question:"Which Microsoft Office application is presentation software?",
+    options:["Microsoft Publisher","Microsoft Outlook","Microsoft Access","Microsoft PowerPoint"],
+    answer:3, explanation:"Microsoft PowerPoint is the presentation software in the Office suite." },
+
+  { id:5, topic:"MS Office Suite",
+    question:"How many applications are listed as part of the Microsoft Office suite in Chapter 1?",
+    options:["4","5","6","7"],
+    answer:2, explanation:"Six applications are listed: Microsoft Word, Access, PowerPoint, Outlook, Publisher, and Excel." },
+
+  /* ── 2. SPREADSHEET DEFINITION ────────────────────────── */
+  { id:6, topic:"Spreadsheet Definition",
+    question:"A spreadsheet is best described as:",
+    options:["A hardware device for calculations","The electronic equivalent of the accounting worksheet","A database management system","A word processing program"],
+    answer:1, explanation:"A spreadsheet (also known as an Electronic Spreadsheet) is a piece of software that is the electronic equivalent of the accounting worksheet." },
+
+  { id:7, topic:"Spreadsheet Definition",
+    question:"What is another common name for a spreadsheet?",
+    options:["Digital worksheet","Electronic spreadsheet","Virtual calculator","Data grid"],
+    answer:1, explanation:"The chapter states that a spreadsheet is 'also known as an Electronic Spreadsheet'." },
+
+  { id:8, topic:"Spreadsheet Definition",
+    question:"In a spreadsheet, what is stored at the intersection of rows and columns?",
+    options:["Only numbers","Only formulas","Numbers and text","Images only"],
+    answer:2, explanation:"The chapter states 'The intersection of the rows and columns are used to store numbers and text'." },
+
+  { id:9, topic:"Spreadsheet Definition",
+    question:"Spreadsheets can perform calculations ranging from:",
+    options:["Simple arithmetic only","Complex analysis only","Simple arithmetic to complex automated calculations and analysis","Statistical analysis only"],
+    answer:2, explanation:"The chapter describes spreadsheets as capable of 'a wide range of manipulations from simple arithmetic calculations such as totals, products or percentages, to complex automated calculations and analysis'." },
+
+  { id:10, topic:"Spreadsheet Definition",
+    question:"Spreadsheets are widely used for which of the following purposes?",
+    options:["Storing, manipulating and comparing data, and for planning and forecasting","Creating presentations only","Managing email only","Word processing tasks"],
+    answer:0, explanation:"The chapter states that spreadsheets are 'widely used in research, industry and business for storing, manipulating and comparing data and for planning and forecasting'." },
+
+  /* ── 3. SPREADSHEET USES ──────────────────────────────── */
+  { id:11, topic:"Spreadsheet Uses",
+    question:"Which of the following is a listed accounting use of spreadsheets?",
+    options:["Virus detection","Preparation of budgets, balance sheet and trial balance","Design of physical infrastructure","Social media management"],
+    answer:1, explanation:"The chapter lists preparation of budgets, balance sheet, trial balance, analysis of cash flows, costing projects, managing inventory, payroll, and other financial plans as accounting uses." },
+
+  { id:12, topic:"Spreadsheet Uses",
+    question:"Which institutions are given as examples that can use spreadsheets for accounting?",
+    options:["KNUST, CSIR, SSNIT, Bank of Ghana","WHO, UN, NATO, ECOWAS","FIFA, UEFA, CAF, IOC","IMF, World Bank, ADB, ECB"],
+    answer:0, explanation:"The chapter specifically mentions KNUST, CSIR, SSNIT, and Bank of Ghana as examples of financial and non-financial institutions that use spreadsheets for accounting." },
+
+  { id:13, topic:"Spreadsheet Uses",
+    question:"Which of the following financial calculations are listed as uses of spreadsheets?",
+    options:["Discounts, loan, taxation, investment, interest and interest rate calculations","Currency exchange only","Budget preparation only","Payroll only"],
+    answer:0, explanation:"The chapter lists discounts, loan, taxation, investment, interest, and interest rate calculations as uses of spreadsheets in accounting." },
+
+  { id:14, topic:"Spreadsheet Uses",
+    question:"In the scientific environment, spreadsheets are used to perform statistical computations such as:",
+    options:["Fourier transforms and signal processing","Averages, standard deviations, variance, and R-Squared","Quantum mechanical calculations","Genetic sequencing algorithms"],
+    answer:1, explanation:"The chapter says scientists 'use spreadsheets to perform statistical computations such as averages, standard deviations, variance, R-Squared, etc.'." },
+
+  { id:15, topic:"Spreadsheet Uses",
+    question:"Which advanced mathematical capability of spreadsheets is mentioned for scientists?",
+    options:["Solving differential equations numerically","Analysis of Variance (ANOVA) and solving simultaneous equations","Running machine learning models","Performing 3D graphical rendering"],
+    answer:1, explanation:"The chapter mentions calculating regression coefficients, performing ANOVA, solving simultaneous equations, and building frequency distribution tables." },
+
+  { id:16, topic:"Spreadsheet Uses",
+    question:"Which types of graphs are mentioned as examples of graphical representation in spreadsheets?",
+    options:["Only bar graphs","Pie chart, Histogram, and line graphs","Network diagrams and flowcharts","3D surface plots only"],
+    answer:1, explanation:"The chapter states that spreadsheets are used to represent data 'graphically for easy analysis such as Pie chart, Histogram, line graphs, etc.'." },
+
+  { id:17, topic:"Spreadsheet Uses",
+    question:"What medical data example is given for graphical representation using spreadsheets?",
+    options:["DNA sequences and genome data","Mortality values, morbidity values, and disease outbreak trends","Blood pressure readings over time","MRI scan intensity data"],
+    answer:1, explanation:"The chapter mentions that hospitals can use spreadsheets to represent 'mortality values, morbidity values, the trend of cases with respect to an outbreak of a disease' in graphical forms." },
+
+  { id:18, topic:"Spreadsheet Uses",
+    question:"What is mentioned as a use of spreadsheets in forex bureaus and multinational companies?",
+    options:["Automated stock trading","Currency conversions without using any calculating device","Tracking social media metrics","Creating marketing materials"],
+    answer:1, explanation:"The chapter states that 'Forex bureau and other multi-national companies use spreadsheets for their currency conversions' and that it's possible to convert from one currency to another without needing any calculating device." },
+
+  { id:19, topic:"Spreadsheet Uses",
+    question:"For database management, spreadsheets allow users to perform operations such as:",
+    options:["Sending emails and scheduling meetings","Sorting data and extracting records from a database","Creating 3D animations","Running background system processes"],
+    answer:1, explanation:"The chapter says spreadsheets allow 'operations such as sorting the data in their database, extracting information/records from a given database'. They can also be used in the preparation of pay vouchers." },
+
+  { id:20, topic:"Spreadsheet Uses",
+    question:"Spreadsheets are described as particularly good at providing answers to which type of question?",
+    options:['"When will …?" questions','"Who did …?" questions','"What if …?" questions','"How many …?" questions'],
+    answer:2, explanation:"The chapter explicitly states: 'Spreadsheets are particularly good at providing answers to the \"what if …?\" type of questions which occur very frequently in business'." },
+
+  { id:21, topic:"Spreadsheet Uses",
+    question:"The storm drain example in the chapter illustrates which key spreadsheet feature?",
+    options:["Graphical representation of data","Database sorting capabilities","What-if analysis with automatic recalculation","Currency conversion"],
+    answer:2, explanation:"The storm drain example illustrates what-if analysis: builders can change the diameter and the spreadsheet automatically recalculates all dependent values (rate of flow), eliminating the need to redo all calculations manually." },
+
+  { id:22, topic:"Spreadsheet Uses",
+    question:"According to the chapter, when one value changes in Excel, what happens to all dependent values?",
+    options:["They must be manually recalculated","Excel automatically updates or recalculates all dependent values","Nothing happens until the file is saved","Only adjacent cells are updated"],
+    answer:1, explanation:"The chapter states that 'Whenever there is a change in one value Excel for example will automatically update or recalculate all values that are dependent on the changed value'." },
+
+  /* ── 4. OTHER PACKAGES & TERMINOLOGY ─────────────────── */
+  { id:23, topic:"Packages & Terminology",
+    question:"Which of the following is listed as a spreadsheet package in the chapter?",
+    options:["Microsoft Access","LOTUS 1-2-3","Oracle Database","Visual Basic"],
+    answer:1, explanation:"LOTUS 1-2-3 is one of the spreadsheet packages listed in the chapter. The full list is AS-EASY-AS, SUPERCALC, LOTUS 1-2-3, SYMPHONY, QUATROPRO, FRAMEWORK IV, and EXCEL." },
+
+  { id:24, topic:"Packages & Terminology",
+    question:"Which of the following is NOT listed as a spreadsheet package in the chapter?",
+    options:["SUPERCALC","SYMPHONY","MICROSOFT ACCESS","FRAMEWORK IV"],
+    answer:2, explanation:"Microsoft Access is a database management application, not a spreadsheet package. The spreadsheet packages listed are AS-EASY-AS, SUPERCALC, LOTUS 1-2-3, SYMPHONY, QUATROPRO, FRAMEWORK IV, and EXCEL." },
+
+  { id:25, topic:"Packages & Terminology",
+    question:"How many spreadsheet packages are explicitly listed (excluding 'etc') in the chapter?",
+    options:["5","6","7","8"],
+    answer:2, explanation:"Seven packages are listed: AS-EASY-AS, SUPERCALC, LOTUS 1-2-3, SYMPHONY, QUATROPRO, FRAMEWORK IV, and EXCEL." },
+
+  { id:26, topic:"Packages & Terminology",
+    question:"The term 'spreadsheet' can refer to:",
+    options:["Only the computer program","Only the sheet where work is done","Both the computer program and the sheet where work is done","Only the hardware device"],
+    answer:2, explanation:"The chapter states: 'The term spreadsheet is often used to refer to the computer program. Sometimes the same term is used to refer to the sheet on which the work is done'." },
+
+  { id:27, topic:"Packages & Terminology",
+    question:"What term do some spreadsheet programs use for the sheet on which work is done?",
+    options:["Datasheet","Workbook","Worksheet","Gridsheet"],
+    answer:2, explanation:"The chapter states: 'Some spreadsheet programs use the term \"worksheet\" for this' (referring to the sheet where work is done)." },
+
+  /* ── 5. STARTING & QUITTING EXCEL ────────────────────── */
+  { id:28, topic:"Starting & Quitting Excel",
+    question:"What is the first step to start Excel using the Start menu?",
+    options:["Double-click the Excel icon on the desktop","Click the Start button on the taskbar at the bottom left of the screen","Press Ctrl+Alt+Del","Open File Explorer and navigate to Excel"],
+    answer:1, explanation:"Step I in the chapter is: 'Click the Start button on the taskbar at the bottom left of the screen'." },
+
+  { id:29, topic:"Starting & Quitting Excel",
+    question:"An alternative way to start Excel (besides the Start menu) is to:",
+    options:["Right-click the taskbar","Press F1","Double-click the Excel shortcut icon on the desktop","Press Ctrl+E"],
+    answer:2, explanation:"The chapter states: 'Another way you can start Excel is from a shortcut icon on the desktop. Double-click the EXCEL short-cut icon on the desktop'." },
+
+  { id:30, topic:"Starting & Quitting Excel",
+    question:"Why should you close/quit Excel when finished?",
+    options:["To prevent virus infections","To free memory for other applications","To save your files permanently","To update Excel automatically"],
+    answer:1, explanation:"The chapter says to close Excel 'in order to free memory for other applications or at the end of the day when you have finished working'." },
+
+  { id:31, topic:"Starting & Quitting Excel",
+    question:"Before clicking the close button to quit Excel, what should you do first?",
+    options:["Press Alt+F4","Make sure your work is saved","Close all other applications","Press Ctrl+W"],
+    answer:1, explanation:"The chapter lists as Step I: 'Make sure your work is saved, click on the close button the title bar'." },
+
+  { id:32, topic:"Starting & Quitting Excel",
+    question:"The close button used to quit Excel is located on the:",
+    options:["Status bar","Ribbon","Title bar","Formula bar"],
+    answer:2, explanation:"The chapter specifies clicking 'the close button the title bar' to close Excel." },
+
+  /* ── 6. EDITING CELLS ─────────────────────────────────── */
+  { id:33, topic:"Editing Cells",
+    question:"What is the first step to edit content in the formula bar?",
+    options:["Press F2","Select the cell","Double-click the cell","Press Enter"],
+    answer:1, explanation:"Step I for editing in the formula bar is: 'Select cell'." },
+
+  { id:34, topic:"Editing Cells",
+    question:"After selecting a cell to edit in the formula bar, what is step II?",
+    options:["Press F2 to activate the formula bar","Position pointer in text and click","Press Enter","Press Delete"],
+    answer:1, explanation:"Step II is: 'Position pointer in text and click'." },
+
+  { id:35, topic:"Editing Cells",
+    question:"To edit directly in a cell (not the formula bar), the first step is to:",
+    options:["Press F2","Click once on the cell","Double-click the cell","Right-click the cell"],
+    answer:2, explanation:"Step I for editing directly in a cell is: 'Double-click the cell'." },
+
+  { id:36, topic:"Editing Cells",
+    question:"When editing directly in a cell, which keys can you use to move the insertion point?",
+    options:["Tab and Shift+Tab","Arrow keys","Page Up and Page Down","Home and End only"],
+    answer:1, explanation:"Step II states: 'Using arrow keys move insertion point to required positions'." },
+
+  { id:37, topic:"Editing Cells",
+    question:"When editing directly in a cell, pressing Enter will:",
+    options:["Cancel the changes","Move to the next cell without saving","Append/confirm the changes","Open a dialog box"],
+    answer:2, explanation:"Step IV states: 'Press Enter to append changes (or paste) information'." },
+
+  { id:38, topic:"Editing Cells",
+    question:"When editing directly in a cell, pressing Esc will:",
+    options:["Delete the cell contents","Confirm the changes","Leave the contents unchanged","Move to the next cell"],
+    answer:2, explanation:"Step IV continues: 'or press Esc to leave the contents unchanged'." },
+
+  /* ── 7. ENTERING TEXT & NUMBERS ──────────────────────── */
+  { id:39, topic:"Entering Text & Numbers",
+    question:"How many characters can you type in a single cell in Excel?",
+    options:["100","128","255","512"],
+    answer:2, explanation:"The chapter states: 'You can type as many as 255 characters in a cell'." },
+
+  { id:40, topic:"Entering Text & Numbers",
+    question:"If a cell is not wide enough and the cell to the right contains data, what happens to the text?",
+    options:["It automatically wraps to the next line","All characters may not be displayed","The text is automatically truncated and lost","Excel deletes the extra characters"],
+    answer:1, explanation:"The chapter states: 'If a cell is not wide enough, all characters may not be displayed if the cell to the right contains data'." },
+
+  { id:41, topic:"Entering Text & Numbers",
+    question:"With the General format, text in a cell automatically aligns to the:",
+    options:["Right","Center","Left","Justified"],
+    answer:2, explanation:"The chapter states: 'With the General format, the text automatically aligns on the left side of the cell'." },
+
+  { id:42, topic:"Entering Text & Numbers",
+    question:"To force Excel to accept a number as text, one method is to type what before the number?",
+    options:["A hash sign (#)","An asterisk (*)","An apostrophe (')","A dollar sign ($)"],
+    answer:2, explanation:"The chapter states: 'You can make Excel accept a number as text by typing an apostrophe (') followed by the number e.g. '25,000'." },
+
+  { id:43, topic:"Entering Text & Numbers",
+    question:"Another way to enter a number as text in Excel is:",
+    options:["Typing the number in parentheses","Placing an equal sign before the number and enclosing it in quotation marks, e.g., =\"25,000\"","Typing the number in square brackets","Adding a space before the number"],
+    answer:1, explanation:"The chapter says: 'You may also enter numbers as text by placing an equal sign in front of the number and enclosing the number in quotation marks e.g. = \"25,000\"'." },
+
+  { id:44, topic:"Entering Text & Numbers",
+    question:"When a large number exceeds the cell width and is not formatted as text, the cell may display:",
+    options:["ERROR","N/A","##### signs","The number in parentheses"],
+    answer:2, explanation:"The chapter states: 'the cell will be filled with # signs or in some cases may be displayed in scientific notation'." },
+
+  { id:45, topic:"Entering Text & Numbers",
+    question:"The value 2.17E+09 in a cell is an example of:",
+    options:["An error message","Scientific notation display","A date format","A text entry"],
+    answer:1, explanation:"The chapter gives '2.17E+09' as an example of a number displayed in scientific notation when it exceeds the cell width." },
+
+  { id:46, topic:"Entering Text & Numbers",
+    question:"Which arithmetic operations can you perform on text values in Excel?",
+    options:["Addition and subtraction only","All basic arithmetic operations","No arithmetic operations — text values cannot be used in computations","Multiplication only"],
+    answer:2, explanation:"The chapter states: 'you may not perform any arithmetic operation with text values'." },
+
+  { id:47, topic:"Entering Text & Numbers",
+    question:"Which characters are valid in Excel number entries (in addition to digits 0–9)?",
+    options:["# $ % @","- + / . E e","& * ! ?","< > [ ]"],
+    answer:1, explanation:"The chapter states: 'Numbers are constant values containing only the following characters: 1 2 3 4 5 6 7 8 9 0 - + / . E e'." },
+
+  { id:48, topic:"Entering Text & Numbers",
+    question:"When you enter a number in Excel, what does Excel store?",
+    options:["Only the raw number","Both the number typed and the format (appearance) in which it should be displayed","Only the display format","A text copy of the number"],
+    answer:1, explanation:"The chapter states: 'When a number is entered, Excel stores both the number typed into a cell and the format (or appearance) in which the number should be displayed'." },
+
+  { id:49, topic:"Entering Text & Numbers",
+    question:"Apart from digits 0–9, each special character (-, +, /, ., E, e) can appear how many times in a valid Excel number?",
+    options:["Multiple times","At most twice","No more than once","Up to three times"],
+    answer:2, explanation:"The chapter states: 'Apart from the digits 0 to 9, none of the other characters can appear more than once in a given number'." },
+
+  { id:50, topic:"Entering Text & Numbers",
+    question:"Which of the following is an INVALID number in Excel?",
+    options:["2.4e4","2.4E+09","2.4e4e2","2.40"],
+    answer:2, explanation:"The chapter gives '2.4e4e2' as an example of an invalid number (two 'e' characters). Excel treats it as text and it cannot be used in computations." },
+
+  { id:51, topic:"Entering Text & Numbers",
+    question:"Which of the following is an INVALID number in Excel?",
+    options:["2.3","2.33","2.3.3","2.3E+4"],
+    answer:2, explanation:"The chapter gives '2.3.3' as an example of an invalid number (two decimal points). Excel treats it as text." },
+
+  { id:52, topic:"Entering Text & Numbers",
+    question:"To enter the fraction 7½ (seven and a half) in Excel, you should type:",
+    options:["7/2","7.5","7, a space, then 1/2","7½ directly using a special character"],
+    answer:2, explanation:"The chapter states: 'To enter a fraction such as 7½, type the integer 7, a space, and then the fraction (½)'." },
+
+  { id:53, topic:"Entering Text & Numbers",
+    question:"To type the fraction ½ by itself (without a whole number part), how should you enter it to prevent Excel from interpreting it as a date?",
+    options:["Type /2","Type 0 1/2","Type .5","Type 1/2 directly"],
+    answer:1, explanation:"The chapter states: 'To type ½, type a zero, a space, and the fraction (0 1/2); else Excel will interpret the entry as a date'." },
+
+  /* ── 8. DATES & TIMES ─────────────────────────────────── */
+  { id:54, topic:"Dates & Times",
+    question:"How does Excel store dates and times internally?",
+    options:["As text strings","As serial numbers","As formatted strings","As binary values"],
+    answer:1, explanation:"The chapter states: 'When you type a date or time, Excel converts your entry to a serial number. This enables Excel to do date and time calculations'." },
+
+  { id:55, topic:"Dates & Times",
+    question:"The serial number for dates in Excel is counted from which starting date?",
+    options:["January 1, 1990","January 1, 1900","January 1, 1970","January 1, 1800"],
+    answer:1, explanation:"The chapter states: 'For a date, the serial number represents the number of days from the beginning of the 20th century (i.e. 1/1/1900) until the date you type'." },
+
+  { id:56, topic:"Dates & Times",
+    question:"What is the serial number for January 1, 1902 in Excel?",
+    options:["365","730","732","1095"],
+    answer:2, explanation:"The chapter gives the example: 'the date 1/1/1902 is represented as 732 and that is the number of days since 1/1/1900'." },
+
+  { id:57, topic:"Dates & Times",
+    question:"How is time represented in Excel's serial number system?",
+    options:["As hours since midnight","As minutes since midnight","As a decimal fraction of a 24-hour day","As seconds since midnight"],
+    answer:2, explanation:"The chapter states: 'Time is displayed as a decimal fraction of a 24-hour day'." },
+
+  { id:58, topic:"Dates & Times",
+    question:"Regardless of how a cell is formatted, the formula bar always displays dates in which format?",
+    options:["dd/mm/yyyy","yyyy-mm-dd","m/d/yyyy","mmm d, yyyy"],
+    answer:2, explanation:"The chapter states: 'Correctly entered dates appear in the formula bar with the format m/d/yyyy, regardless of how the cell is formatted'." },
+
+  { id:59, topic:"Dates & Times",
+    question:"Which keyboard shortcut formats a date in the default date format?",
+    options:["Ctrl+D","Ctrl+#","Ctrl+@","Ctrl+;"],
+    answer:1, explanation:"The chapter states: 'To format a date in the default date format, select the cell containing the date and press Ctrl + #'." },
+
+  { id:60, topic:"Dates & Times",
+    question:"Which keyboard shortcut formats a time in the default time format?",
+    options:["Ctrl+T","Ctrl+#","Ctrl+@","Ctrl+:"],
+    answer:2, explanation:"The chapter states: 'To format a time in the default format press Ctrl+ @'." },
+
+  { id:61, topic:"Dates & Times",
+    question:"Which keyboard shortcut quickly enters the current date in a cell?",
+    options:["Ctrl+D","Ctrl+#","Ctrl+;","Ctrl+:"],
+    answer:2, explanation:"The chapter states: 'To quickly enter the current date in a cell press Ctrl+;'." },
+
+  { id:62, topic:"Dates & Times",
+    question:"Which keyboard shortcut quickly enters the current time in a cell?",
+    options:["Ctrl+T","Ctrl+@","Ctrl+;","Ctrl+:"],
+    answer:3, explanation:"The chapter states: 'To quickly enter the current time in a cell press Ctrl+:'." },
+
+  { id:63, topic:"Dates & Times",
+    question:"How does a valid date entry appear in an unformatted cell?",
+    options:["Left-aligned, as text","Right-aligned, as a number","Centered in the cell","With a calendar icon"],
+    answer:1, explanation:"The chapter states: 'A valid date entry in an unformatted cell is aligned, as a number, to the right'." },
+
+  { id:64, topic:"Dates & Times",
+    question:"If a cell was previously formatted with a numeric format and you enter a date, it appears as:",
+    options:["A text string","The date in d/m/yyyy format","A serial number","An error"],
+    answer:2, explanation:"The chapter states: 'If the cell has been previously formatted with a numeric format, it appears as a serial number'." },
+
+  { id:65, topic:"Dates & Times",
+    question:"Which date format corresponds to the example '8-July-97'?",
+    options:["m/d/yy","dd/mm/yy","d-mmm-yy","mmmm d, yyyy"],
+    answer:2, explanation:"The chapter's date formats table shows d-mmm-yy with the example 8-July-97." },
+
+  { id:66, topic:"Dates & Times",
+    question:"Which date format corresponds to the example 'July 8, 1997'?",
+    options:["mmm-yy","m/d/yy h:mm","mmmm d, yyyy","d-mmm-yy"],
+    answer:2, explanation:"The chapter's date formats table shows 'mmmm d, yyyy' with the example 'July 8, 1997'." },
+
+  { id:67, topic:"Dates & Times",
+    question:"Which time format corresponds to the example '13:32:45'?",
+    options:["h:mm","h:mm:ss","h:mm AM/PM","h:mm:ss AM/PM"],
+    answer:1, explanation:"The chapter's time formats table shows h:mm:ss with the example 13:32:45." },
+
+  { id:68, topic:"Dates & Times",
+    question:"Which time format corresponds to the example '1:32PM'?",
+    options:["h:mm","h:mm:ss","h:mm AM/PM","h:mm:ss AM/PM"],
+    answer:2, explanation:"The chapter's time formats table shows h:mm AM/PM with the example 1:32PM." },
+
+  { id:69, topic:"Dates & Times",
+    question:"When using a 12-hour clock in Excel, you should follow the time with a space and:",
+    options:["H or h","A, AM, P, or PM (upper or lower case)","1 or 2","AM only (uppercase)"],
+    answer:1, explanation:"The chapter states: 'If you use a 12-hour clock follow the time with a space and A, AM, P or PM (in Upper or lower case)'." },
+
+  /* ── 9. AUTOCOMPLETE ──────────────────────────────────── */
+  { id:70, topic:"AutoComplete",
+    question:"What is the primary purpose of Excel's AutoComplete feature?",
+    options:["To automatically format cells with colours","To make it easy to enter repeated text items in a column","To spell-check all entries in real time","To auto-save the workbook every minute"],
+    answer:1, explanation:"The chapter states: 'To make it easy to enter repeated text items in a column, Excel includes a new feature called Auto complete. Instead of typing the same text items over and over, you only need to type it once'." },
+
+  { id:71, topic:"AutoComplete",
+    question:"AutoComplete automatically completes entries that contain:",
+    options:["Only numbers","Only dates and times","Text, or a combination of text and numbers","Only formulas"],
+    answer:2, explanation:"The chapter states: 'Excel automatically completes only those entries that contain text or a combination of text and numbers and not dates and times'." },
+
+  { id:72, topic:"AutoComplete",
+    question:"Which types of entries does AutoComplete NOT complete automatically?",
+    options:["Text entries","Text and number combinations","Entries that contain only numbers, dates, or times","Long text entries exceeding 100 characters"],
+    answer:2, explanation:"The chapter states: 'Entries that contain only numbers, dates, or times are not automatically completed'." },
+
+  { id:73, topic:"AutoComplete",
+    question:"When AutoComplete suggests a completion, how do you accept it?",
+    options:["Click on the suggested text","Press Tab","Press Enter","Press F2"],
+    answer:2, explanation:"The chapter states: 'To accept a proposed entry, press ENTER. The completed entry exactly matches the pattern of uppercase and lowercase letters of the existing entry'." },
+
+  { id:74, topic:"AutoComplete",
+    question:"To replace an AutoComplete suggestion with different text, you should:",
+    options:["Press Escape first","Press Delete","Continue typing the required text","Press F2"],
+    answer:2, explanation:"The chapter states: 'To replace the automatically entered characters, continue typing the required text'." },
+
+  { id:75, topic:"AutoComplete",
+    question:"To delete (remove) an AutoComplete suggestion, you should press:",
+    options:["Delete","Backspace","Escape","F5"],
+    answer:1, explanation:"The chapter states: 'To delete the automatically entered characters, press BACKSPACE'." },
+
+  { id:76, topic:"AutoComplete",
+    question:"To turn off AutoComplete, which navigation path should you follow?",
+    options:["File > Settings > AutoComplete","File > Options > Advanced > Editing options > Enable AutoComplete for cell values","Home > Edit > AutoComplete","View > Options > AutoComplete"],
+    answer:1, explanation:"The chapter specifies: 'Click the File Tab and then click Options. Click Advanced, and then under Editing options, clear or select the Enable AutoComplete for cell values check box to turn automatic completion of cell values on or off'." },
+
+  { id:77, topic:"AutoComplete",
+    question:"AutoComplete only works when:",
+    options:["The cell is in the middle of the worksheet","The insertion point is at the end of the current cell contents","The cell is formatted as text","The column has at least 10 entries"],
+    answer:1, explanation:"The chapter states: 'Excel then completes an entry only when the insertion point is at the end of the current cell contents'." },
+
+  { id:78, topic:"AutoComplete",
+    question:"AutoComplete bases its list of potential entries on:",
+    options:["The entire worksheet","The current row","The column that contains the active cell","The entire workbook"],
+    answer:2, explanation:"The chapter states: 'Excel bases the list of potential AutoComplete entries on the column that contains the active cell'." },
+
+  { id:79, topic:"AutoComplete",
+    question:"If entries are repeated within a row (not a column), they are:",
+    options:["Automatically completed by AutoComplete","Not automatically completed by AutoComplete","Highlighted in yellow","Converted to text"],
+    answer:1, explanation:"The chapter states: 'If entries are repeated within a row they are not automatically completed'." },
+
+  /* ── 10. CLEARING, INSERTING & DELETING ──────────────── */
+  { id:80, topic:"Clearing, Inserting & Deleting",
+    question:"What does pressing the Del key do to a selected cell?",
+    options:["Deletes the cell and shifts surrounding cells","Clears the formula/contents (same as Edit, Clear, Contents)","Cuts the selection to the clipboard","Undoes the last action"],
+    answer:1, explanation:"The chapter's shortcut keys table states: Del — 'Clears selected formula; same as the Edit, Clear, Contents command'." },
+
+  { id:81, topic:"Clearing, Inserting & Deleting",
+    question:"What does pressing Backspace do in the context of the formula bar?",
+    options:["Deletes the entire row","Clears and activates the formula bar","Cuts the selection","Pastes at the selected cell"],
+    answer:1, explanation:"The chapter states: Backspace — 'Clears the formula bar; activates and clears the formula bar'." },
+
+  { id:82, topic:"Clearing, Inserting & Deleting",
+    question:"What is the keyboard shortcut to cut a selection so it can be pasted?",
+    options:["Ctrl+C","Ctrl+X","Ctrl+V","Ctrl+Z"],
+    answer:1, explanation:"The chapter's shortcut table: Ctrl+X — 'Cuts the selection so it can be pasted; same as the Edit, Cut command'." },
+
+  { id:83, topic:"Clearing, Inserting & Deleting",
+    question:"What is the keyboard shortcut to paste at the selected cell?",
+    options:["Ctrl+C","Ctrl+X","Ctrl+V","Ctrl+Z"],
+    answer:2, explanation:"The chapter's shortcut table: Ctrl+V — 'Paste at the selected cell; same as the Edit, Paste command'." },
+
+  { id:84, topic:"Clearing, Inserting & Deleting",
+    question:"What is the keyboard shortcut to undo the last command?",
+    options:["Ctrl+U","Ctrl+X","Ctrl+V","Ctrl+Z"],
+    answer:3, explanation:"The chapter's shortcut table: Ctrl+Z — 'Undoes last command'." },
+
+  { id:85, topic:"Clearing, Inserting & Deleting",
+    question:"When erasing cell contents, which practice should you AVOID according to the chapter?",
+    options:["Using the Del key","Using the Clear command","Typing a space to replace the original contents","Selecting the cell first"],
+    answer:2, explanation:"The chapter states: 'To erase the contents of a cell, refrain from typing a space to replace the original contents. This could lead to problems later'." },
+
+  { id:86, topic:"Clearing, Inserting & Deleting",
+    question:"When the Del key is used to delete cell contents, what is NOT removed?",
+    options:["The cell contents","The notes attached and the formats","The formula in the cell","The text in the cell"],
+    answer:1, explanation:"The chapter states: 'You may also press Del Key after selecting the cell to delete the contents of a cell – only the contents are deleted not the notes attached or Formats'." },
+
+  { id:87, topic:"Clearing, Inserting & Deleting",
+    question:"Which Clear command option clears all contents AND returns the cell to General format?",
+    options:["Clear Contents","Clear Comments","Clear All (clears contents and notes and returns to General format)","Clear Formats"],
+    answer:2, explanation:"The chapter states that Clear All clears 'all cell contents and notes … and returned to General format'." },
+
+  { id:88, topic:"Clearing, Inserting & Deleting",
+    question:"Which Clear command option removes only the contents, keeping formats and notes intact?",
+    options:["Clear All","Clear Contents","Clear Comments","Clear Formats"],
+    answer:1, explanation:"The chapter states: 'Clear contents but does not change formats or notes'." },
+
+  { id:89, topic:"Clearing, Inserting & Deleting",
+    question:"When the Edit > Delete command deletes cells, what happens to the surrounding cells?",
+    options:["They remain in place with blank spaces","The selected cells are removed and other cells slide in to fill the gap","The entire worksheet is deleted","Only the cell contents are removed, not the cells"],
+    answer:1, explanation:"The chapter states: 'When the Edit, Delete command deletes cells, it completely removes the selected cells and slides in other cells to fill the gap'." },
+
+  { id:90, topic:"Clearing, Inserting & Deleting",
+    question:"Which keyboard shortcut is used to delete selected cells?",
+    options:["Ctrl++ (plus)","Ctrl+- (minus)","Ctrl+D","Ctrl+Delete"],
+    answer:1, explanation:"The chapter lists 'press Ctrl, - (minus)' as one of the methods to delete cells." },
+
+  { id:91, topic:"Clearing, Inserting & Deleting",
+    question:"When deleting cells, the Delete dialog box lets you choose which direction remaining cells will shift. Which directions are options?",
+    options:["Only left","Only up","Shift cells left, shift cells up, delete entire row, or delete entire column","Left, up, right, or down"],
+    answer:2, explanation:"The chapter states you can choose 'shift cells left, shift cells up, delete entire row or column'." },
+
+  { id:92, topic:"Clearing, Inserting & Deleting",
+    question:"If you select an entire row or column before using the Delete command, what happens to the Delete dialog box?",
+    options:["It shows extra options","It does not appear","It shows a warning message","It asks for written confirmation"],
+    answer:1, explanation:"The chapter states: 'If you selected a whole row or column, the dialogue box does not appear'." },
+
+  { id:93, topic:"Clearing, Inserting & Deleting",
+    question:"Which keyboard shortcut is used to INSERT cells in Excel?",
+    options:["Ctrl+I","Ctrl+Shift++ (plus)","Ctrl+Alt+I","Ctrl+Insert"],
+    answer:1, explanation:"The chapter lists 'press Ctrl, Shift, + (plus)' as one of the methods to insert cells." },
+
+  { id:94, topic:"Clearing, Inserting & Deleting",
+    question:"Which of the following is NOT listed as a method to insert cells in the chapter?",
+    options:["Press Ctrl+Shift++ (plus)","Right-click and select Insert","Home > Cells > Insert","Press F5"],
+    answer:3, explanation:"The three listed methods are: (i) press Ctrl, Shift, + (plus); (ii) right-click and select Insert; (iii) Home > Cells > Insert. F5 is not a method for inserting cells." },
+
+  /* ── 11. FILL HANDLE & AUTOFILL ──────────────────────── */
+  { id:95, topic:"Fill Handle & AutoFill",
+    question:"The fill handle is displayed by default. To HIDE it, you should go to:",
+    options:["File > Options > Advanced > Editing options > uncheck 'Enable Fill handle and cell drag-and-drop'","View > Options > uncheck Fill Handle","Right-click the cell > Hide Fill Handle","Press Ctrl+H"],
+    answer:0, explanation:"The chapter states: 'Click the File Tab and then click Options. Click Advanced, and then under the Editing options, clear or select the Enable Fill handle and cell drag-and-drop check box to hide or display the fill handle'." },
+
+  { id:96, topic:"Fill Handle & AutoFill",
+    question:"To avoid accidentally replacing existing data when dragging the fill handle, which check box should be selected?",
+    options:["Protect cells before overwriting","Alert before overwriting cells","Confirm cell replacement","Lock cells when filled"],
+    answer:1, explanation:"The chapter states: 'To avoid replacing existing data when you drag the fill handle, make sure that the Alert before overwriting cells check box is selected'." },
+
+  { id:97, topic:"Fill Handle & AutoFill",
+    question:"After you drag the fill handle, what appears to allow you to choose how the selection is filled?",
+    options:["A dialog box with fill options","The Auto Fill Options button","A mini formatting toolbar","The Format Cells dialog box"],
+    answer:1, explanation:"The chapter states: 'After you drag the fill handle, the Auto Fill Options button appears so that you can choose how the selection is filled'." },
+
+  { id:98, topic:"Fill Handle & AutoFill",
+    question:"Which Auto Fill option fills only the cell formats (not the contents)?",
+    options:["Fill Without Formatting","Fill Series","Fill Formatting Only","Copy Cells"],
+    answer:2, explanation:"The chapter states: 'you can choose to fill just cell formats by clicking Fill Formatting Only'." },
+
+  { id:99, topic:"Fill Handle & AutoFill",
+    question:"Which Auto Fill option fills the cell contents without applying any formats?",
+    options:["Fill Formatting Only","Fill Without Formatting","Fill Contents Only","Fill Values"],
+    answer:1, explanation:"The chapter states: 'you can choose to fill just the contents of a cell by clicking Fill Without Formatting'." },
+
+  { id:100, topic:"Fill Handle & AutoFill",
+    question:"To turn off the Auto Fill Options button (stop it from appearing after dragging), you should:",
+    options:["File > Options > Advanced > Cut, Copy, and Paste > uncheck 'Show Paste Options buttons'","Right-click > Turn off Auto Fill","View > Options > Auto Fill","Home > Fill > Options"],
+    answer:0, explanation:"The chapter states: 'Click the File Tab and then click Options. Click Advanced, and then under the Cut, Copy, and Paste, clear the Show Paste Options buttons check box'." },
+
+  { id:101, topic:"Fill Handle & AutoFill",
+    question:"The Fill command on the Home tab can fill data in which directions?",
+    options:["Only downward","Down, Right, Up, or Left","Only down and right","Up and left only"],
+    answer:1, explanation:"The chapter lists the Fill command directions as Down, Right, Up, or Left." },
+
+  { id:102, topic:"Fill Handle & AutoFill",
+    question:"Which keyboard shortcut fills a cell with the contents of the cell ABOVE it?",
+    options:["Ctrl+U","Ctrl+A","Ctrl+D","Ctrl+R"],
+    answer:2, explanation:"The chapter states: 'You can also quickly fill a cell with the contents of the cell above using CTRL+D'." },
+
+  { id:103, topic:"Fill Handle & AutoFill",
+    question:"Which keyboard shortcut fills a cell with the contents of the cell to its LEFT?",
+    options:["Ctrl+L","Ctrl+D","Ctrl+R","Ctrl+F"],
+    answer:2, explanation:"The chapter states: 'fill a cell with the contents of the cell left of it by pressing CTRL+R'." },
+
+  { id:104, topic:"Fill Handle & AutoFill",
+    question:"If you drag the fill handle UP or to the LEFT and STOP within the selected cells (without going past the first column or top row), what happens?",
+    options:["Excel extends the series in reverse","Excel deletes all data within the selection","Excel copies the selected data to adjacent cells","Nothing happens — the action is ignored"],
+    answer:1, explanation:"The chapter warns: 'If you drag the fill handle up or to the left of a selection and stop in the selected cells without going past the first column or the top row in the selection, Excel deletes all data within the selection'." },
+
+  { id:105, topic:"Fill Handle & AutoFill",
+    question:"To avoid data loss when dragging the fill handle near the selected area, you should:",
+    options:["Hold Ctrl while dragging","Drag the fill handle out of the selected area before releasing the mouse button","Use Ctrl+Z immediately after","Always drag downward only"],
+    answer:1, explanation:"The chapter states: 'you are to ensure that you drag the fill handle out of the selected area before releasing the mouse button'." },
+
+  /* ── 12. FILLING SERIES ───────────────────────────────── */
+  { id:106, topic:"Filling Series",
+    question:"When filling a series, after typing the starting value, what should you do in the NEXT cell?",
+    options:["Select Fill > Series immediately","Type a value in the next cell to define a pattern","Press Ctrl+Enter","Press F5"],
+    answer:1, explanation:"The chapter says step III is: 'Type a value in the next cell to define a pattern. For example, if you want the series 2, 4, 6, 8, 10,…. type 2 and 4 in the first two cells'." },
+
+  { id:107, topic:"Filling Series",
+    question:"If you want the series 2, 2, 2, 2,… what should you type in the second cell?",
+    options:["Type 2 again","Leave the second cell blank","Type 0","Type –2"],
+    answer:1, explanation:"The chapter states: 'if you want the series 2, 2, 2, 2..., you can leave the second cell blank'." },
+
+  { id:108, topic:"Filling Series",
+    question:"To fill a series in INCREASING order, which direction should you drag the fill handle?",
+    options:["Up or to the left","Down or to the right","Either direction works","Always straight down only"],
+    answer:1, explanation:"The chapter states: 'To fill in increasing order, drag down or to the right'." },
+
+  { id:109, topic:"Filling Series",
+    question:"To fill a series in DECREASING order, which direction should you drag the fill handle?",
+    options:["Down or to the right","Up or to the left","Always upward","Always to the right"],
+    answer:1, explanation:"The chapter states: 'To fill in decreasing order, drag up or to the left'." },
+
+  { id:110, topic:"Filling Series",
+    question:"According to the series examples table, what does the initial selection '1st Period' extend to?",
+    options:["2nd Quarter, 3rd Quarter, …","2nd Period, 3rd Period, …","Period 2, Period 3, …","Second, Third, …"],
+    answer:1, explanation:"The chapter's series examples table shows: Initial selection '1st Period' → Extended series '2nd Period, 3rd Period, …'." },
+
+  { id:111, topic:"Filling Series",
+    question:"If the starting value is Jan-2000 and you right-drag the fill handle and click 'Fill Months', what series is produced?",
+    options:["Jan-2001, Jan-2002, …","Feb-2000, Mar-2000, …","January 1 2000, January 2 2000, …","Q1-2000, Q2-2000, …"],
+    answer:1, explanation:"The chapter states: 'if the starting value is the date Jan-2000, click Fill Months for the series Feb-2000, Mar-2000, and so on'." },
+
+  { id:112, topic:"Filling Series",
+    question:"Using the right-drag shortcut menu on the fill handle, which types of date series commands are available?",
+    options:["Fill Days and Fill Weeks","Fill Months and Fill Years","Fill Hours and Fill Minutes","Fill Quarters and Fill Decades"],
+    answer:1, explanation:"The chapter states you can 'click Fill Months' or 'click Fill Years' from the shortcut menu that appears when right-dragging the fill handle." },
+
+  { id:113, topic:"Filling Series",
+    question:"In the Fill > Series dialog, which 'Type' option creates a series by ADDING the step value to each cell?",
+    options:["Growth","Date","Linear","AutoFill"],
+    answer:2, explanation:"The chapter states: 'Click Linear for a series that is calculated by adding the value in the Step value box to each cell value in turn'." },
+
+  { id:114, topic:"Filling Series",
+    question:"In the Fill > Series dialog, which 'Type' option creates a series by MULTIPLYING the step value by each cell?",
+    options:["Linear","Growth","Date","AutoFill"],
+    answer:1, explanation:"The chapter states: 'Click Growth for a series that is calculated by multiplying the value in the Step value box by each cell value in turn'." },
+
+  { id:115, topic:"Filling Series",
+    question:"In the Fill > Series dialog, which 'Type' option produces the same results as dragging the fill handle?",
+    options:["Linear","Growth","Date","AutoFill"],
+    answer:3, explanation:"The chapter states: 'Click AutoFill for a series that produces the same results as dragging the fill handle'." },
+
+  { id:116, topic:"Filling Series",
+    question:"In the Fill > Series dialog, which 'Type' option fills date values incrementally based on a specified Date unit?",
+    options:["Linear","Growth","Date","AutoFill"],
+    answer:2, explanation:"The chapter states: 'Click Date for a series that fills date values incrementally by the value in the Step value box and dependent on the unit specified under Date unit'." },
+
+  { id:117, topic:"Filling Series",
+    question:"How can you suppress (prevent) AutoFill from extending a series when dragging the fill handle?",
+    options:["Right-click instead of left-click","Hold Ctrl while dragging the fill handle of a selection of two or more cells","Press Shift while dragging","Use the keyboard only (not the mouse)"],
+    answer:1, explanation:"The chapter states: 'You can suppress AutoFill by holding down CTRL while you drag the fill handle of a selection of two or more cells. The selected values are then copied to the adjacent cells, and Excel does not extend a series'." },
+
+  { id:118, topic:"Filling Series",
+    question:"What is the result of holding Ctrl while dragging the fill handle (with two or more cells selected)?",
+    options:["The series is extended","The selected values are copied to adjacent cells (not extended as a series)","Excel shows a dialog box","The cells are deleted"],
+    answer:1, explanation:"The chapter states: 'The selected values are then copied to the adjacent cells, and Excel does not extend a series'." },
+
+  /* ── 13. FILLING FORMULAS ─────────────────────────────── */
+  { id:119, topic:"Fill Handle & AutoFill",
+    question:"To fill a formula into adjacent cells using the fill handle, you first select:",
+    options:["All cells including the destination cells","The cell that contains the formula","All cells in the column","The destination cells only"],
+    answer:1, explanation:"The chapter states: 'Select the cell that contains the formula that you want to fill into adjacent cells', then drag the fill handle." },
+
+  { id:120, topic:"Fill Handle & AutoFill",
+    question:"You can automatically fill a formula downward to all adjacent applicable cells by:",
+    options:["Pressing Ctrl+D repeatedly","Double-clicking the fill handle of the first cell containing the formula","Dragging the fill handle to the last visible row","Using Ctrl+Shift+Enter"],
+    answer:1, explanation:"The chapter states: 'You can automatically fill a formula downward, for all adjacent cells that it applies to, by double-clicking the fill handle of the first cell that contains the formula'." },
+
+  { id:121, topic:"Fill Handle & AutoFill",
+    question:"In the example in the chapter, if =A10+B10 is in cell C10 and numbers exist in A10:A25 and B10:B25, double-clicking the fill handle copies the formula into:",
+    options:["C11:C25","C10:C25","A10:C25","B10:C25"],
+    answer:0, explanation:"The chapter states: 'you can copy the formula in C10 into cells C11:C25 by selecting cell C10 and double-clicking the fill handle'." },
+
+  /* ── 14. CUSTOM FILL SERIES ───────────────────────────── */
+  { id:122, topic:"Custom Fill Series",
+    question:"According to the chapter, built-in series that Excel can fill automatically include:",
+    options:["Random number sequences","Days of the week (Mon, Tue, Wed…) and months (Jan, Feb, Mar…)","Custom cell styles","Colour-coded sequences"],
+    answer:1, explanation:"The chapter's series examples table shows built-in series such as days of the week (Mon, Tue, Wed…) and months (Jan, Feb, Mar…) that fill automatically." },
+
+  { id:123, topic:"Custom Fill Series",
+    question:"The chapter mentions the ability to fill cells using a 'custom fill series'. The primary purpose of a custom fill series is:",
+    options:["To apply custom number formats to a range","To allow entering a particular sequence of data more easily across rows or columns","To create custom chart types","To define custom cell border patterns"],
+    answer:1, explanation:"The chapter introduces 'Filling data by using a custom fill series' and states 'You can make the entering of a particular sequence of data easy…' (inferred from context, as the slide text was truncated)." },
+
+  { id:124, topic:"Custom Fill Series",
+    question:"Which of the following is an example of a series Excel can automatically extend using the fill handle?",
+    options:["A series of random numbers","Mon, Tue, Wed (days of the week)","A series of blank cells","A series of formulas with absolute references"],
+    answer:1, explanation:"The chapter's series table shows 'Mon' in the initial selection automatically extending to 'Tue, Wed, Thu,…'." },
+
+  { id:125, topic:"Custom Fill Series",
+    question:"Which of the following initial selections would extend to 'Feb, Mar, Apr,…' when using the fill handle?",
+    options:["1, 2, 3","Mon","Jan","10:00"],
+    answer:2, explanation:"The chapter's series examples table shows 'Jan' as the initial selection extending to 'Feb, Mar, Apr,…'." },
+
+];
+
+/* ═══════════════════════════════════════════════════════════
+   TOPIC LIST (derived from questions)
+═══════════════════════════════════════════════════════════ */
+const TOPICS = [...new Set(QUESTIONS.map(q => q.topic))];
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+let state = {
+  mode: 'practice',
+  shuffleQ: false,
+  shuffleA: false,
+  activeTopics: new Set(TOPICS),
+  pool: [],          // final ordered question array for this session
+  optionOrder: [],   // per-question shuffled option indices
+  current: 0,
+  answers: [],       // per-question: { chosen: idx|null, correct: bool }
+  score: 0,
+  started: false,
+};
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════════ */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function $(id) { return document.getElementById(id); }
+
+function showPage(id) {
+  ['setupPage','quizPage','resultsPage','reviewPage'].forEach(p => {
+    const el = $(p);
+    el.classList.remove('active');
+    el.setAttribute('aria-hidden', 'true');
+  });
+  $(id).classList.add('active');
+  $(id).removeAttribute('aria-hidden');
+  window.scrollTo(0, 0);
+}
+
+function toast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SETUP PAGE
+═══════════════════════════════════════════════════════════ */
+function buildTopicGrid() {
+  const grid = $('topicGrid');
+  grid.innerHTML = '';
+  TOPICS.forEach(topic => {
+    const count = QUESTIONS.filter(q => q.topic === topic).length;
+    const item = document.createElement('label');
+    item.className = 'topic-item';
+    item.innerHTML = `
+      <input type="checkbox" checked data-topic="${topic}" onchange="onTopicChange()" />
+      ${topic}
+      <span class="count">${count}</span>`;
+    grid.appendChild(item);
+  });
+}
+
+function onTopicChange() {
+  state.activeTopics = new Set(
+    [...document.querySelectorAll('#topicGrid input:checked')].map(i => i.dataset.topic)
+  );
+  updatePreview();
+}
+
+function setAllTopics(on) {
+  document.querySelectorAll('#topicGrid input').forEach(i => { i.checked = on; });
+  state.activeTopics = on ? new Set(TOPICS) : new Set();
+  updatePreview();
+}
+
+function updatePreview() {
+  const count = QUESTIONS.filter(q => state.activeTopics.has(q.topic)).length;
+  $('qPreview').textContent = `${count} question${count !== 1 ? 's' : ''} selected`;
+  $('startBtn').disabled = count === 0;
+}
+
+function initSetupListeners() {
+  document.querySelectorAll('input[name="mode"]').forEach(r => {
+    r.addEventListener('change', e => {
+      state.mode = e.target.value;
+      $('practiceCard').classList.toggle('selected', state.mode === 'practice');
+      $('examCard').classList.toggle('selected', state.mode === 'exam');
+    });
+  });
+  $('shuffleQ').addEventListener('change', e => { state.shuffleQ = e.target.checked; });
+  $('shuffleA').addEventListener('change', e => { state.shuffleA = e.target.checked; });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   START QUIZ
+═══════════════════════════════════════════════════════════ */
+function startQuiz() {
+  let pool = QUESTIONS.filter(q => state.activeTopics.has(q.topic));
+  if (pool.length === 0) { toast('Please select at least one topic'); return; }
+  if (state.shuffleQ) pool = shuffle(pool);
+
+  // Build per-question option orders
+  state.pool = pool;
+  state.optionOrder = pool.map(q => {
+    const indices = q.options.map((_, i) => i);
+    return state.shuffleA ? shuffle(indices) : indices;
+  });
+
+  state.answers  = pool.map(() => ({ chosen: null, correct: false }));
+  state.current  = 0;
+  state.score    = 0;
+  state.started  = true;
+
+  showPage('quizPage');
+  renderQuestion();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   QUESTION RENDERING
+═══════════════════════════════════════════════════════════ */
+function renderQuestion() {
+  const q      = state.pool[state.current];
+  const ans    = state.answers[state.current];
+  const order  = state.optionOrder[state.current];
+  const total  = state.pool.length;
+  const pct    = ((state.current) / total) * 100;
+
+  // Progress
+  $('progressFill').style.width = pct + '%';
+  $('progressBar').setAttribute('aria-valuenow', Math.round(pct));
+  $('qCounter').textContent = `Question ${state.current + 1} of ${total}`;
+  $('scoreCounter').textContent = state.mode === 'practice' ? `Score: ${state.score}` : '';
+
+  // Question meta
+  $('topicTag').textContent = q.topic;
+  $('questionText').textContent = `Q${state.current + 1}. ${q.question}`;
+
+  // Options
+  const list = $('optionsList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  order.forEach((origIdx, displayPos) => {
+    const li  = document.createElement('li');
+    li.setAttribute('role', 'listitem');
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.setAttribute('aria-label', `Option ${letters[displayPos]}: ${q.options[origIdx]}`);
+    btn.dataset.origIdx = origIdx;
+    btn.dataset.displayPos = displayPos;
+    btn.innerHTML = `<span class="opt-badge" aria-hidden="true">${letters[displayPos]}</span><span>${q.options[origIdx]}</span>`;
+    btn.addEventListener('click', () => selectOption(btn, origIdx));
+
+    // Restore state if navigating back
+    if (ans.chosen !== null) {
+      btn.disabled = true;
+      btn.classList.add('locked');
+      if (state.mode === 'practice') {
+        if (origIdx === q.answer) btn.classList.add('show-correct');
+        if (origIdx === ans.chosen && origIdx !== q.answer) btn.classList.add('wrong');
+        if (origIdx === ans.chosen && origIdx === q.answer) btn.classList.replace('show-correct','correct');
+      } else {
+        if (origIdx === ans.chosen) btn.classList.add('chosen');
+      }
+    }
+    li.appendChild(btn);
+    list.appendChild(li);
+  });
+
+  // Explanation (practice mode only, if already answered)
+  const expEl = $('explanation');
+  expEl.className = 'explanation';
+  expEl.textContent = '';
+  if (ans.chosen !== null && state.mode === 'practice') {
+    expEl.classList.add('show', ans.correct ? 'correct-exp' : 'wrong-exp');
+    expEl.textContent = (ans.correct ? '✅ Correct! ' : '❌ Incorrect. ') + q.explanation;
+  }
+
+  // Nav buttons
+  $('prevBtn').disabled = state.current === 0;
+  updateNextBtn();
+}
+
+function selectOption(btn, origIdx) {
+  const q   = state.pool[state.current];
+  const ans = state.answers[state.current];
+  if (ans.chosen !== null) return; // already answered
+
+  ans.chosen  = origIdx;
+  ans.correct = origIdx === q.answer;
+  if (ans.correct) state.score++;
+
+  // Disable all options
+  $('optionsList').querySelectorAll('.opt-btn').forEach(b => {
+    b.disabled = true;
+    b.classList.add('locked');
+    const oi = parseInt(b.dataset.origIdx, 10);
+    if (state.mode === 'practice') {
+      if (oi === q.answer) b.classList.add('show-correct');
+      if (oi === origIdx && !ans.correct) b.classList.add('wrong');
+      if (oi === origIdx && ans.correct)  {
+        b.classList.remove('show-correct');
+        b.classList.add('correct');
+      }
+    } else {
+      if (oi === origIdx) b.classList.add('chosen');
+    }
+  });
+
+  // Explanation in practice mode
+  if (state.mode === 'practice') {
+    const expEl = $('explanation');
+    expEl.className = `explanation show ${ans.correct ? 'correct-exp' : 'wrong-exp'}`;
+    expEl.textContent = (ans.correct ? '✅ Correct! ' : '❌ Incorrect. ') + q.explanation;
+    expEl.focus();
+  }
+
+  $('scoreCounter').textContent = state.mode === 'practice' ? `Score: ${state.score}` : '';
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const btn = $('nextBtn');
+  const ans = state.answers[state.current];
+  const last = state.current === state.pool.length - 1;
+
+  if (last) {
+    btn.textContent = ans.chosen !== null ? 'Finish Quiz ✓' : 'Skip & Finish';
+    btn.onclick = finishQuiz;
+  } else {
+    btn.textContent = ans.chosen !== null ? 'Next →' : 'Skip →';
+    btn.onclick = () => goQuestion(1);
+  }
+}
+
+function goQuestion(dir) {
+  const next = state.current + dir;
+  if (next < 0 || next >= state.pool.length) return;
+  state.current = next;
+  renderQuestion();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FINISH & RESULTS
+═══════════════════════════════════════════════════════════ */
+function finishQuiz() {
+  // In exam mode, tally scores
+  if (state.mode === 'exam') {
+    state.score = state.answers.filter(a => a.correct).length;
+  }
+  showResults();
+}
+
+function showResults() {
+  const total   = state.pool.length;
+  const correct = state.answers.filter(a => a.correct).length;
+  const wrong   = state.answers.filter(a => a.chosen !== null && !a.correct).length;
+  const skipped = state.answers.filter(a => a.chosen === null).length;
+  const pct     = Math.round((correct / total) * 100);
+
+  $('scoreRing').style.setProperty('--pct', pct);
+  $('scoreNum').textContent   = pct + '%';
+  $('statCorrect').textContent = correct;
+  $('statWrong').textContent   = wrong;
+  $('statSkipped').textContent = skipped;
+
+  // Grade
+  const badge = $('gradeBadge');
+  let grade, colour;
+  if (pct >= 90) { grade = 'A – Excellent! 🌟'; colour = '#e8f5e9'; }
+  else if (pct >= 75) { grade = 'B – Good job! 👍'; colour = '#e3f2fd'; }
+  else if (pct >= 60) { grade = 'C – Satisfactory'; colour = '#fff9c4'; }
+  else if (pct >= 50) { grade = 'D – Needs work'; colour = '#ffe0b2'; }
+  else { grade = 'F – Keep studying!'; colour = '#ffebee'; }
+  badge.textContent = grade;
+  badge.style.background = colour;
+  badge.style.color = '#333';
+
+  showPage('resultsPage');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   REVIEW
+═══════════════════════════════════════════════════════════ */
+function showReview() {
+  renderReview();
+  showPage('reviewPage');
+}
+
+function renderReview() {
+  const filter  = $('reviewFilter').value;
+  const list    = $('reviewList');
+  const letters = ['A','B','C','D','E'];
+  list.innerHTML = '';
+
+  state.pool.forEach((q, i) => {
+    const ans = state.answers[i];
+    const status = ans.chosen === null ? 'skip' : (ans.correct ? 'correct' : 'wrong');
+    if (filter === 'wrong'   && status === 'correct') return;
+    if (filter === 'correct' && status !== 'correct') return;
+
+    const order   = state.optionOrder[i];
+    const dotCls  = status === 'correct' ? 'correct-dot' : status === 'wrong' ? 'wrong-dot' : 'skip-dot';
+    const icon    = status === 'correct' ? '✅' : status === 'wrong' ? '❌' : '⏭';
+
+    const item = document.createElement('div');
+    item.className = 'review-item';
+
+    // Head (toggle)
+    const head = document.createElement('button');
+    head.className = 'review-head';
+    head.setAttribute('aria-expanded', 'false');
+    head.innerHTML = `<span class="dot ${dotCls}" aria-hidden="true"></span>${icon} Q${i+1}: ${q.question.substring(0,80)}${q.question.length>80?'…':''}<span class="arrow" aria-hidden="true">▼</span>`;
+    head.addEventListener('click', () => {
+      const detail = item.querySelector('.review-detail');
+      const open   = detail.classList.toggle('open');
+      head.classList.toggle('open', open);
+      head.setAttribute('aria-expanded', String(open));
+    });
+
+    // Detail
+    const detail = document.createElement('div');
+    detail.className = 'review-detail';
+
+    const chosenDisplayPos = ans.chosen !== null
+      ? order.indexOf(ans.chosen)
+      : null;
+    const correctDisplayPos = order.indexOf(q.answer);
+
+    let html = `<p><strong>Question:</strong> ${q.question}</p><br/>`;
+    html += `<p><strong>Options:</strong></p><ul style="margin:6px 0 6px 18px">`;
+    order.forEach((origIdx, dp) => {
+      html += `<li>${letters[dp]}) ${q.options[origIdx]}</li>`;
+    });
+    html += '</ul>';
+
+    if (ans.chosen === null) {
+      html += `<p class="your-ans">You skipped this question.</p>`;
+    } else {
+      html += `<p class="your-ans">Your answer: ${letters[chosenDisplayPos]}) ${q.options[ans.chosen]}</p>`;
+    }
+    html += `<p class="correct-ans">Correct answer: ${letters[correctDisplayPos]}) ${q.options[q.answer]}</p>`;
+    html += `<div class="exp-text">📖 ${q.explanation}</div>`;
+
+    detail.innerHTML = html;
+
+    item.appendChild(head);
+    item.appendChild(detail);
+    list.appendChild(item);
+  });
+
+  if (list.children.length === 0) {
+    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">No questions match this filter.</p>';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SETUP NAVIGATION
+═══════════════════════════════════════════════════════════ */
+function showSetup() {
+  state.started = false;
+  showPage('setupPage');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   KEYBOARD NAVIGATION
+═══════════════════════════════════════════════════════════ */
+document.addEventListener('keydown', e => {
+  if (!$('quizPage').classList.contains('active')) return;
+  const key = e.key;
+
+  // 1-4 select options
+  if (['1','2','3','4'].includes(key)) {
+    const pos  = parseInt(key, 10) - 1;
+    const btns = [...$('optionsList').querySelectorAll('.opt-btn')];
+    const btn  = btns.find(b => parseInt(b.dataset.displayPos, 10) === pos);
+    if (btn && !btn.disabled) btn.click();
+    return;
+  }
+
+  if (key === 'Enter' || key === ' ') {
+    e.preventDefault();
+    $('nextBtn').click();
+    return;
+  }
+  if (key === 'ArrowRight') { goQuestion(1); return; }
+  if (key === 'ArrowLeft')  { goQuestion(-1); return; }
+});
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
+(function init() {
+  buildTopicGrid();
+  initSetupListeners();
+  updatePreview();
+  showPage('setupPage');
+})();
+</script>
+</body>
+</html>
