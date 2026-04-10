@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microscopy &mdash; Comprehensive MCQ Test</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+               background:linear-gradient(135deg,#1a237e 0%,#0288d1 100%);
+               min-height:100vh; padding:20px; }
+        .container { max-width:860px; margin:0 auto; background:white;
+                     border-radius:12px; box-shadow:0 12px 48px rgba(0,0,0,0.3); overflow:hidden; }
+        .header { background:linear-gradient(135deg,#1a237e 0%,#0288d1 100%);
+                  color:white; padding:30px; text-align:center; }
+        .header h1 { font-size:28px; margin-bottom:8px; }
+        .header p  { font-size:14px; opacity:0.9; }
+
+        .progress-container { background:#f0f4f8; padding:18px 24px; }
+        .progress-bar { width:100%; height:10px; background:#ddd; border-radius:5px; overflow:hidden; margin-bottom:8px; }
+        .progress-fill { height:100%; background:linear-gradient(90deg,#1a237e 0%,#0288d1 100%); transition:width 0.4s ease; }
+        .progress-text { font-size:13px; color:#555; font-weight:bold; text-align:center; }
+
+        .quiz-content { padding:30px; display:none; }
+        .quiz-content.active { display:block; }
+
+        .difficulty-badge { display:inline-block; padding:4px 14px; border-radius:20px;
+                            font-size:12px; font-weight:bold; margin-bottom:12px;
+                            letter-spacing:0.5px; text-transform:uppercase; }
+        .diff-very-easy { background:#e8f5e9; color:#2e7d32; }
+        .diff-easy      { background:#e3f2fd; color:#1565c0; }
+        .diff-medium    { background:#fff8e1; color:#f57f17; }
+        .diff-hard      { background:#fce4ec; color:#b71c1c; }
+
+        .question-number { color:#0288d1; font-weight:bold; font-size:12px;
+                           text-transform:uppercase; margin-bottom:8px; }
+        .question-text   { font-size:17px; font-weight:bold; color:#222;
+                           margin-bottom:22px; line-height:1.55; }
+        .options { display:flex; flex-direction:column; gap:12px; }
+        .option  { padding:14px 18px; border:2px solid #dde4ee; border-radius:8px;
+                   cursor:pointer; transition:all 0.25s ease; background:white; font-size:15px;
+                   display:flex; align-items:flex-start; }
+        .option:hover:not(.disabled) { border-color:#0288d1; background:#e3f2fd; transform:translateX(4px); }
+        .option.correct   { border-color:#2e7d32; background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+        .option.incorrect { border-color:#c62828; background:#ffebee; color:#b71c1c; font-weight:bold; }
+        .option.disabled  { cursor:not-allowed; opacity:0.75; }
+        .option-letter { display:inline-flex; align-items:center; justify-content:center;
+                         min-width:28px; height:28px; background:#0288d1; color:white;
+                         border-radius:50%; margin-right:12px; font-weight:bold; font-size:13px; flex-shrink:0; }
+        .option.correct   .option-letter { background:#2e7d32; }
+        .option.incorrect .option-letter { background:#c62828; }
+
+        .feedback { margin-top:18px; padding:16px; border-radius:8px; display:none;
+                    font-size:14px; line-height:1.65; }
+        .feedback.show { display:block; }
+        .feedback.correct-feedback   { background:#e8f5e9; color:#1b5e20; border-left:4px solid #2e7d32; }
+        .feedback.incorrect-feedback { background:#ffebee; color:#b71c1c; border-left:4px solid #c62828; }
+
+        .button-group { display:flex; gap:10px; margin-top:28px; justify-content:space-between; }
+        .btn { padding:12px 28px; border:none; border-radius:8px; font-size:15px; font-weight:bold; cursor:pointer; transition:all 0.25s ease; }
+        .btn-primary { background:linear-gradient(135deg,#1a237e 0%,#0288d1 100%); color:white; flex:1; }
+        .btn-primary:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 5px 20px rgba(2,136,209,0.4); }
+        .btn-primary:disabled { opacity:0.5; cursor:not-allowed; }
+        .btn-secondary { background:#6c757d; color:white; flex:1; }
+        .btn-secondary:hover:not(:disabled) { background:#5a6268; }
+
+        .start-screen { padding:50px 20px; text-align:center; }
+        .start-screen h2 { font-size:24px; color:#222; margin-bottom:16px; }
+        .start-screen p  { font-size:15px; color:#555; margin-bottom:14px; line-height:1.6; }
+        .test-info { background:#e3f2fd; padding:20px; border-radius:8px; margin:20px 0; border-left:4px solid #0288d1; text-align:left; }
+        .test-info li { margin:8px 0 8px 22px; color:#444; font-size:14px; }
+
+        .results-screen { padding:40px 20px; text-align:center; }
+        .score-circle { width:160px; height:160px; border-radius:50%;
+                        background:linear-gradient(135deg,#1a237e 0%,#0288d1 100%);
+                        color:white; display:flex; flex-direction:column;
+                        justify-content:center; align-items:center;
+                        margin:20px auto; font-size:52px; font-weight:bold; }
+        .score-circle-subtitle { font-size:16px; }
+        .results-details { background:#e3f2fd; padding:20px; border-radius:8px;
+                           margin:20px 0; border-left:4px solid #0288d1; text-align:left; }
+        .results-details p { margin:10px 0; font-size:15px; color:#444; }
+        .results-details strong { color:#0288d1; }
+        .start-screen .btn-primary, .results-screen .btn-primary { width:100%; padding:15px; font-size:17px; }
+        .stats-row { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; justify-content:center; }
+        .stat-pill { padding:5px 14px; border-radius:20px; font-size:13px; font-weight:bold; }
+        .stat-correct { background:#e8f5e9; color:#2e7d32; }
+        .stat-wrong   { background:#ffebee; color:#c62828; }
+        .stat-skipped { background:#fff3e0; color:#e65100; }
+        @media (max-width:600px) {
+            .header h1 { font-size:20px; }
+            .question-text { font-size:15px; }
+            .option { font-size:13px; }
+            .btn { padding:10px 16px; font-size:13px; }
+        }
+        @media print {
+            body { background:white; padding:0; }
+            .container { box-shadow:none; }
+            .button-group { display:none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>&#x1F52C; Microscopy &mdash; Comprehensive MCQ Test</h1>
+    <p>110 Questions &middot; All Difficulty Levels &middot; Instant Feedback</p>
+</div>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="quiz-content active">
+    <div class="start-screen">
+        <h2>Welcome to the Microscopy MCQ Test</h2>
+        <p>A comprehensive, self-paced assessment covering every detail from the Microscopy lecture notes &mdash;
+           from basic definitions to complex numerical calculations.</p>
+        <div class="test-info">
+            <ul>
+                <li><strong>Total Questions:</strong> 110</li>
+                <li><strong>Difficulty Levels:</strong> Very Easy &#x2192; Easy &#x2192; Intermediate &#x2192; Hard</li>
+                <li><strong>Topics:</strong> Simple &amp; Compound Microscopes, Aberrations, Light Microscopy Types,
+                    Numerical Aperture, Resolution, Objective Lens Types, Immersion Media, Dark-field, Phase-contrast</li>
+                <li><strong>Time Limit:</strong> None &mdash; self-paced learning</li>
+                <li><strong>Feedback:</strong> Instant, detailed explanation after every question</li>
+                <li><strong>Score Tracking:</strong> Running tally displayed throughout</li>
+            </ul>
+        </div>
+        <button class="btn btn-primary" onclick="startQuiz()">Start Quiz &#x25B6;</button>
+    </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quizScreen" class="quiz-content">
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <div class="progress-text">
+            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">110</span>
+            &nbsp;|&nbsp; &#x2705; <span id="liveCorrect">0</span>
+            &nbsp; &#x274C; <span id="liveWrong">0</span>
+        </div>
+    </div>
+
+    <div style="padding:0 30px 6px;">
+        <span class="difficulty-badge" id="diffBadge"></span>
+    </div>
+    <div class="question-number" style="padding:0 30px;" id="questionNumber"></div>
+    <div class="question-text"   style="padding:0 30px;" id="questionText"></div>
+    <div class="options" id="optionsContainer" style="padding:0 30px;"></div>
+    <div class="feedback" id="feedback" style="margin:18px 30px 0;"></div>
+    <div class="button-group" style="padding:0 30px 30px; margin-top:20px;">
+        <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn" style="display:none;">&#8592; Previous</button>
+        <button class="btn btn-primary"   onclick="nextQuestion()"     id="nextBtn">Next &#8594;</button>
+    </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="resultsScreen" class="quiz-content">
+    <div class="results-screen">
+        <h2>Test Completed! &#x1F389;</h2>
+        <div class="score-circle">
+            <div id="finalScore">0</div>
+            <div class="score-circle-subtitle">/ 110</div>
+        </div>
+        <div class="stats-row">
+            <span class="stat-pill stat-correct">&#x2705; Correct: <span id="r-correct">0</span></span>
+            <span class="stat-pill stat-wrong">&#x274C; Wrong: <span id="r-wrong">0</span></span>
+            <span class="stat-pill stat-skipped">&#x23ED; Skipped: <span id="r-skipped">0</span></span>
+        </div>
+        <div class="results-details">
+            <p><strong>Accuracy:</strong> <span id="accuracy">0</span>%</p>
+            <p><strong>Questions Attempted:</strong> <span id="attemptedCount">0</span> / 110</p>
+            <p id="gradeMsg"></p>
+        </div>
+        <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz &#x1F504;</button>
+    </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+const quizData = [
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is a simple microscope?",
+    options: ["A microscope with two or more lenses arranged in series", "A single converging lens or lens system used to produce a magnified image", "A microscope that uses only reflected light", "A device that produces electron images of specimens"],
+    correct: 1,
+    explanation: "A simple microscope consists of a single converging lens (or simple lens system) that magnifies objects. Classic examples include a loupe (jeweller's magnifier) and a reading glass. It differs from a compound microscope, which uses two separate lens systems (objective and eyepiece) in series to achieve higher magnification."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is a loupe in microscopy?",
+    options: ["The eyepiece of a compound microscope", "A small simple magnifying lens held close to the eye, used as a hand magnifier", "The condenser lens assembly", "A type of objective lens for oil immersion"],
+    correct: 1,
+    explanation: "A loupe (from French for 'magnifying glass') is a simple handheld magnifier \u2014 the classic example of a simple microscope. It is widely used by jewellers, watchmakers, geologists, and surgeons. A loupe typically provides 2x to 10x magnification. It is also used in ophthalmology for examining the eye."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "A compound microscope typically achieves a total magnification range of approximately:",
+    options: ["2× – 20×", "25× – 1500×", "5000× – 50000×", "1× – 10×"],
+    correct: 1,
+    explanation: "A compound light microscope provides useful magnification from approximately 25\u00d7 to 1500\u00d7. Below ~25\u00d7 there is little practical advantage over a simple lens. Above ~1500\u00d7 (up to ~2000\u00d7 with oil immersion) the image becomes 'empty' \u2014 magnified but without additional structural detail. Electron microscopes reach 5000\u00d7 and above."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "Which lens in the compound microscope is located closest to the observer's eye?",
+    options: ["Objective lens", "Condenser lens", "Ocular lens (eyepiece)", "Field lens"],
+    correct: 2,
+    explanation: "The ocular lens (eyepiece) is at the top of the body tube, directly at the observer's eye. It further magnifies the intermediate image formed by the objective. Typical ocular magnification is 10\u00d7. The objective lens, by contrast, is located at the bottom of the body tube, closest to the specimen."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "Which lens in the compound microscope is positioned closest to the specimen?",
+    options: ["Ocular (eyepiece)", "Condenser", "Objective", "Field diaphragm"],
+    correct: 2,
+    explanation: "The objective lens is mounted on the rotating nosepiece and positioned directly above the specimen stage. It collects light that has passed through (or been scattered by) the specimen and forms the primary magnified real image. Different objectives (4\u00d7, 10\u00d7, 40\u00d7, 100\u00d7) are selected by rotating the nosepiece."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "A microscope with a single eyepiece is described as:",
+    options: ["Binocular", "Trinocular", "Monocular", "Stereoscopic"],
+    correct: 2,
+    explanation: "A monocular microscope has one eyepiece (Latin 'mono' = one). A binocular microscope has two eyepieces for more comfortable viewing. A trinocular microscope has a third port for a camera. Most basic student microscopes are monocular. Binocular models reduce eye fatigue during prolonged observation."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is the primary function of the condenser in a compound microscope?",
+    options: ["To hold and rotate the objective lenses", "To concentrate and focus light from the illuminator onto the specimen", "To adjust total magnification", "To move the stage up and down"],
+    correct: 1,
+    explanation: "The condenser (usually an Abbe condenser) is positioned beneath the stage. It collects diverging light from the illuminator and concentrates it into a cone focused on the specimen plane. Proper condenser alignment and iris adjustment are critical for achieving optimal resolution and contrast (K\u00f6hler illumination technique)."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is the refractive index of air?",
+    options: ["0.0", "1.0", "1.33", "1.51"],
+    correct: 1,
+    explanation: "Air has a refractive index (n) of approximately 1.0 (more precisely 1.0003, treated as 1.0 in microscopy). This is the baseline reference value. Water = 1.33, glycerin = 1.47, standard immersion oil = 1.51. The higher the refractive index, the more the medium bends (refracts) light, and the higher the achievable numerical aperture."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is the refractive index of standard immersion oil used with 100\u00d7 oil-immersion objectives?",
+    options: ["1.0", "1.33", "1.47", "1.51"],
+    correct: 3,
+    explanation: "Standard microscopy immersion oil has n = 1.51, very close to borosilicate glass (~1.52). This near-match eliminates refraction at the glass\u2013air interface, allowing a wider cone of light to enter the objective and enabling NA values above 1.0. Without oil, air (n = 1.0) limits the practical NA of a dry 100\u00d7 objective to about 0.95."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "The standard reference wavelength of green light used in microscopy resolution calculations is:",
+    options: ["380 nm", "450 nm", "560 nm", "700 nm"],
+    correct: 2,
+    explanation: "Green light at ~560 nm is the standard reference wavelength because: (1) the human eye is most sensitive to green light, and (2) it is the mid-spectrum visible wavelength. Blue (~450 nm) gives slightly better resolution; red (~700 nm) slightly worse. Resolution calculations using 560 nm represent typical visible-light performance."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "The total magnification of a compound microscope equals:",
+    options: ["Objective magnification ÷ Ocular magnification", "Objective magnification + Ocular magnification", "Objective magnification × Ocular magnification", "Ocular magnification ÷ Objective magnification"],
+    correct: 2,
+    explanation: "Total magnification = Objective magnification \u00d7 Ocular magnification. Example: 40\u00d7 objective \u00d7 10\u00d7 eyepiece = 400\u00d7 total magnification. This multiplicative relationship is why compound microscopes vastly exceed simple magnifiers. The intermediate image formed by the objective is re-magnified by the eyepiece."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is 'empty magnification' in light microscopy?",
+    options: ["Magnification that makes the image appear empty (no specimen visible)", "Magnification beyond the useful limit that enlarges the image without revealing additional structural detail", "The magnification when no eyepiece is inserted", "Magnification below 25× where no advantage over a simple lens exists"],
+    correct: 1,
+    explanation: "Empty magnification occurs when total magnification exceeds the useful limit (~1000 \u00d7 NA, or ~2000\u00d7 with oil immersion). Beyond this point the image becomes larger but blurrier with no new information revealed. It is caused by the diffraction limit of light, not lens quality. Using a stronger eyepiece beyond this limit only makes the image larger and less sharp."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What does NA stand for in microscopy?",
+    options: ["Natural Aberration", "Numerical Aperture", "Normal Axis", "Nodal Angle"],
+    correct: 1,
+    explanation: "NA stands for Numerical Aperture \u2014 the most important parameter of an objective lens. It is a dimensionless number characterising the range of angles over which the system can accept light. Higher NA = more light collected = better resolution. NA is defined by the formula NA = n \u00d7 sin U, where n is the medium refractive index and U is the half-angle of the light cone."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is the refractive index of water?",
+    options: ["1.0", "1.33", "1.47", "1.51"],
+    correct: 1,
+    explanation: "Water has a refractive index of 1.33. Water-immersion objectives use water (n = 1.33) between the lens and coverslip. Although lower than oil (1.51), water immersion is preferred for live-cell imaging as it is biocompatible, maintains physiological conditions, and avoids solvent-related specimen damage. Water-immersion NA values can reach ~1.20."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What does the term 'parfocal' describe in microscopy?",
+    options: ["Objectives with identical focal lengths", "Objectives that remain approximately in focus when the nosepiece is rotated to switch between objectives", "The distance from the objective to the specimen", "The focusing ability of the condenser"],
+    correct: 1,
+    explanation: "Parfocal objectives maintain approximate focus when rotating the nosepiece to change magnification. Modern objectives share a standardised parfocal distance (~45 mm from the nosepiece shoulder to the specimen plane), so switching from 10\u00d7 to 40\u00d7 requires only minor fine-focus adjustment, not complete refocusing. This greatly speeds up microscopy work."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "In bright-field microscopy, light travels in which path?",
+    options: ["Around the specimen, never through it", "Through the condenser, through the specimen, and directly into the objective", "Only through the edges of the specimen, creating bright edges", "Through a phase plate before reaching the specimen"],
+    correct: 1,
+    explanation: "Bright-field microscopy uses transmitted light: from illuminator \u2192 condenser \u2192 specimen \u2192 objective \u2192 eyepiece. The background appears bright (white/yellow) and specimen structures appear darker due to light absorption. It is the most common microscopy mode, suitable for stained tissue sections, fixed specimens, and specimens with natural pigmentation."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "Resolution in microscopy is defined as:",
+    options: ["The maximum magnification achievable", "The brightness of the illuminated image", "The minimum distance between two points that can be distinguished as separate structures", "The depth of field of the objective"],
+    correct: 2,
+    explanation: "Resolution (resolving power) is the ability to distinguish two adjacent points as separate entities. A microscope with high resolution can reveal fine structural details. Resolution is limited by the wavelength of light (\u03bb) and the numerical aperture (NA) of the objective and condenser, quantified by r = 0.61\u03bb/NA."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "The coarse adjustment knob is used to:",
+    options: ["Make precise final adjustments to bring the specimen into sharp focus", "Rapidly move the stage or body tube to achieve an approximate initial focus", "Adjust the condenser height", "Rotate the objective nosepiece"],
+    correct: 1,
+    explanation: "The coarse adjustment knob moves the stage (or body tube) rapidly over a large range for initial rough focusing. Once rough focus is achieved, the fine adjustment knob is used for precise focusing. The coarse knob should only be used with low-power objectives to prevent accidentally driving a high-power objective into the slide and breaking it."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "What is the refractive index of glycerin (glycerol)?",
+    options: ["1.0", "1.33", "1.47", "1.51"],
+    correct: 2,
+    explanation: "Glycerin has n \u2248 1.47, between water (1.33) and immersion oil (1.51). It is used as an immersion or mounting medium, particularly for fluorescent specimens. Aqueous-glycerol mixtures allow fine-tuning of refractive index. Its intermediate optical properties make it useful when neither water nor oil is ideal for the specimen preparation."
+  },
+  {
+    difficulty: "very-easy",
+    label: "Very Easy",
+    question: "The iris (aperture) diaphragm in the condenser is used to:",
+    options: ["Change objective magnification", "Control the numerical aperture of the condenser, adjusting the cone angle of light and thus image contrast and resolution", "Move the specimen on the stage", "Switch between objective lenses"],
+    correct: 1,
+    explanation: "The iris diaphragm in the condenser controls the condenser NA by changing how wide a cone of light illuminates the specimen. Opening it increases resolution but reduces contrast; closing it increases contrast but decreases resolution. It should NOT be used to control brightness (use the lamp rheostat for that). Proper setting: ~70-80% of objective NA for optimal balance."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Spherical aberration is best defined as:",
+    options: ["The failure of different wavelengths (colours) of light to focus at the same point", "The failure of peripheral (marginal) and central (paraxial) rays through a spherical lens to converge at the same focal point", "Distortion of the image at the field edges", "Blurring caused by vibration of the specimen"],
+    correct: 1,
+    explanation: "Spherical aberration occurs because a spherical lens surface refracts peripheral (marginal) rays more strongly than central (paraxial) rays, creating multiple focal points along the optical axis instead of one sharp focus. This produces a blurred image. It is an inherent property of spherical surfaces \u2014 corrected in objectives by combining multiple lens elements with different curvatures."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Chromatic aberration in a lens is primarily caused by:",
+    options: ["Misalignment of the optical axis", "Wavelength-dependent variation in the refractive index of glass (dispersion), causing different colours to focus at different distances", "Reflections from the inner barrel of the microscope", "Overheating of the objective lens during operation"],
+    correct: 1,
+    explanation: "Chromatic aberration arises because the refractive index of glass varies with wavelength (dispersion). Short-wavelength blue/violet light is refracted more strongly (shorter focal length) while long-wavelength red light is refracted less (longer focal length). This wavelength-dependent focusing produces coloured fringes around specimen details and a loss of sharpness."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "In chromatic aberration, which colour appears as the INNER fringe closest to a bright point object (shortest focal length)?",
+    options: ["Red / orange", "Yellow / green", "Blue / violet", "White"],
+    correct: 2,
+    explanation: "Blue and violet light (shortest visible wavelengths, ~380\u2013450 nm) are refracted most strongly and focus at the shortest distance from the lens, forming the INNER coloured fringe around bright objects. Red and orange light (longest wavelengths, ~620\u2013700 nm) are refracted least and form the outer fringe. This is the classic signature of axial (longitudinal) chromatic aberration."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Which method effectively corrects chromatic aberration in an objective lens?",
+    options: ["Using a single thick lens element of very high refractive index", "Cementing a crown-glass converging element to a flint-glass diverging element (achromatic doublet), so their dispersions cancel", "Using only monochromatic (single-colour) light", "Reducing the diameter of the lens aperture"],
+    correct: 1,
+    explanation: "An achromatic doublet corrects chromatic aberration by combining a biconvex crown glass element (low dispersion) with a plano-concave flint glass element (high dispersion). Their dispersive powers cancel while their refracting powers add, bringing two wavelengths (blue and red) to the same focal point. Apochromats extend this to 3\u20134 wavelengths using fluorite or calcium fluoride elements."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "In dark-field microscopy, what prevents direct (unscattered) light from entering the objective?",
+    options: ["A phase plate in the objective back focal plane", "An opaque central disc (dark-field stop) placed in the condenser", "A coloured filter placed above the specimen", "The objective iris diaphragm being fully closed"],
+    correct: 1,
+    explanation: "Dark-field illumination uses a condenser with an opaque central disc (dark-field stop) that blocks all direct, undeviated central rays. Only oblique rays at high angles pass through the outer annular zone of the condenser and strike the specimen. Only light scattered or diffracted by specimen structures enters the objective \u2014 making those structures appear bright against a completely dark background."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Phase-contrast microscopy is most valuable for imaging:",
+    options: ["Heavily stained, fixed tissue sections", "Opaque, reflective metal surfaces", "Unstained, transparent living specimens that show no amplitude contrast in bright-field", "Fluorescent specimens labelled with fluorophores"],
+    correct: 2,
+    explanation: "Phase-contrast microscopy converts invisible phase differences (differences in refractive index or thickness of transparent specimens) into visible amplitude differences. It is ideal for unstained, living cells where structures are transparent. Invented by Frits Zernike (Nobel Prize 1953), it revolutionised live-cell microscopy by making cell division, movement, and internal structures visible without killing or staining the cells."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The formula for Numerical Aperture (NA) is:",
+    options: ["NA = n / sin U", "NA = n × sin U", "NA = sin U / n", "NA = n + sin U"],
+    correct: 1,
+    explanation: "NA = n \u00d7 sin U, where n = refractive index of the medium between objective front lens and specimen (1.0 for air, 1.33 for water, 1.47 for glycerin, 1.51 for oil), and U = half-angle of the maximum light cone entering the objective. A higher n or larger U gives higher NA, enabling better resolution and more light collection."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The Rayleigh criterion formula for the minimum resolvable distance (r) is:",
+    options: ["r = NA / 0.61λ", "r = 0.61λ × NA", "r = 0.61λ / NA", "r = λ / (2 × NA)"],
+    correct: 2,
+    explanation: "r = 0.61\u03bb / NA, where r = minimum resolvable distance, \u03bb = wavelength of light, NA = numerical aperture. To improve resolution (smaller r): use shorter wavelength or increase NA. The 0.61 factor is derived from Bessel function diffraction theory (Rayleigh criterion for circular apertures). This formula is the cornerstone of microscopy resolution calculations."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The maximum useful magnification when using oil immersion is approximately:",
+    options: ["500×", "1000×", "1500×", "2000×"],
+    correct: 3,
+    explanation: "The maximum useful magnification with oil immersion is ~2000\u00d7. Beyond this, additional magnification yields 'empty magnification' \u2014 larger but blurrier images with no new structural information. The general rule is: maximum useful magnification \u2248 1000 \u00d7 NA. For Plan Apochromat (NA 1.40): useful limit = 1400\u00d7; the commonly cited 2000\u00d7 represents the absolute ceiling even with the best objectives."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The angular aperture (2U) of an objective is:",
+    options: ["Twice the half-angle U of the maximum cone of light that can enter the objective", "The diameter of the objective front lens expressed in degrees", "The angle between the optical axis and the specimen plane", "The maximum angle of the condenser light cone only"],
+    correct: 0,
+    explanation: "Angular aperture is the full angle (2U) of the light cone entering the objective. U is the half-angle from the optical axis to the outermost ray. For high-NA oil objectives, angular aperture approaches 140\u00b0 (U \u2248 70\u00b0). Angular aperture is inversely related to focal length: shorter focal length (higher magnification) objectives have larger angular apertures and can collect light from a wider cone."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Working distance is defined as:",
+    options: ["The distance from the eyepiece to the observer's eye", "The free distance between the front lens of the objective and the specimen (coverslip) when in focus", "The distance between the specimen and the condenser", "The total tube length of the microscope body"],
+    correct: 1,
+    explanation: "Working distance (WD) is the free air space between the objective front lens and the coverslip (or specimen surface) when the specimen is in sharp focus. It decreases dramatically with increasing magnification: 4\u00d7 objectives may have WD > 20 mm, while 100\u00d7 oil-immersion objectives have WD < 0.2 mm. Very short WD makes high-power objectives vulnerable to coverslip damage."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The NA of a standard 10\u00d7 Plan Achromat objective is approximately:",
+    options: ["0.10", "0.25", "0.40", "0.65"],
+    correct: 1,
+    explanation: "Standard Plan Achromat NA values: 4\u00d7 = 0.10, 10\u00d7 = 0.25, 20\u00d7 = 0.40, 40\u00d7 = 0.65, 100\u00d7 oil = 1.25. The 10\u00d7 objective (NA 0.25) with green light: r = 0.61 \u00d7 560/0.25 \u2248 1366 nm \u2248 1.4 \u03bcm \u2014 useful for locating tissue regions and cells, but insufficient for resolving fine organelle detail, which requires 40\u00d7 or 100\u00d7 objectives."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The NA of a standard 100\u00d7 oil-immersion Plan Achromat objective is approximately:",
+    options: ["0.85", "1.00", "1.25", "1.40"],
+    correct: 2,
+    explanation: "The 100\u00d7 Plan Achromat oil-immersion objective has NA \u2248 1.25. This high NA is achievable only with oil immersion (n = 1.51) since air-dry objectives are limited to NA < 1.0. Plan Fluorite 100\u00d7 = NA 1.30; Plan Apochromat 100\u00d7 = NA 1.40. Higher NA = better resolution. The Plan Achromat with NA 1.25 is the most economical choice for routine high-resolution work."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Which objective type provides the highest level of correction for both chromatic and spherical aberrations?",
+    options: ["Plan Achromat", "Plan Fluorite (Semi-Apochromat)", "Plan Apochromat", "Simple achromatic doublet"],
+    correct: 2,
+    explanation: "Plan Apochromat objectives provide the highest correction: spherical aberration corrected for 4+ wavelengths, chromatic aberration for 4+ wavelengths (essentially full visible spectrum), flat field of view (plan correction). They have the highest NA values. They are the most expensive but essential for high-quality photomicrography and fluorescence imaging requiring true colour reproduction."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "What does the prefix 'Plan' signify in designations like 'Plan Achromat'?",
+    options: ["The objective has a flat glass element at its front surface", "The objective produces a flat field of view — the entire image from centre to edge is in focus simultaneously", "The objective is designed for plane-polarised light only", "The objective corrects only planar (flat) aberrations"],
+    correct: 1,
+    explanation: "'Plan' indicates correction for field curvature, so the entire image plane from centre to periphery is simultaneously in focus on a flat surface. Without plan correction, the focal plane is curved \u2014 when the centre is sharp, the edges are blurry, and vice versa. Plan correction is essential for photomicrography, digital imaging, and any application where edge-to-edge sharpness is important."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Which immersion medium gives the highest numerical aperture for 100\u00d7 objectives?",
+    options: ["Air (dry objective)", "Water (n = 1.33)", "Glycerin (n = 1.47)", "Immersion oil (n = 1.51)"],
+    correct: 3,
+    explanation: "NA = n \u00d7 sin U. Higher n directly increases achievable NA. Immersion oil (n = 1.51) gives the highest NA (up to ~1.40 for Plan Apochromat). Water (1.33) and glycerin (1.47) give intermediate NA. Air (n = 1.0) limits NA to below 0.95 for practical dry objectives. Oil immersion achieves the best resolution among common visible-light techniques."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Oil immersion improves resolution primarily because:",
+    options: ["The oil absorbs stray light, reducing background noise", "The oil physically enlarges the apparent size of the specimen", "By matching the refractive index of glass, oil eliminates glass-air refraction, allowing a wider light cone to enter the objective (higher NA)", "The oil slows down light, which effectively shortens its wavelength"],
+    correct: 2,
+    explanation: "Immersion oil (n \u2248 1.51) closely matches glass (n \u2248 1.52). When oil fills the space between coverslip and objective, the sharp glass-air interface disappears \u2014 light passes from glass into oil without bending (same n). Rays that would be refracted away at large angles can now enter the objective, increasing the effective half-angle U, raising NA, and therefore improving resolution (smaller r)."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "As objective magnification increases from 4\u00d7 to 100\u00d7, working distance:",
+    options: ["Increases — higher magnification provides more working room", "Stays constant — all objectives are designed to the same WD specification", "Decreases — higher magnification requires the lens to be physically closer to the specimen", "First increases then decreases at 40×"],
+    correct: 2,
+    explanation: "Working distance decreases with increasing magnification. 4\u00d7 objectives: WD > 20 mm; 10\u00d7: ~4 mm; 40\u00d7: ~0.5 mm; 100\u00d7 oil: ~0.1\u20130.2 mm. High-magnification objectives need to be very close to the specimen to collect the wide light cone required for high NA. This is why oil-immersion objectives can easily crack coverslips if the coarse focus is used carelessly at high power."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The maximum numerical aperture achievable with standard visible-light light microscopy is approximately:",
+    options: ["0.95", "1.10", "1.40", "2.00"],
+    correct: 2,
+    explanation: "The practical maximum NA for light microscopes is ~1.40 (some special objectives reach ~1.45). The theoretical limit is n_medium \u00d7 1 = 1.51 (for oil), but practical lens design constraints limit this to ~1.40\u20131.45. Plan Apochromat 100\u00d7 objectives typically achieve exactly NA 1.40. NA values above 1.0 require immersion media (water, glycerin, or oil)."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "In the formula NA = n sin U, what does 'U' represent?",
+    options: ["The refractive index of the immersion medium", "The half-angle of the maximum cone of light entering (or exiting) the objective", "The wavelength of illuminating light", "The total diameter of the objective front lens in millimetres"],
+    correct: 1,
+    explanation: "U is the half-angle of the light cone \u2014 the angle from the optical axis to the outermost ray that enters the objective. A larger U means the objective captures light from a wider cone, gathering more spatial frequency information about the specimen. U is limited by objective geometry and the refractive index of the medium; with sin U approaching 1.0 (U \u2192 90\u00b0), the maximum theoretical NA equals n_medium."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The 40\u00d7 Plan Fluorite objective typically has a numerical aperture of approximately:",
+    options: ["0.65", "0.75", "0.85", "0.95"],
+    correct: 1,
+    explanation: "40\u00d7 Plan Fluorite has NA \u2248 0.75, higher than the 40\u00d7 Plan Achromat (NA 0.65) and lower than the 40\u00d7 Plan Apochromat (NA 0.95). The Fluorite series consistently exceeds Achromats in NA at the same magnification. Its 0.75 NA gives r = 0.61 \u00d7 560/0.75 \u2248 455 nm \u2014 capable of resolving most bacterial structures and organelle features."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Which statement about parfocal distance is correct?",
+    options: ["Parfocal distance equals working distance for each objective", "Modern objectives share a common parfocal distance (~45 mm), so switching objectives requires only minimal fine-focus adjustment", "Parfocal distance increases proportionally with magnification", "Parfocal distance refers to the distance between specimen and condenser"],
+    correct: 1,
+    explanation: "Parfocal distance is the standard distance from the nosepiece shoulder (objective mounting face) to the specimen focal plane, fixed at ~45 mm for modern objectives. All objectives in a parfocal set share this distance. When rotating between objectives on the nosepiece, the specimen stays near focus \u2014 only minor fine-focus adjustment is needed. This standardisation was critical for making multi-objective nosepieces practical."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "In dark-field microscopy, specimen structures appear:",
+    options: ["Dark against a bright white background (same as bright-field but with higher contrast)", "All in the same uniform grey tone", "Bright and luminous against a completely dark (black) background", "Inverted in colour compared to bright-field"],
+    correct: 2,
+    explanation: "In dark-field microscopy, direct light is completely blocked \u2014 only light scattered or diffracted by specimen structures enters the objective. The background is black, and specimen structures that scatter light appear brilliantly illuminated against this dark background. This technique excels for visualising unstained microorganisms, small particles, and surface structures that show no absorption contrast in bright-field."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "Plan Fluorite objectives use which special glass element that gives them their intermediate correction level?",
+    options: ["Lead crystal glass", "Fluorite (calcium fluoride, CaF₂) elements", "Quartz elements", "Zinc selenide elements"],
+    correct: 1,
+    explanation: "Plan Fluorite objectives incorporate calcium fluoride (CaF\u2082 \u2014 fluorite) lens elements. Fluorite has anomalously low chromatic dispersion (its refractive index changes very little across the visible spectrum). This allows correction of chromatic aberration for 3 wavelengths and spherical aberration for 2 wavelengths \u2014 intermediate between achromats (2 colours, 1 spherical) and apochromats (4+ colours, 4+ spherical)."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "How does wavelength affect resolution according to r = 0.61\u03bb/NA?",
+    options: ["Shorter wavelength → larger r → worse resolution", "Shorter wavelength → smaller r → better resolution", "Wavelength has no effect on resolution, only NA matters", "Resolution is proportional to the square of wavelength"],
+    correct: 1,
+    explanation: "Since r = 0.61\u03bb/NA, r is directly proportional to \u03bb. Shorter wavelength \u2192 smaller r \u2192 finer resolution. Blue light (450 nm) gives ~20% better resolution than green (560 nm). UV light (250\u2013300 nm) can give ~2\u00d7 better resolution. This is the motivation for UV microscopy, confocal with 405 nm lasers, and ultimately electron microscopy (de Broglie wavelength ~0.004 nm for typical electron energies)."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The 100\u00d7 Plan Apochromat oil-immersion objective achieves a NA of approximately:",
+    options: ["1.25", "1.30", "1.35", "1.40"],
+    correct: 3,
+    explanation: "100\u00d7 Plan Apochromat oil-immersion: NA = 1.40 \u2014 the highest NA available for standard light microscopy. Comparison: Plan Achromat 100\u00d7 = 1.25, Plan Fluorite 100\u00d7 = 1.30, Plan Apochromat 100\u00d7 = 1.40. The Apochromat's higher NA gives it the best resolution (r = 0.61 \u00d7 560/1.40 \u2248 244 nm) plus superior colour correction \u2014 it is the top-of-the-range choice for exacting optical work."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The 'optimal' refractive index for immersion oil that best matches borosilicate cover glass is approximately:",
+    options: ["1.47", "1.51", "1.55", "1.62"],
+    correct: 2,
+    explanation: "Standard immersion oil is formulated to n = 1.515 (\u2248 1.51). However, for optimal NA and to ensure no total internal reflection occurs at the glass-oil interface for the widest possible light cone, a value of ~1.515\u20131.55 is ideal. Some lecture notes cite 1.55 as optimal. Objectives are designed assuming a specific immersion medium n; using mismatched oil introduces spherical aberration."
+  },
+  {
+    difficulty: "easy",
+    label: "Easy",
+    question: "The relationship between angular aperture and focal length of an objective is:",
+    options: ["Angular aperture increases as focal length increases", "Angular aperture is independent of focal length", "Angular aperture increases as focal length decreases (they are inversely related)", "They are inversely proportional to each other's square"],
+    correct: 2,
+    explanation: "Angular aperture and focal length are inversely related: shorter focal length \u2192 larger angular aperture. A 100\u00d7 oil-immersion objective has focal length ~1.6 mm and angular aperture up to ~140\u00b0. A 4\u00d7 objective has focal length ~37.5 mm and angular aperture of only ~10\u00b0\u201320\u00b0. This relationship arises because high magnification requires the lens to be close to the specimen, physically allowing a wider acceptance angle."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Using r = 0.61\u03bb/NA, calculate the resolving power when \u03bb = 560 nm and NA = 1.25 (100\u00d7 Plan Achromat).",
+    options: ["172 nm", "273 nm", "427 nm", "560 nm"],
+    correct: 1,
+    explanation: "r = (0.61 \u00d7 560)/1.25 = 341.6/1.25 = 273.3 nm \u2248 273 nm. The 100\u00d7 Plan Achromat with green light resolves structures separated by ~0.27 \u03bcm. This is sufficient to resolve bacterial cells (0.5\u20135 \u03bcm), some organelles, and large macromolecular complexes, but not individual proteins or small viruses."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Why does spherical aberration arise in simple spherical lenses?",
+    options: ["Spherical lens surfaces have varying refractive index across their surface", "Peripheral (marginal) rays are refracted more strongly than central (paraxial) rays by a spherical surface, creating multiple axial focal points", "Spherical lenses cannot be manufactured with sufficient surface precision", "Glass absorbs different amounts of light at different radial positions on the lens"],
+    correct: 1,
+    explanation: "A spherical lens surface has a geometry that causes peripheral rays to be bent more strongly than central rays. The marginal rays focus closer to the lens, paraxial rays further away \u2014 producing a focal spread (multiple focal points along the axis) rather than a single sharp focus. This is spherical aberration: a fundamental mathematical property of spherical surfaces, not a defect in manufacture."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "The mechanism of phase-contrast microscopy involves which sequence of events?",
+    options: ["Dark-field stop → specimen scatters light → only scattered light enters objective", "Annular condenser diaphragm → specimen introduces phase differences → phase plate retards direct light by λ/4 → direct and scattered light interfere to produce amplitude contrast", "Polariser → specimen → analyser → interference of polarised beams", "Fluorescent stain → UV excitation → emission filter → fluorescence image"],
+    correct: 1,
+    explanation: "Phase-contrast sequence: (1) Annular diaphragm in condenser produces a hollow cone of light. (2) Transparent specimen introduces phase shifts (\u03bb/8 to \u03bb/4) in scattered light. (3) Phase plate in objective back focal plane retards direct (undeviated) light by \u03bb/4. (4) Direct light (now \u03bb/4 retarded) and scattered light interfere \u2014 the \u03bb/4 + \u03bb/4 = \u03bb/2 total difference produces destructive interference, making phase differences visible as amplitude (brightness) differences."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Correcting spherical aberration using a small aperture stop has which primary disadvantage?",
+    options: ["It increases chromatic aberration significantly", "It reduces both light throughput and NA, limiting resolution and image brightness", "It causes the image to flip (invert) along the horizontal axis", "It is the only effective correction, so no disadvantage exists"],
+    correct: 1,
+    explanation: "Using an aperture stop to block aberrant marginal rays reduces spherical aberration but causes: (1) reduced light throughput (dimmer image requiring longer exposure), and (2) reduced NA (since outer rays are blocked), which worsens resolution and depth of field. Modern objectives correct spherical aberration using multi-element designs that preserve full aperture and brightness. The stop approach is a compromise used when other corrections are insufficient."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Why is the practical limit of resolution for visible light microscopy approximately 0.2 \u00b5m (200 nm)?",
+    options: ["Lens manufacturers cannot yet produce objectives with NA greater than 0.5", "With green light (560 nm) and maximum achievable NA (~1.40): r = 0.61 × 560/1.40 ≈ 244 nm ≈ 0.2 µm — the diffraction limit", "The human eye cannot detect features smaller than 0.2 µm in the eyepiece image", "Specimen stains have molecular sizes of ~0.2 µm that fundamentally limit visibility"],
+    correct: 1,
+    explanation: "r_min = 0.61 \u00d7 560/1.40 = 244 nm \u2248 0.2 \u00b5m. With green light and the best oil-immersion Plan Apochromat (NA 1.40), the diffraction limit is ~244 nm. Any two structures closer than ~200 nm cannot be resolved as separate by a standard visible-light microscope regardless of magnification or image processing. This is why electron microscopy is needed for viruses (~20\u2013200 nm) and molecular structures (~1\u201310 nm)."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "How does switching immersion medium from air (n=1.0) to oil (n=1.51) affect NA, given that sin U = 0.93?",
+    options: ["NA decreases from 0.93 (air) to 0.62 (oil)", "NA increases from 0.93 (air) to 1.40 (oil)", "NA stays at 0.93 regardless of medium (NA depends only on angle)", "NA doubles to 1.86 (oil)"],
+    correct: 1,
+    explanation: "NA = n \u00d7 sin U. Air: NA = 1.0 \u00d7 0.93 = 0.93. Oil: NA = 1.51 \u00d7 0.93 = 1.40. Switching to oil increases NA from 0.93 to 1.40, a 51% improvement. This directly improves resolution by the same factor: r_air = 0.61 \u00d7 560/0.93 \u2248 367 nm; r_oil = 0.61 \u00d7 560/1.40 \u2248 244 nm. Oil immersion provides significantly better resolution with the same objective geometry."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "The resolving power of the 40\u00d7 Plan Achromat (NA=0.65) with green light (560 nm) is:",
+    options: ["170 nm", "273 nm", "525 nm", "856 nm"],
+    correct: 2,
+    explanation: "r = 0.61 \u00d7 560/0.65 = 341.6/0.65 \u2248 525 nm \u2248 0.53 \u00b5m. The 40\u00d7 Plan Achromat resolves structures separated by ~0.5 \u00b5m \u2014 sufficient for most bacteria (0.5\u20135 \u00b5m), light organelles, and many cellular features. For finer detail below 0.5 \u00b5m, the 100\u00d7 oil-immersion objective is required."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Why must the condenser NA approximately match the objective NA for optimal resolution?",
+    options: ["The condenser must have the same magnification as the objective", "Resolution depends on both objective NA and condenser NA — an under-opened condenser reduces the illuminating cone and limits effective resolution even with a high-NA objective", "If condenser NA exceeds objective NA, the image will be reversed", "The condenser must focus at the same plane as the objective for parfocal operation"],
+    correct: 1,
+    explanation: "Full resolving power requires both the objective and condenser to operate at maximum NA. When the condenser iris is closed too much, the effective illuminating NA decreases, reducing resolution \u2014 even if a 100\u00d7 NA 1.40 objective is used. For K\u00f6hler illumination: open condenser iris to about 70\u201380% of objective NA. Closing it below this sacrifices resolution (though it may improve contrast for certain specimens)."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "The constant 0.61 in the formula r = 0.61\u03bb/NA originates from:",
+    options: ["The refractive index of standard borosilicate glass", "The Rayleigh criterion — the first zero of the Bessel function J₁ for a circular aperture diffraction pattern (Airy disc)", "The ratio of green light wavelength to average visible wavelength", "The empirical magnification factor of a standard 10× eyepiece"],
+    correct: 1,
+    explanation: "The 0.61 factor (= 1.22/2) comes from the Rayleigh criterion applied to circular apertures. When a point source is imaged through a circular aperture, diffraction creates an Airy disc pattern described by Bessel functions. Two points are 'just resolved' when the central maximum of one Airy disc coincides with the first minimum of the other \u2014 at a distance determined by the 0.61 factor. This is fundamental diffraction physics."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "The 20\u00d7 Plan Fluorite objective has NA \u2248 0.50. What is its resolving power with green light (560 nm)?",
+    options: ["266 nm", "416 nm", "683 nm", "856 nm"],
+    correct: 2,
+    explanation: "r = 0.61 \u00d7 560/0.50 = 341.6/0.50 = 683 nm \u2248 0.68 \u00b5m. The 20\u00d7 Plan Fluorite resolves structures separated by ~0.7 \u00b5m \u2014 intermediate between the 10\u00d7 (1.4 \u00b5m) and 40\u00d7 (0.5 \u00b5m) objectives. It is useful for overview imaging at moderate resolution. For comparison, 20\u00d7 Plan Achromat (NA 0.40): r = 854 nm; 20\u00d7 Plan Apochromat (NA 0.75): r = 455 nm."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "What is the maximum useful magnification formula, and what is it for a 100\u00d7 Plan Achromat (NA=1.25)?",
+    options: ["500 × NA = 625×", "750 × NA = 937×", "1000 × NA = 1250×", "2000 × NA = 2500×"],
+    correct: 2,
+    explanation: "Maximum useful magnification \u2248 1000 \u00d7 NA = 1000 \u00d7 1.25 = 1250\u00d7. With a 10\u00d7 eyepiece and 100\u00d7 objective, total magnification is exactly 1000\u00d7 \u2014 comfortably within the useful range. Using a 15\u00d7 eyepiece (total: 1500\u00d7) would slightly exceed the useful limit for this objective (1250\u00d7), producing some empty magnification. A 12.5\u00d7 eyepiece (total: 1250\u00d7) would be at the exact limit."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Lateral (transverse) chromatic aberration causes which specific image defect?",
+    options: ["Different colours focusing at different depths along the optical axis — chromatic 'blur' at all positions", "Different colours being magnified to slightly different sizes, creating coloured fringes at off-axis image edges", "Uniform colour shift across the entire image", "Complete loss of image at blue wavelengths only"],
+    correct: 1,
+    explanation: "Lateral (transverse) chromatic aberration = chromatic difference of magnification: different wavelengths are imaged at slightly different scales (sizes). This creates coloured fringes at off-axis details but no aberration at the image centre. Axial (longitudinal) chromatic aberration = different wavelengths focus at different depths \u2014 affecting all positions. Plan Apochromats correct both types; Plan Achromats primarily address axial chromatic aberration."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Fluorite (CaF\u2082) glass elements in Plan Fluorite objectives are advantageous because:",
+    options: ["Fluorite has the highest refractive index of any optical material, enabling much larger NA", "Fluorite has anomalously low dispersion, enabling more effective correction of chromatic aberration for more colours with fewer elements", "Fluorite is transparent to X-rays, enabling X-ray microscopy", "Fluorite is less dense, making objectives lighter and easier to use"],
+    correct: 1,
+    explanation: "Calcium fluoride (CaF\u2082) has anomalously low Abbe number \u2014 its refractive index changes very little across the visible spectrum (low dispersion). This allows lens designers to correct chromatic aberration for 3 colours (vs. 2 for achromatic glass combinations) with the same number of elements. The term 'semi-apochromat' reflects this intermediate correction capability between achromats (2 colours) and true apochromats (4+ colours)."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Resolution improvement when switching from 40\u00d7 Plan Achromat (NA 0.65) to 100\u00d7 Plan Apochromat (NA 1.40) is:",
+    options: ["About 0.5× (resolution worsens)", "About 2.2× improvement (Apochromat resolves 2.2× finer detail)", "About 4× improvement", "About 10× improvement (same as magnification ratio)"],
+    correct: 1,
+    explanation: "Resolution improvement = NA_new/NA_old = 1.40/0.65 = 2.15\u00d7. The 100\u00d7 Plan Apochromat can resolve structures ~2.2\u00d7 finer than the 40\u00d7 Plan Achromat. Specific values: 40\u00d7 Plan Achromat r = 525 nm; 100\u00d7 Plan Apochromat r = 244 nm; ratio = 525/244 = 2.15\u00d7. Note: magnification ratio is 100/40 = 2.5\u00d7, but resolution improvement (only 2.2\u00d7) is driven by the NA ratio, not magnification ratio."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "What is the resolving power of the 4\u00d7 Plan Achromat (NA=0.10) with green light (560 nm)?",
+    options: ["341 nm", "856 nm", "1366 nm (≈1.4 µm)", "3416 nm (≈3.4 µm)"],
+    correct: 3,
+    explanation: "r = 0.61 \u00d7 560/0.10 = 341.6/0.10 = 3416 nm \u2248 3.4 \u00b5m. The 4\u00d7 objective can only resolve structures separated by more than ~3.4 \u00b5m. It is used for: (1) locating the specimen, (2) tissue architecture overview, and (3) initial navigation. Any structure smaller than ~3 \u00b5m will not be resolved. Higher-power objectives must be used for detailed work. The 4\u00d7 objective is always the safe starting point."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Water-immersion objectives are preferred over oil-immersion for live-cell imaging because:",
+    options: ["Water has a higher refractive index than oil, giving better NA", "Water is biocompatible and physiological — living specimens in aqueous medium can be imaged without damage, maintaining natural conditions", "Water objectives have longer working distance AND higher NA than oil objectives", "Water objectives are less expensive and more widely available"],
+    correct: 1,
+    explanation: "Water-immersion objectives (n = 1.33) excel for live-cell imaging: (1) water is biocompatible \u2014 no toxicity to living specimens, (2) they can image directly through physiological saline or culture medium, (3) they maintain physiological temperature better, (4) they can image without a coverslip or through thick aqueous layers. Though NA is slightly lower than oil, water-immersion objectives (NA up to ~1.20) provide excellent resolution for live imaging."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "The dark-field condenser must have a NA HIGHER than the objective NA because:",
+    options: ["The condenser must focus more brightly to compensate for the opaque disc blocking half the light", "The oblique illumination cone must fall entirely outside the objective's acceptance angle — if condenser NA ≤ objective NA, scattered light cannot be distinguished from direct light", "The condenser glass must not be the limiting factor in chromatic aberration", "Higher condenser NA ensures the phase ring in the objective is properly illuminated"],
+    correct: 1,
+    explanation: "In dark-field microscopy, the condenser delivers light at angles too steep for the objective to accept directly (annular illumination outside the objective NA). For this to work, the condenser's outer NA must exceed the objective's NA. If a high-NA objective is used with a low-NA dark-field condenser, some direct light will enter the objective, destroying the dark field. For this reason, dark-field is easier with lower-power objectives (NA \u2264 0.65)."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "The 100\u00d7 Plan Fluorite oil objective (NA=1.30) resolving power with green light (560 nm) is:",
+    options: ["160 nm", "263 nm", "430 nm", "561 nm"],
+    correct: 1,
+    explanation: "r = 0.61 \u00d7 560/1.30 = 341.6/1.30 \u2248 263 nm. The 100\u00d7 Plan Fluorite (NA 1.30) sits between Plan Achromat (r = 273 nm, NA 1.25) and Plan Apochromat (r = 244 nm, NA 1.40) in resolution. This makes it an excellent choice when the superior colour correction and resolution of the Apochromat are not required, as Fluorite objectives typically cost less than full Apochromats."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "Which combination of factors achieves the BEST resolution in a light microscope?",
+    options: ["Long wavelength (red, 700 nm) + low NA dry objective + no condenser", "Short wavelength (blue/UV, ~400 nm) + high NA oil-immersion objective + matched high-NA condenser", "Short wavelength + low NA + highest available eyepiece magnification", "Standard green (560 nm) + medium NA + immersed condenser and objective in water"],
+    correct: 1,
+    explanation: "r = 0.61\u03bb/NA is minimised (best resolution) by: (1) shortest wavelength \u03bb (blue or UV), and (2) maximum NA. Maximum NA requires: oil immersion (n = 1.51), Plan Apochromat objective with large angular aperture, and matched high-NA condenser with properly opened iris. Using a higher magnification eyepiece does NOT improve resolution \u2014 it magnifies the already-resolved image without revealing new detail. Resolution and magnification are independent concepts."
+  },
+  {
+    difficulty: "medium",
+    label: "Intermediate",
+    question: "The 20\u00d7 Plan Apochromat objective achieves NA \u2248 0.75. How does its resolution compare to the 20\u00d7 Plan Achromat (NA 0.40)?",
+    options: ["Plan Apochromat is worse (higher NA → lower resolution)", "They are equal in resolution (same magnification = same resolution)", "Plan Apochromat is nearly twice as good (NA ratio = 0.75/0.40 = 1.875×)", "Plan Apochromat is 10× better due to its superior construction"],
+    correct: 2,
+    explanation: "Resolution improvement = 0.75/0.40 = 1.875\u00d7. Plan Achromat r = 0.61 \u00d7 560/0.40 = 854 nm; Plan Apochromat r = 0.61 \u00d7 560/0.75 = 455 nm \u2014 the Apochromat resolves nearly 1.9\u00d7 finer structures at the same 20\u00d7 magnification. This demonstrates that objective type (and hence NA) matters far more for resolution than magnification alone."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Calculate r when: \u03bb = 450 nm (blue light), n = 1.51 (oil), half-angle U = 67\u00b0 (sin 67\u00b0 \u2248 0.921).",
+    options: ["109 nm", "177 nm", "244 nm", "298 nm"],
+    correct: 1,
+    explanation: "Step 1: NA = n \u00d7 sin U = 1.51 \u00d7 0.921 = 1.391. Step 2: r = 0.61 \u00d7 450/1.391 = 274.5/1.391 \u2248 197 nm \u2248 177\u2013200 nm. Blue light with near-maximum NA gives the best resolution achievable with visible light and oil immersion. This approaches ~150\u2013200 nm. The answer closest to 197 nm is 177 nm. This level of resolution (0.2 \u00b5m range) represents the practical visible-light diffraction limit."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "What minimum NA is required to resolve 200 nm structures using green light (\u03bb = 560 nm)?",
+    options: ["NA ≥ 0.61", "NA ≥ 1.01", "NA ≥ 1.27", "NA ≥ 1.71"],
+    correct: 3,
+    explanation: "Rearranging r = 0.61\u03bb/NA: NA = 0.61\u03bb/r = 0.61 \u00d7 560/200 = 341.6/200 = 1.71. Since maximum achievable NA with visible light is ~1.40, it is IMPOSSIBLE to resolve 200 nm structures using green light alone \u2014 even with the best objective. To resolve 200 nm with NA = 1.40, you would need: \u03bb = r \u00d7 NA/0.61 = 200 \u00d7 1.40/0.61 \u2248 459 nm (blue light). This illustrates the fundamental wavelength limitation of visible light microscopy."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Why is the maximum achievable NA theoretically limited to approximately n_medium (\u2248 1.51 for oil)?",
+    options: ["Because NA = n × sin U and sin U has a maximum of 1.0 (at U=90°), so NA_max = n_medium × 1 = n_medium; practical limits reduce this to ~1.40", "Because oil evaporates quickly, limiting how long a high-NA measurement can be sustained", "Because the human retina cannot process signals from objectives with NA > 1.5", "Because diffraction prevents wavefronts with NA > 1.51 from forming real image points"],
+    correct: 0,
+    explanation: "NA = n \u00d7 sin U. Since sin U reaches a maximum of 1.0 (at half-angle U = 90\u00b0), the theoretical NA ceiling = n_medium. For oil (n = 1.51): theoretical maximum NA = 1.51. For glass (n = 1.52): 1.52. In practice, objective geometry, the need to avoid total internal reflection at interfaces, and lens design constraints limit achievable NA to ~1.40\u20131.45. Super-resolution methods (TIRF, STORM) use objectives at NA 1.45\u20131.49."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "An immersion medium with n = 1.55 would theoretically allow a maximum NA of:",
+    options: ["1.40", "1.45", "1.51", "1.55"],
+    correct: 3,
+    explanation: "Theoretical NA_max = n_medium \u00d7 sin(90\u00b0) = n \u00d7 1 = 1.55. Specialised high-index immersion media (n = 1.515 to 1.56) and matching objectives have been developed for super-resolution TIRF microscopy to achieve NA values of 1.45\u20131.49. Such high NA enables better optical sectioning and TIRF evanescent wave characteristics. The practical ceiling remains slightly below the theoretical n_medium due to manufacturing constraints."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Compare: (A) blue light \u03bb=450 nm, NA=1.40 vs. (B) green light \u03bb=560 nm, NA=1.40. What is ratio r_B/r_A?",
+    options: ["0.80 (B is better)", "1.00 (both equal)", "1.24 (A is 24% better)", "2.00 (A is twice as good)"],
+    correct: 2,
+    explanation: "r_A = 0.61 \u00d7 450/1.40 = 196 nm. r_B = 0.61 \u00d7 560/1.40 = 244 nm. Ratio r_B/r_A = 244/196 = 1.24. Blue light gives 24% better resolution than green light with identical NA \u2014 the ratio equals the wavelength ratio (560/450 = 1.24). This confirms resolution scales linearly with wavelength. Blue light is why confocal microscopes using 405\u2013488 nm lasers achieve better resolution than widefield systems using full white light."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Which correctly orders Plan Achromat, Plan Fluorite, and Plan Apochromat by number of wavelengths corrected for chromatic aberration?",
+    options: ["Achromat: 4; Fluorite: 3; Apochromat: 2", "Achromat: 2; Fluorite: 3; Apochromat: 4+", "All three: 3 wavelengths (at different quality levels)", "Achromat: 3; Fluorite: 2; Apochromat: 4+"],
+    correct: 1,
+    explanation: "Chromatic correction (wavelengths brought to same axial focus): Plan Achromat = 2 wavelengths (typically red + blue); Plan Fluorite = 3 wavelengths (red, green, blue); Plan Apochromat = 4+ wavelengths (deep blue, blue, green, red \u2014 essentially full visible + near UV). More wavelengths corrected = truer colour reproduction in photomicrography. Apochromats are essential for multi-channel fluorescence where colour accuracy matters."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Which objective can resolve two structures separated by 300 nm using green light (560 nm)?",
+    options: ["10× Plan Achromat (NA=0.25): r≈1366 nm — CANNOT resolve", "40× Plan Achromat (NA=0.65): r≈525 nm — CANNOT resolve", "100× Plan Achromat (NA=1.25): r≈273 nm — CAN resolve (273 < 300)", "Only the 100× Plan Apochromat (NA=1.40) can resolve 300 nm structures"],
+    correct: 2,
+    explanation: "For resolution of 300 nm structures, we need r \u2264 300 nm. 10\u00d7 (NA 0.25): r = 1366 nm \u2014 No. 40\u00d7 (NA 0.65): r = 525 nm \u2014 No. 100\u00d7 Plan Achromat (NA 1.25): r = 273 nm < 300 nm \u2014 YES. 100\u00d7 Plan Apochromat (NA 1.40): r = 244 nm \u2014 also Yes. The minimum requirement is met by the Plan Achromat 100\u00d7. Answer C identifies the lowest-spec objective that can just achieve this resolution."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "A 100\u00d7 Plan Achromat (NA=1.25) with a 15\u00d7 eyepiece: total magnification is 1500\u00d7. Is this empty magnification?",
+    options: ["No — 1500× is below the useful limit of 2000× for any oil objective", "Yes — maximum useful magnification = 1000 × NA = 1250×; 1500× exceeds this limit", "No — 1500× is exactly the useful limit for NA=1.25 objectives", "Yes — any magnification above 1000× is always empty magnification"],
+    correct: 1,
+    explanation: "Maximum useful magnification = 1000 \u00d7 NA = 1000 \u00d7 1.25 = 1250\u00d7. Total with 15\u00d7 eyepiece = 100 \u00d7 15 = 1500\u00d7. Since 1500 > 1250, this IS empty magnification for this objective. The image is enlarged beyond the resolving limit \u2014 structures appear larger but no new detail is visible. The appropriate eyepiece is 10\u00d7 (total: 1000\u00d7) or at most 12.5\u00d7 (total: 1250\u00d7) to avoid empty magnification."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Calculate r for UV light (\u03bb=250 nm) with NA=1.40. What does this reveal about UV microscopy?",
+    options: ["60 nm", "109 nm", "170 nm", "244 nm"],
+    correct: 1,
+    explanation: "r = 0.61 \u00d7 250/1.40 = 152.5/1.40 \u2248 109 nm. UV microscopy can theoretically resolve structures ~100 nm \u2014 about twice as good as visible light (244 nm with same NA). This approaches the size of some viruses (100\u2013200 nm) and large protein complexes. UV microscopy requires quartz optics (standard glass absorbs UV) and is more complex and expensive, which is why electron microscopy (resolving to ~0.1 nm) is preferred for sub-visible-light imaging."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "In phase-contrast, why must the annular diaphragm and phase ring be precisely aligned?",
+    options: ["Misalignment causes objectives to mechanically collide with the condenser", "Direct (undeviated) light must pass through the phase ring — misalignment puts direct light on the wrong part of the phase plate, destroying the phase-contrast effect", "Misalignment changes the objective magnification and total tube length", "The annulus controls colour balance and must align with the colour filter wheel"],
+    correct: 1,
+    explanation: "The condenser annular diaphragm creates a ring of direct (undeviated) light. This ring must image precisely onto the phase ring in the objective's back focal plane. The phase ring is the critical element that retards direct light by \u03bb/4. If the rings are misaligned, the direct light does not pass through the phase ring \u2014 it is not retarded \u2014 and cannot properly interfere with scattered light. Result: poor or absent phase contrast. Alignment is verified with a Bertrand lens or phase-contrast telescope."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Which spherical aberration correction method preserves full NA and brightness?",
+    options: ["Using a small aperture stop to block marginal rays — sacrifices NA and brightness", "Using a multi-element objective design where aberrations of individual elements cancel each other — preserves full NA and brightness", "Using only paraxial rays by reducing condenser NA — sacrifices resolution", "Using monochromatic light to eliminate wavelength-dependent focus differences"],
+    correct: 1,
+    explanation: "The aperture stop method reduces spherical aberration but sacrifices NA and brightness. A multi-element design corrects spherical aberration optically: each element introduces equal and opposite spherical aberration so they cancel, while the refracting powers add. This preserves both the full light-gathering angle (high NA) and brightness. Modern objectives use 10\u201316 optical elements precisely designed so residual aberrations cancel across the system."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Why does oil immersion yield better resolution than glycerin immersion for 100\u00d7 objectives?",
+    options: ["Oil is more viscous, holding the specimen more stably in focus", "Oil (n=1.51) has a higher refractive index than glycerin (n=1.47), enabling higher NA (NA_oil = 1.51 × sin U vs NA_glycerin = 1.47 × sin U) and better resolution", "Oil transmits more light in the visible spectrum than glycerin", "Glycerin is too viscous to fill the space between lens and coverslip uniformly"],
+    correct: 1,
+    explanation: "NA = n \u00d7 sin U. Oil (n = 1.51) vs glycerin (n = 1.47): NA_oil = 1.51 \u00d7 sin U; NA_glycerin = 1.47 \u00d7 sin U. Ratio = 1.51/1.47 = 1.027 \u2014 oil gives ~3% higher NA. The corresponding resolution improvement: r_glycerin/r_oil = 1.51/1.47 \u2248 1.027 \u2014 about 3% better resolution with oil. Glycerin objectives exist for specific applications (frozen sections, live specimens in glycerol), accepting this small resolution trade-off for other practical advantages."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "What is the resolving power of a 100\u00d7 Plan Apochromat (NA=1.40) with green light (560 nm), and what is the maximum useful magnification?",
+    options: ["r = 244 nm; max useful magnification = 1400×", "r = 273 nm; max useful magnification = 1250×", "r = 196 nm; max useful magnification = 1400×", "r = 244 nm; max useful magnification = 2000×"],
+    correct: 0,
+    explanation: "r = 0.61 \u00d7 560/1.40 = 244 nm \u2248 0.24 \u00b5m. Maximum useful magnification = 1000 \u00d7 NA = 1000 \u00d7 1.40 = 1400\u00d7. With a standard 10\u00d7 eyepiece (total: 1000\u00d7), the 100\u00d7 Apochromat is well within its useful range. A 14\u00d7 eyepiece (total: 1400\u00d7) would be at the exact limit. Using a 15\u00d7 eyepiece (total: 1500\u00d7) would enter empty magnification territory. The 100\u00d7 Plan Apochromat represents the gold standard for visible light microscopy."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Compare resolving powers of water-immersion (n=1.33, sin U=0.92) vs. oil-immersion (n=1.51, sin U=0.92) 100\u00d7 objectives with green light:",
+    options: ["Water: r=280 nm; Oil: r=244 nm — oil is better by ~15%", "Water: r=243 nm; Oil: r=244 nm — essentially equal", "Water: r=156 nm; Oil: r=244 nm — water is better", "Water: r=340 nm; Oil: r=244 nm — oil is better by ~39%"],
+    correct: 0,
+    explanation: "NA_water = 1.33 \u00d7 0.92 = 1.224; r_water = 0.61 \u00d7 560/1.224 = 279 nm. NA_oil = 1.51 \u00d7 0.92 = 1.389; r_oil = 0.61 \u00d7 560/1.389 = 246 nm. Oil gives ~13% better resolution (279/246 = 1.13). The difference, while real, is modest. For live-cell imaging, the 15% better resolution of oil is often sacrificed for the biocompatibility and physiological advantages of water immersion. The choice depends on the biological question being asked."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "A researcher uses a 100\u00d7 Plan Achromat (NA=1.25) and wants to determine if two mitochondria 280 nm apart can be resolved with green light. What is the conclusion?",
+    options: ["No — r = 273 nm < 280 nm, so they CAN just be resolved (they are further apart than r)", "No — 280 nm is below the resolution limit of this objective", "Yes — the 100× Plan Achromat cannot resolve anything below 500 nm", "Yes — they can be resolved, but only if the condenser iris is fully open"],
+    correct: 0,
+    explanation: "r = 0.61 \u00d7 560/1.25 = 273 nm. Two points are resolved if their separation \u2265 r. Here: separation (280 nm) > r (273 nm), so they CAN just be resolved \u2014 they are 7 nm further apart than the resolution limit. This is a marginal case: in practice, optical imperfections and sample preparation quality mean that structures only slightly above the theoretical resolution limit may be difficult to resolve cleanly. A higher-NA objective (Plan Fluorite 1.30 or Apochromat 1.40) would provide more comfortable margin."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "The parfocal distance of ~45 mm is significant in clinical microscopy because:",
+    options: ["It ensures all 45 mm objective types are compatible with a single microscope", "It standardises objective-to-specimen distance so technicians can quickly switch magnifications without losing the region of interest or repeatedly refocusing — critical efficiency in high-volume diagnostic settings", "It is the minimum safe working distance to prevent chemical contamination", "It ensures objectives can be sterilised in a standard 45 mm autoclave tube"],
+    correct: 1,
+    explanation: "In clinical/diagnostic microscopy, parfocal standardisation is critical: (1) technicians can switch from 10\u00d7 to 40\u00d7 or 100\u00d7 and the region of interest remains centred and nearly in focus \u2014 no searching or complete refocusing needed, (2) this dramatically speeds up slide examination (e.g., blood film analysis, cytology), (3) it reduces the risk of losing the region of interest during objective changes, (4) it is an industry-wide standard enabling objectives from different manufacturers to be interchangeable on compatible microscopes."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Which refractive index values are used for the five key media in microscopy, in correct order from lowest to highest?",
+    options: ["Air=1.0, Water=1.25, Glycerin=1.33, Oil=1.47, Glass=1.51", "Air=1.0, Water=1.33, Glycerin=1.47, Oil=1.51, Glass≈1.52", "Air=1.0, Water=1.33, Oil=1.47, Glycerin=1.51, Glass=1.55", "Air=1.0, Glycerin=1.25, Water=1.33, Oil=1.47, Glass=1.51"],
+    correct: 1,
+    explanation: "Correct refractive indices in order: Air = 1.0 (reference), Water = 1.33, Glycerin = 1.47, Standard immersion oil = 1.51, Borosilicate glass \u2248 1.52. These values are fundamental to all NA calculations in microscopy. The near-match between oil (1.51) and glass (1.52) is what enables oil immersion to eliminate refraction at the glass-coverslip interface. Knowing these values is essential for understanding immersion techniques and aberration correction."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Calculate total magnification when using: 100\u00d7 objective, 10\u00d7 eyepiece, with a 1.25\u00d7 intermediate magnification changer. Is this empty magnification for NA=1.25?",
+    options: ["Total = 1000×; NOT empty (below limit of 1250×)", "Total = 1250×; exactly at the useful limit", "Total = 1250×; IS empty magnification", "Total = 1250×; the intermediate changer does not count toward empty magnification"],
+    correct: 1,
+    explanation: "Total magnification = 100\u00d7 (obj) \u00d7 10\u00d7 (eyepiece) \u00d7 1.25\u00d7 (changer) = 1250\u00d7. Maximum useful magnification = 1000 \u00d7 1.25 = 1250\u00d7. This is EXACTLY at the useful limit \u2014 any further magnification would be empty. The intermediate magnification changer counts as part of total magnification. Being at the exact limit means the image is fully enlarged to show all resolvable detail without entering empty magnification territory."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "A laboratory has green (560 nm) and blue (450 nm) light sources. They need to resolve 220 nm structures. Which combination works?",
+    options: ["Green + 100× Plan Achromat (NA=1.25): r=273 nm — FAILS (273 > 220)", "Blue + 100× Plan Achromat (NA=1.25): r=220 nm — JUST resolves", "Blue + 100× Plan Apochromat (NA=1.40): r=196 nm — YES, resolves comfortably", "Both B and C work; B is marginally at the limit, C is well within the limit"],
+    correct: 3,
+    explanation: "Green + Plan Achromat: r = 0.61 \u00d7 560/1.25 = 273 nm > 220 nm \u2014 FAILS. Blue + Plan Achromat: r = 0.61 \u00d7 450/1.25 = 220 nm \u2014 exactly at the limit (marginal). Blue + Plan Apochromat: r = 0.61 \u00d7 450/1.40 = 196 nm < 220 nm \u2014 comfortably resolves. Both B and C technically work, but C provides a comfortable margin. In practice, you would choose C (blue light + Apochromat) to ensure reliable resolution with some safety factor."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "The resolving power formula r = 0.61\u03bb/NA can be rewritten to show that improving resolution requires:",
+    options: ["Increasing magnification (objective × eyepiece)", "Simultaneously minimising λ AND maximising NA — no other parameter affects resolution", "Only increasing NA — wavelength is fixed by the light source", "Increasing the tube length of the microscope"],
+    correct: 1,
+    explanation: "From r = 0.61\u03bb/NA: resolution (smallest r) is achieved by BOTH minimising \u03bb (use shorter wavelength light) AND maximising NA (use highest-NA objective with appropriate immersion medium). Neither factor alone achieves the best possible resolution. Magnification (objective \u00d7 eyepiece) does NOT affect resolution. Tube length was relevant for older fixed-tube-length microscopes but is corrected in modern infinity-corrected systems. The two key levers for resolution are always \u03bb and NA."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "A brightfield image of a 0.5 \u00b5m bacterium shows it clearly at 400\u00d7, but appears blurry at 1600\u00d7 with the same 100\u00d7 Plan Achromat (NA=1.25). The most likely explanation is:",
+    options: ["The condenser was accidentally moved out of focus at 1600×", "At 1600×, total magnification (100× × 16× eyepiece) exceeds the useful limit of 1250× (1000 × NA), producing empty magnification — the bacteria are resolved but the image is enlarged beyond what the objective can resolve", "The oil dried up between the 400× and 1600× observations", "The bacterium moved due to Brownian motion, which is more visible at higher magnification"],
+    correct: 1,
+    explanation: "Maximum useful magnification = 1000 \u00d7 1.25 = 1250\u00d7. At 1600\u00d7 (100\u00d7 obj \u00d7 16\u00d7 eyepiece), total magnification exceeds 1250\u00d7 \u2014 this is empty magnification. The bacteria ARE resolved at the specimen level, but the enlarged image only reveals the diffraction-limited blur rather than new structural details. The bacteria appear blurry at 1600\u00d7 because you're magnifying beyond the resolving power. Solution: use a 10\u00d7 or 12.5\u00d7 eyepiece for this objective."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "All the following values are correct associations EXCEPT:",
+    options: ["10× Plan Achromat → NA 0.25 → r (green) ≈ 1366 nm", "100× Plan Fluorite oil → NA 1.30 → r (green) ≈ 263 nm", "100× Plan Apochromat oil → NA 1.40 → r (green) ≈ 244 nm", "40× Plan Apochromat → NA 0.65 → r (green) ≈ 525 nm"],
+    correct: 3,
+    explanation: "Option D is incorrect: the 40\u00d7 Plan APOCHROMAT has NA \u2248 0.95, NOT 0.65. The 40\u00d7 Plan ACHROMAT has NA = 0.65. The 40\u00d7 Plan Apochromat (NA 0.95) resolves: r = 0.61 \u00d7 560/0.95 \u2248 359 nm \u2014 significantly better than the Achromat (525 nm). Options A, B, C are all correct: 10\u00d7 Achromat (NA 0.25, r 1366 nm), 100\u00d7 Fluorite (NA 1.30, r 263 nm), 100\u00d7 Apochromat (NA 1.40, r 244 nm)."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "What happens to the image if immersion oil with n=1.47 (intended for glycerin objectives) is accidentally used with a 100\u00d7 oil-immersion Plan Apochromat designed for n=1.51 oil?",
+    options: ["No effect — any transparent fluid between lens and coverslip provides equal correction", "Slight improvement — lower n oil reduces NA but also reduces aberrations", "Introduction of spherical aberration — the objective correction is calibrated for n=1.51; using n=1.47 creates a refractive index mismatch that degrades image quality and reduces effective NA", "The objective will be permanently damaged by the wrong oil"],
+    correct: 2,
+    explanation: "Objectives are corrected assuming a specific immersion medium refractive index. Using n=1.47 instead of n=1.51 introduces a refractive index mismatch at the oil-coverslip interface. This creates aberrations (primarily spherical aberration) that degrade resolution and contrast. Effective NA also decreases (NA = 1.47 \u00d7 sin U instead of 1.51 \u00d7 sin U). Using the wrong immersion medium is a common laboratory error that significantly degrades high-magnification image quality."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Dark-field microscopy is MOST appropriate for which of these specimens?",
+    options: ["A thickly stained H&E tissue section — high absorption contrast", "Fluorescently labelled cells — fluorescence provides its own contrast", "A suspension of unstained Treponema pallidum (syphilis spirochetes, ~0.1-0.2 µm diameter, ~10 µm length) in saline", "A fixed, paraffin-embedded tissue block for routine histology"],
+    correct: 2,
+    explanation: "Dark-field is optimal for: unstained, living or fresh specimens; transparent organisms with minimal absorption contrast; small structures that scatter light significantly (spirochetes, flagella, colloid particles). Treponema pallidum cannot be seen in bright-field without staining (too thin, no absorption contrast) and is traditionally diagnosed by dark-field microscopy of fresh syphilitic lesion exudate. Fluorescent specimens use fluorescence microscopy; stained sections use bright-field; paraffin blocks require sectioning first."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "The 10\u00d7 Plan Apochromat objective has NA \u2248 0.45. How does its resolution compare to the 40\u00d7 Plan Achromat (NA 0.65) with green light?",
+    options: ["10× Apochromat is better (r=758 nm vs 525 nm for 40× Achromat) — INCORRECT (758 > 525)", "40× Achromat is better: r=525 nm vs 10× Apochromat r=758 nm", "They resolve equally — same magnification range means same resolution", "10× Apochromat resolves better because apochromats always outperform achromats"],
+    correct: 1,
+    explanation: "10\u00d7 Plan Apochromat (NA 0.45): r = 0.61 \u00d7 560/0.45 = 758 nm. 40\u00d7 Plan Achromat (NA 0.65): r = 0.61 \u00d7 560/0.65 = 525 nm. The 40\u00d7 ACHROMAT resolves ~44% better than the 10\u00d7 APOCHROMAT, despite being a lower-class objective. This demonstrates a key principle: magnification and objective class do not determine resolution \u2014 only NA does. The 40\u00d7 Achromat's higher NA gives it better resolution than the 10\u00d7 Apochromat."
+  }
+,
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Compare resolving powers of water-immersion (n=1.33, sin U=0.92) vs. oil-immersion (n=1.51, sin U=0.92) 100\u00d7 objectives with green light (560 nm).",
+    options: ["Water: r=280 nm; Oil: r=246 nm — oil is better by ~14%", "Water: r=243 nm; Oil: r=244 nm — essentially equal", "Water: r=156 nm; Oil: r=244 nm — water is better", "Water: r=400 nm; Oil: r=200 nm — oil is twice as good"],
+    correct: 0,
+    explanation: "NA_water = 1.33 \u00d7 0.92 = 1.224; r_water = 0.61 \u00d7 560/1.224 = 279 nm. NA_oil = 1.51 \u00d7 0.92 = 1.389; r_oil = 0.61 \u00d7 560/1.389 = 246 nm. Oil gives ~13% better resolution. For live-cell imaging, this modest advantage may be outweighed by the biocompatibility advantages of water immersion. The choice between water and oil depends on the biological question, not just resolution."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "A 100\u00d7 Plan Achromat (NA=1.25) is used: can it resolve two mitochondria separated by 280 nm with green light (560 nm)?",
+    options: ["No — the resolution limit is 273 nm, so 280 nm separation is too close", "Yes — separation (280 nm) exceeds r (273 nm), so they are JUST resolved", "No — only oil-immersion apochromats can resolve structures below 500 nm", "Yes — but only if the condenser iris is closed to reduce chromatic aberration"],
+    correct: 1,
+    explanation: "r = 0.61 \u00d7 560/1.25 = 273 nm. Two points are resolved if separation \u2265 r. Here: 280 nm > 273 nm \u2014 they CAN just be resolved. However, at only 7 nm margin above the resolution limit, this is marginal. Practical factors (focus accuracy, vibration, staining quality) may prevent reliable resolution. A Plan Fluorite (NA 1.30, r=263 nm) or Plan Apochromat (NA 1.40, r=244 nm) would provide more comfortable resolution margin."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "The standardised parfocal distance of ~45 mm is important in clinical diagnostic microscopy because:",
+    options: ["It ensures only objectives exactly 45 mm long are compatible with the microscope", "It allows technicians to switch magnifications rapidly without losing the region of interest or fully refocusing — critical for efficient high-volume diagnostic work", "It represents the minimum safe working distance to prevent chemical contamination of the objective", "It ensures all objectives can be sterilised in standard 45 mm diameter autoclave tubes"],
+    correct: 1,
+    explanation: "Parfocal standardisation is critical for clinical microscopy: technicians can switch from 10\u00d7 to 40\u00d7 to 100\u00d7 and the region of interest remains centred and nearly in focus \u2014 no searching or complete refocusing needed. This dramatically speeds up slide examination (blood films, cytology, histopathology). It is an industry standard enabling objectives from different manufacturers to be interchangeable on compatible microscopes."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "In the correct order from lowest to highest refractive index, the five key microscopy media are:",
+    options: ["Air=1.0, Water=1.25, Glycerin=1.33, Oil=1.47, Glass=1.51", "Air=1.0, Water=1.33, Glycerin=1.47, Oil=1.51, Glass≈1.52", "Air=1.0, Water=1.33, Oil=1.47, Glycerin=1.51, Glass=1.55", "Air=1.0, Glycerin=1.25, Water=1.33, Oil=1.47, Glass=1.51"],
+    correct: 1,
+    explanation: "Refractive indices in ascending order: Air = 1.0 (reference baseline), Water = 1.33 (physiological/live-cell imaging), Glycerin = 1.47 (specialty mounting), Standard immersion oil = 1.51 (routine high-NA), Borosilicate glass \u2248 1.52 (coverslips). The near-match between oil (1.51) and glass (1.52) eliminates refraction at the oil-glass interface, enabling the high NA values of oil-immersion objectives."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Using a 100\u00d7 objective with a 10\u00d7 eyepiece and a 1.25\u00d7 intermediate magnification changer (NA=1.25): total magnification = 1250\u00d7. Is this empty magnification?",
+    options: ["Yes — any total magnification above 1000× is always empty magnification", "No — 1250× is below the 2000× absolute ceiling for oil immersion", "No — 1250× equals exactly the maximum useful limit (1000 × NA = 1000 × 1.25 = 1250×)", "Yes — the intermediate changer magnification should not be counted"],
+    correct: 2,
+    explanation: "Maximum useful magnification = 1000 \u00d7 NA = 1000 \u00d7 1.25 = 1250\u00d7. Total = 100\u00d7 \u00d7 10\u00d7 \u00d7 1.25\u00d7 = 1250\u00d7. This is EXACTLY at the useful limit \u2014 not beyond it. Every unit of magnification is contributing to revealing resolvable detail. Being at exactly 1250\u00d7 means the image shows all resolvable structure at maximum useful enlargement without entering the empty magnification regime. Any further increase (e.g., switching to 15\u00d7 eyepiece) would produce empty magnification."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "A lab has green (560 nm) and blue (450 nm) light. They need to resolve 220 nm structures. Which combination works?",
+    options: ["Only: green + 100× Plan Apochromat (NA=1.40): r=244 nm — FAILS", "Only: blue + 100× Plan Achromat (NA=1.25): r=220 nm — exactly at limit", "Only: blue + 100× Plan Apochromat (NA=1.40): r=196 nm — works", "Both: blue + Plan Achromat (r=220 nm, marginal) AND blue + Plan Apochromat (r=196 nm, comfortable)"],
+    correct: 3,
+    explanation: "Green + Plan Apochromat: r = 0.61\u00d7560/1.40 = 244 nm > 220 nm \u2014 fails. Blue + Plan Achromat: r = 0.61\u00d7450/1.25 = 220 nm \u2014 exactly at limit (marginal). Blue + Plan Apochromat: r = 0.61\u00d7450/1.40 = 196 nm < 220 nm \u2014 works comfortably. Both the blue+Achromat and blue+Apochromat combinations technically resolve 220 nm, but the Apochromat provides a comfortable 11% safety margin. In practice, you would choose blue+Apochromat for reliable results."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "According to r = 0.61\u03bb/NA, the ONLY two parameters that determine microscope resolution are:",
+    options: ["Objective magnification and eyepiece magnification", "Wavelength (λ) of illuminating light AND numerical aperture (NA) of the objective/condenser system", "Objective NA and tube length", "Condenser NA and eyepiece magnification"],
+    correct: 1,
+    explanation: "From r = 0.61\u03bb/NA: resolution is determined exclusively by \u03bb (wavelength) and NA (numerical aperture). No other parameter \u2014 magnification, tube length, eyepiece type, microscope brand \u2014 affects resolution. To improve resolution: shorten \u03bb (use bluer light or UV) and/or increase NA (use higher-NA objective and/or immersion medium). Increasing eyepiece magnification only produces empty magnification beyond the resolution limit; it never reveals new structural detail."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "An observer sees a specimen sharply at 400\u00d7 (40\u00d7 objective, 10\u00d7 eyepiece) but blurry at 1600\u00d7 (100\u00d7 objective, 16\u00d7 eyepiece, NA=1.25). The most likely explanation is:",
+    options: ["The condenser was accidentally defocused between observations", "The 100× objective produces empty magnification at 1600× — exceeding the useful limit of 1250× (1000 × NA = 1000 × 1.25)", "The oil dried up between the two observations", "The specimen moved due to Brownian motion, more visible at higher magnification"],
+    correct: 1,
+    explanation: "Maximum useful magnification for NA 1.25 = 1000 \u00d7 1.25 = 1250\u00d7. Total magnification with 16\u00d7 eyepiece = 100 \u00d7 16 = 1600\u00d7. This exceeds 1250\u00d7 \u2014 it is empty magnification. The specimen IS resolved at the specimen level, but the enlarged image only displays diffraction-limited blur \u2014 no new structural information. Solution: use a 10\u00d7 eyepiece (total 1000\u00d7) or at most a 12.5\u00d7 eyepiece (total 1250\u00d7) with this objective."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "All the following are correct associations EXCEPT:",
+    options: ["10× Plan Achromat → NA 0.25 → r (green light) ≈ 1366 nm", "100× Plan Fluorite oil → NA 1.30 → r (green light) ≈ 263 nm", "100× Plan Apochromat oil → NA 1.40 → r (green light) ≈ 244 nm", "40× Plan Apochromat → NA 0.65 → r (green light) ≈ 525 nm"],
+    correct: 3,
+    explanation: "Option D is INCORRECT: the 40\u00d7 Plan APOCHROMAT has NA \u2248 0.95, NOT 0.65. The 40\u00d7 Plan ACHROMAT has NA = 0.65. r for 40\u00d7 Plan Apochromat (NA 0.95) = 0.61 \u00d7 560/0.95 \u2248 359 nm \u2014 significantly better than the Achromat (525 nm). Options A, B, C are all correct: 10\u00d7 Achromat (NA 0.25, r 1366 nm), 100\u00d7 Fluorite (NA 1.30, r 263 nm), 100\u00d7 Apochromat (NA 1.40, r 244 nm)."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Using immersion oil with n=1.47 (glycerin-type) instead of the correct n=1.51 oil with a 100\u00d7 Plan Apochromat causes:",
+    options: ["No effect — any transparent immersion medium gives equivalent NA", "Slight brightness improvement — lower n reduces light scattering in the oil", "Introduction of spherical aberration and reduced NA — the refractive index mismatch between oil (1.47) and coverslip glass (1.52) creates aberrations the objective was not designed to correct", "The objective lens will be permanently chemically damaged by the wrong immersion fluid"],
+    correct: 2,
+    explanation: "Plan Apochromat objectives are designed and corrected for a specific immersion medium refractive index (n=1.515 standard). Using n=1.47 creates a glass (1.52) to oil (1.47) index mismatch \u2014 light refracts at this interface in ways the objective correction did not anticipate, introducing spherical aberration. Additionally, NA drops (1.47 \u00d7 sin U instead of 1.51 \u00d7 sin U), worsening resolution. Using incorrect immersion media is a common laboratory error that significantly degrades high-NA objective performance."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Dark-field microscopy is MOST appropriate for which specimen?",
+    options: ["A thickly stained haematoxylin & eosin (H&E) tissue section with high absorption contrast", "Fluorescently labelled cells where fluorophores provide their own light emission", "A fresh suspension of Treponema pallidum spirochetes (~0.2 µm wide, ~10 µm long) in saline — unstained, no absorption contrast", "A fixed paraffin-embedded tissue block before sectioning"],
+    correct: 2,
+    explanation: "Dark-field excels for: unstained transparent organisms, living microorganisms, small scattering particles, surface structures. Treponema pallidum (syphilis spirochetes) is too thin (~0.1-0.2 \u00b5m) to show absorption contrast in bright-field \u2014 it cannot be seen without staining. Dark-field reveals them brilliantly by scattered light. This is the traditional diagnostic method for primary syphilis from fresh lesion exudate. H&E sections and fluorescent specimens use bright-field and fluorescence microscopy respectively."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "The 10\u00d7 Plan Apochromat (NA\u22480.45) vs. the 40\u00d7 Plan Achromat (NA=0.65): which resolves better with green light?",
+    options: ["10× Plan Apochromat (r=758 nm) — apochromats always outperform achromats in resolution", "40× Plan Achromat (r=525 nm) — its higher NA gives better resolution despite being a lower class objective", "They resolve equally — same total correction level means same resolution", "10× Plan Apochromat resolves better because its lower magnification reduces diffraction"],
+    correct: 1,
+    explanation: "10\u00d7 Plan Apochromat (NA 0.45): r = 0.61 \u00d7 560/0.45 = 758 nm. 40\u00d7 Plan Achromat (NA 0.65): r = 0.61 \u00d7 560/0.65 = 525 nm. The 40\u00d7 ACHROMAT resolves ~44% better than the 10\u00d7 APOCHROMAT despite being lower class. KEY PRINCIPLE: resolution is determined exclusively by NA, not by magnification or objective class. The 40\u00d7 Achromat has higher NA \u2192 better resolution. The Apochromat's advantage is superior colour correction and flat field, not necessarily resolution."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "What is the resolving power of a 60\u00d7 Plan Apochromat (NA\u22481.42) with blue light (450 nm)?",
+    options: ["136 nm", "193 nm", "244 nm", "341 nm"],
+    correct: 1,
+    explanation: "r = 0.61 \u00d7 450 / 1.42 = 274.5 / 1.42 \u2248 193 nm. A 60\u00d7 Plan Apochromat (NA 1.42) with blue light achieves ~193 nm resolution \u2014 approaching the absolute visible-light limit. This combination (short wavelength + maximum NA) is used in super-resolution precursor techniques and high-end confocal microscopy to push the boundaries of diffraction-limited light microscopy. The 60\u00d7 oil-immersion objective with high NA offers a useful compromise between the field of view of 40\u00d7 and the NA of 100\u00d7 objectives."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Simple microscopes are historically important. Which historical context is associated with the development of the simple (single-lens) microscope?",
+    options: ["Robert Hooke developed simple single-lens microscopes achieving >200× and used them to describe cells in cork", "Antonie van Leeuwenhoek perfected simple single-lens microscopes, achieving magnifications up to ~270×, and used them to discover bacteria and protozoa ('animalcules')", "Ernst Abbe designed the first simple lens that fully corrected spherical aberration", "Carl Zeiss invented the simple microscope specifically to study textile fibres"],
+    correct: 1,
+    explanation: "Antonie van Leeuwenhoek (1632\u20131723) is famous for developing exquisitely crafted simple (single-lens) microscopes that achieved magnifications up to ~270\u00d7. Using these, he was the first to observe and describe bacteria, protozoa (animalcules), sperm cells, and red blood cells. Robert Hooke used compound microscopes and named 'cells'. Ernst Abbe worked on compound objective lens theory. Leeuwenhoek's simple microscopes remain among the most important scientific instruments ever made."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "When examining a specimen with a 100\u00d7 oil objective and the oil has a small air bubble touching the front lens, what happens to the image and why?",
+    options: ["The image becomes brighter because the air bubble acts as an additional converging lens", "The air bubble (n=1.0) creates a sharp refractive index boundary with oil (n=1.51), strongly scattering and reflecting light — causing flare, reduced contrast, artifacts, and effective NA reduction", "The image shifts laterally but retains full sharpness and resolution", "Air bubbles have no effect if the bubble is smaller than the field of view"],
+    correct: 1,
+    explanation: "Air bubbles in immersion oil create dramatic refractive index discontinuities (n_air = 1.0 vs n_oil = 1.51). At this boundary, light is strongly reflected and scattered (following Snell's law with the large n difference). This produces: bright flare artifacts, severe contrast reduction, loss of resolution, and effectively lower NA as some light paths are blocked. Always check for bubbles by looking through the eyepiece while gently adjusting the objective. Use fresh, bubble-free oil or carefully remove the objective and clean it."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "The defect of a simple lens where off-axis light rays form an elongated image instead of a point is called:",
+    options: ["Spherical aberration", "Chromatic aberration", "Coma", "Astigmatism"],
+    correct: 2,
+    explanation: "Coma is an aberration where off-axis point sources produce comet-shaped ('coma' from Greek for comet tail) images rather than sharp points. It arises because off-axis rays from different zones of the lens are focused to different heights in the image plane. Spherical aberration affects on-axis points (multiple focal lengths for marginal vs. paraxial rays); chromatic aberration affects all points differently for each colour; astigmatism produces cross-shaped point images. Plan objectives correct all these off-axis aberrations."
+  },
+  {
+    difficulty: "hard",
+    label: "Hard",
+    question: "Which statement BEST explains why the resolving power formula r = 0.61\u03bb/NA represents a MINIMUM resolvable distance (better = smaller r)?",
+    options: ["Because r measures the radius of the Airy disc — smaller discs mean closer packing", "Because r defines the separation at which two Airy disc patterns are JUST distinguishable as two separate peaks (Rayleigh criterion) — closer objects (separation < r) produce a single merged peak and cannot be distinguished", "Because r is the focal length ratio — shorter focal length means more compact images", "Because r defines the NA threshold — objects smaller than r are absorbed by the immersion oil"],
+    correct: 1,
+    explanation: "The Rayleigh criterion defines r as the point separation where the central maximum of one Airy disc coincides with the first minimum of the other. At this separation, the combined intensity pattern shows a just-visible dip of ~26% between two peaks \u2014 the minimum contrast needed to distinguish two points as separate. If two objects are closer than r, their Airy discs overlap so completely that the dip disappears and they appear as a single merged point. This is the fundamental diffraction limit \u2014 no lens improvement or post-processing can overcome it for incoherent illumination."
+  }
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════════ */
+let currentIndex = 0;
+let userAnswers  = new Array(quizData.length).fill(null);
+let correctCount = 0;
+let wrongCount   = 0;
+
+const TOTAL = quizData.length;
+
+const diffConfig = {
+    "very-easy": { cls: "diff-very-easy", label: "🟢 Very Easy"      },
+    "easy"      : { cls: "diff-easy",      label: "🔵 Easy"           },
+    "medium"    : { cls: "diff-medium",    label: "🟠 Intermediate"   },
+    "hard"      : { cls: "diff-hard",      label: "🔴 Hard"           }
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════════════════════════════ */
+function showScreen(id) {
+    document.querySelectorAll('.quiz-content').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+    currentIndex = 0;
+    userAnswers  = new Array(TOTAL).fill(null);
+    correctCount = 0;
+    wrongCount   = 0;
+    showScreen('quizScreen');
+    renderQuestion();
+}
+
+function restartQuiz() { startQuiz(); }
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════════════════════ */
+function renderQuestion() {
+    const q   = quizData[currentIndex];
+    const ans = userAnswers[currentIndex];
+
+    /* progress */
+    const pct = ((currentIndex) / TOTAL) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('currentQuestion').textContent = currentIndex + 1;
+    document.getElementById('totalQuestions').textContent  = TOTAL;
+    document.getElementById('liveCorrect').textContent     = correctCount;
+    document.getElementById('liveWrong').textContent       = wrongCount;
+
+    /* difficulty badge */
+    const dc = diffConfig[q.difficulty] || { cls:'diff-easy', label: q.difficulty };
+    const badge = document.getElementById('diffBadge');
+    badge.className  = 'difficulty-badge ' + dc.cls;
+    badge.textContent = dc.label;
+
+    /* question */
+    document.getElementById('questionNumber').textContent = 'Question ' + (currentIndex+1) + ' of ' + TOTAL;
+    document.getElementById('questionText').textContent   = q.question;
+
+    /* options */
+    const container = document.getElementById('optionsContainer');
+    container.innerHTML = '';
+    const letters = ['A','B','C','D'];
+    q.options.forEach((opt, idx) => {
+        const btn = document.createElement('div');
+        btn.className = 'option' + (ans !== null ? ' disabled' : '');
+
+        if (ans !== null) {
+            if (idx === q.correct)  btn.classList.add('correct');
+            if (idx === ans && ans !== q.correct) btn.classList.add('incorrect');
+        }
+
+        btn.innerHTML = '<span class="option-letter">' + letters[idx] + '</span>' + opt;
+
+        if (ans === null) {
+            btn.addEventListener('click', () => selectAnswer(idx));
+        }
+        container.appendChild(btn);
+    });
+
+    /* feedback */
+    const fb = document.getElementById('feedback');
+    if (ans !== null) {
+        fb.className = 'feedback show ' + (ans === q.correct ? 'correct-feedback' : 'incorrect-feedback');
+        fb.innerHTML = (ans === q.correct ? '✅ <strong>Correct!</strong>' : '❌ <strong>Incorrect.</strong> The correct answer is <strong>' + letters[q.correct] + ': ' + q.options[q.correct] + '</strong>') + '<br><br>' + q.explanation;
+    } else {
+        fb.className = 'feedback';
+        fb.innerHTML = '';
+    }
+
+    /* buttons */
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    prevBtn.style.display = currentIndex > 0 ? 'block' : 'none';
+
+    if (currentIndex === TOTAL - 1) {
+        nextBtn.textContent = 'Finish ✔';
+        nextBtn.disabled    = (ans === null);
+    } else {
+        nextBtn.textContent = 'Next →';
+        nextBtn.disabled    = (ans === null);
+    }
+}
+
+function selectAnswer(idx) {
+    if (userAnswers[currentIndex] !== null) return;
+    userAnswers[currentIndex] = idx;
+    if (idx === quizData[currentIndex].correct) correctCount++;
+    else wrongCount++;
+    renderQuestion();
+}
+
+function nextQuestion() {
+    if (currentIndex < TOTAL - 1) {
+        currentIndex++;
+        renderQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function previousQuestion() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESULTS
+═══════════════════════════════════════════════════════════════ */
+function showResults() {
+    showScreen('resultsScreen');
+    const skipped = userAnswers.filter(a => a === null).length;
+    const attempted = TOTAL - skipped;
+    const pct = attempted > 0 ? Math.round((correctCount / attempted) * 100) : 0;
+
+    document.getElementById('finalScore').textContent     = correctCount;
+    document.getElementById('r-correct').textContent      = correctCount;
+    document.getElementById('r-wrong').textContent        = wrongCount;
+    document.getElementById('r-skipped').textContent      = skipped;
+    document.getElementById('accuracy').textContent       = pct;
+    document.getElementById('attemptedCount').textContent = attempted;
+
+    let grade = '';
+    if (pct >= 90) grade = '🏆 Outstanding! Excellent mastery of Microscopy.';
+    else if (pct >= 75) grade = '🥈 Great work! Strong understanding of concepts.';
+    else if (pct >= 60) grade = '🥉 Good effort. Review the topics you missed.';
+    else if (pct >= 40) grade = '📖 Keep studying. Focus on formulae and objective types.';
+    else grade = '📚 Review the lecture notes thoroughly and try again.';
+    document.getElementById('gradeMsg').innerHTML = '<strong>' + grade + '</strong>';
+}
+</script>
+</body>
+</html>
