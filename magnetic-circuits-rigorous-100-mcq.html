@@ -1,0 +1,2645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnetic Circuits — Rigorous 100 MCQ Test</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      padding: 20px;
+      min-height: 100vh;
+      color: #222;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+      color: #fff;
+      padding: 28px;
+    }
+    .header h1 { font-size: 28px; margin-bottom: 8px; }
+    .header p { opacity: 0.92; font-size: 14px; line-height: 1.6; }
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 18px 24px;
+      background: #f4f7fa;
+      border-bottom: 1px solid #e6edf3;
+    }
+    .btn { border: none; border-radius: 8px; padding: 10px 16px; font-weight: 700; cursor: pointer; }
+    .btn-primary { background: #2c5364; color: #fff; }
+    .btn-secondary { background: #6c757d; color: #fff; }
+    .content { padding: 24px; }
+    .question {
+      border: 1px solid #e5ebf0;
+      border-radius: 10px;
+      padding: 16px 16px 14px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    .q-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .q-num {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: #2c5364;
+      text-transform: uppercase;
+    }
+    .topic {
+      font-size: 11px;
+      background: #e8f1f8;
+      color: #1f4660;
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .q-text { font-weight: 700; line-height: 1.55; margin-bottom: 10px; }
+    .opts { list-style: none; padding-left: 0; margin-bottom: 10px; }
+    .opts li {
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #f8fbfd;
+      margin-bottom: 6px;
+      border: 1px solid #edf3f7;
+    }
+    .answer {
+      font-weight: 700;
+      color: #0b6b3a;
+      background: #e9f8ef;
+      border-left: 4px solid #1f9d55;
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+    .footer { padding: 14px 24px 24px; color: #57616b; font-size: 12px; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .container { box-shadow: none; }
+      .controls { display: none; }
+      .question { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🧲 Magnetic Circuits — Rigorous MCQ Test</h1>
+      <p>100 questions • Mixed conceptual + numerical rigor • Correct answer shown under each question (no full solution).</p>
+      <p>Use <strong>Download (.txt)</strong> for offline practice or <strong>Print / Save PDF</strong> for a downloadable document.</p>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-primary" onclick="downloadTxt()">Download Question Set (.txt)</button>
+      <button class="btn btn-secondary" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <div class="content">
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 1 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">The magnetic-circuit equivalent of electric current is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> MMF</li>
+            <li><strong>B)</strong> Flux</li>
+            <li><strong>C)</strong> Reluctance</li>
+            <li><strong>D)</strong> Permeability</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Flux</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 2 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">The magnetic-circuit equivalent of voltage is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> MMF</li>
+            <li><strong>B)</strong> Flux density</li>
+            <li><strong>C)</strong> Permeance</li>
+            <li><strong>D)</strong> Magnetization</li>
+          </ul>
+          <div class="answer">Correct Answer: A) MMF</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 3 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">The SI unit of magnetomotive force (MMF) is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> A/Wb</li>
+            <li><strong>B)</strong> Ampere-turn (At)</li>
+            <li><strong>C)</strong> Henry</li>
+            <li><strong>D)</strong> Tesla</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Ampere-turn (At)</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 4 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Reluctance of a magnetic path is directly proportional to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Cross-sectional area</li>
+            <li><strong>B)</strong> Permeability</li>
+            <li><strong>C)</strong> Path length</li>
+            <li><strong>D)</strong> Number of turns</li>
+          </ul>
+          <div class="answer">Correct Answer: C) Path length</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 5 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Reluctance of a magnetic path is inversely proportional to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Path length</li>
+            <li><strong>B)</strong> MMF</li>
+            <li><strong>C)</strong> Cross-sectional area and permeability</li>
+            <li><strong>D)</strong> Current only</li>
+          </ul>
+          <div class="answer">Correct Answer: C) Cross-sectional area and permeability</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 6 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">For a given flux, adding an air gap in a magnetic circuit generally:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Decreases required MMF</li>
+            <li><strong>B)</strong> Increases required MMF</li>
+            <li><strong>C)</strong> Has no effect</li>
+            <li><strong>D)</strong> Makes reluctance zero</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Increases required MMF</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 7 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Magnetic flux density B is measured in:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> A/m</li>
+            <li><strong>B)</strong> Wb/m</li>
+            <li><strong>C)</strong> Tesla</li>
+            <li><strong>D)</strong> Ampere-turn</li>
+          </ul>
+          <div class="answer">Correct Answer: C) Tesla</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 8 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Magnetic field strength H is measured in:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Tesla</li>
+            <li><strong>B)</strong> Wb</li>
+            <li><strong>C)</strong> A/m</li>
+            <li><strong>D)</strong> N</li>
+          </ul>
+          <div class="answer">Correct Answer: C) A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 9 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Permeability of free space μ0 is approximately:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 4π × 10⁻⁷ H/m</li>
+            <li><strong>B)</strong> 8.85 × 10⁻¹² F/m</li>
+            <li><strong>C)</strong> 1.6 × 10⁻¹⁹ C</li>
+            <li><strong>D)</strong> 9.81 m/s²</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 4π × 10⁻⁷ H/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 10 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">In a linear magnetic material, B-H relationship is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Exponential</li>
+            <li><strong>B)</strong> Linear</li>
+            <li><strong>C)</strong> Logarithmic</li>
+            <li><strong>D)</strong> Independent</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Linear</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 11 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Relative permeability μr of air is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 0</li>
+            <li><strong>B)</strong> 1</li>
+            <li><strong>C)</strong> 100</li>
+            <li><strong>D)</strong> 1000</li>
+          </ul>
+          <div class="answer">Correct Answer: B) 1</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 12 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">If cross-sectional area doubles (all else fixed), reluctance:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Doubles</li>
+            <li><strong>B)</strong> Halves</li>
+            <li><strong>C)</strong> Remains same</li>
+            <li><strong>D)</strong> Becomes zero</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Halves</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 13 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Permeance is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Inverse of reluctance</li>
+            <li><strong>B)</strong> Product of reluctance and flux</li>
+            <li><strong>C)</strong> Same as MMF</li>
+            <li><strong>D)</strong> Inverse of flux</li>
+          </ul>
+          <div class="answer">Correct Answer: A) Inverse of reluctance</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 14 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Flux leakage in magnetic circuits means:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> All flux follows intended path</li>
+            <li><strong>B)</strong> Part of flux takes unintended paths</li>
+            <li><strong>C)</strong> Flux becomes zero</li>
+            <li><strong>D)</strong> Current leakage in windings</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Part of flux takes unintended paths</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 15 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Fringing at an air gap tends to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Reduce effective gap area</li>
+            <li><strong>B)</strong> Increase effective gap area</li>
+            <li><strong>C)</strong> Eliminate gap reluctance</li>
+            <li><strong>D)</strong> Reverse flux</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Increase effective gap area</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 16 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Hysteresis loss mainly depends on:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Frequency and Bmax</li>
+            <li><strong>B)</strong> Wire resistance only</li>
+            <li><strong>C)</strong> Cross-section only</li>
+            <li><strong>D)</strong> Turns only</li>
+          </ul>
+          <div class="answer">Correct Answer: A) Frequency and Bmax</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 17 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Eddy-current loss can be reduced by:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Using solid thick core</li>
+            <li><strong>B)</strong> Laminating the core</li>
+            <li><strong>C)</strong> Increasing conductivity</li>
+            <li><strong>D)</strong> Removing insulation between laminations</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Laminating the core</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 18 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Saturation in a magnetic core means:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> B increases linearly forever</li>
+            <li><strong>B)</strong> Very large increase in H gives small increase in B</li>
+            <li><strong>C)</strong> H becomes zero</li>
+            <li><strong>D)</strong> Flux becomes infinite</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Very large increase in H gives small increase in B</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 19 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">In magnetic circuits, Hopkinson’s law is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Φ = MMF / Reluctance</li>
+            <li><strong>B)</strong> MMF = Φ × Reluctance</li>
+            <li><strong>C)</strong> Both A and B</li>
+            <li><strong>D)</strong> Neither</li>
+          </ul>
+          <div class="answer">Correct Answer: C) Both A and B</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 20 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">In a series magnetic circuit, total reluctance is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Sum of individual reluctances</li>
+            <li><strong>B)</strong> Product of reluctances</li>
+            <li><strong>C)</strong> Inverse sum</li>
+            <li><strong>D)</strong> Equal to smallest reluctance</li>
+          </ul>
+          <div class="answer">Correct Answer: A) Sum of individual reluctances</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 21 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">In parallel magnetic paths, flux divides according to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Path length only</li>
+            <li><strong>B)</strong> Reluctances of branches</li>
+            <li><strong>C)</strong> Turns in coil only</li>
+            <li><strong>D)</strong> Current density</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Reluctances of branches</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 22 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Core with very high μr compared with air gap implies:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Gap reluctance often dominates</li>
+            <li><strong>B)</strong> Core reluctance dominates</li>
+            <li><strong>C)</strong> No flux can pass</li>
+            <li><strong>D)</strong> MMF is zero</li>
+          </ul>
+          <div class="answer">Correct Answer: A) Gap reluctance often dominates</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 23 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Magnetic energy in an inductor is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> (1/2)LI²</li>
+            <li><strong>B)</strong> LI</li>
+            <li><strong>C)</strong> I²/R</li>
+            <li><strong>D)</strong> (1/2)CV²</li>
+          </ul>
+          <div class="answer">Correct Answer: A) (1/2)LI²</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 24 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Unit of magnetic flux is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Tesla</li>
+            <li><strong>B)</strong> Weber</li>
+            <li><strong>C)</strong> Henry</li>
+            <li><strong>D)</strong> Joule</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Weber</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 25 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">If number of turns N doubles at same current, MMF:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Halves</li>
+            <li><strong>B)</strong> Doubles</li>
+            <li><strong>C)</strong> Quadruples</li>
+            <li><strong>D)</strong> Unchanged</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Doubles</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 26 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">For same core and flux, increasing μr generally:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Increases reluctance</li>
+            <li><strong>B)</strong> Decreases reluctance</li>
+            <li><strong>C)</strong> No effect</li>
+            <li><strong>D)</strong> Decreases area</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Decreases reluctance</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 27 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">B = Φ/A indicates for fixed Φ, reducing area causes B to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Decrease</li>
+            <li><strong>B)</strong> Increase</li>
+            <li><strong>C)</strong> Remain same</li>
+            <li><strong>D)</strong> Become zero</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Increase</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 28 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">Magnetization curve beyond knee region suggests:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Unsaturated linear region</li>
+            <li><strong>B)</strong> Saturation onset</li>
+            <li><strong>C)</strong> No field required</li>
+            <li><strong>D)</strong> Zero permeability always</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Saturation onset</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 29 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">In practical magnetic design, air gaps are often introduced to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> Eliminate inductance</li>
+            <li><strong>B)</strong> Store energy and control saturation</li>
+            <li><strong>C)</strong> Increase eddy current loss</li>
+            <li><strong>D)</strong> Reduce turns to zero</li>
+          </ul>
+          <div class="answer">Correct Answer: B) Store energy and control saturation</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 30 of 100</div>
+            <div class="topic">Conceptual</div>
+          </div>
+          <div class="q-text">If a magnetic path has two equal series sections, each with reluctance ℜ, total is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> ℜ/2</li>
+            <li><strong>B)</strong> ℜ</li>
+            <li><strong>C)</strong> 2ℜ</li>
+            <li><strong>D)</strong> 4ℜ</li>
+          </ul>
+          <div class="answer">Correct Answer: C) 2ℜ</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 31 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 120 turns carrying 0.6 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 72 At</li>
+            <li><strong>B)</strong> 36 At</li>
+            <li><strong>C)</strong> 144 At</li>
+            <li><strong>D)</strong> 192 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 72 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 32 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 140 turns carrying 0.7 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 98 At</li>
+            <li><strong>B)</strong> 49 At</li>
+            <li><strong>C)</strong> 196 At</li>
+            <li><strong>D)</strong> 238 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 98 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 33 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 160 turns carrying 0.8 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 128 At</li>
+            <li><strong>B)</strong> 64 At</li>
+            <li><strong>C)</strong> 256 At</li>
+            <li><strong>D)</strong> 288 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 128 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 34 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 180 turns carrying 0.9 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 162 At</li>
+            <li><strong>B)</strong> 81 At</li>
+            <li><strong>C)</strong> 324 At</li>
+            <li><strong>D)</strong> 342 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 162 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 35 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 200 turns carrying 1 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 200 At</li>
+            <li><strong>B)</strong> 100 At</li>
+            <li><strong>C)</strong> 400 At</li>
+            <li><strong>D)</strong> 420 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 200 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 36 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 220 turns carrying 1.1 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 242 At</li>
+            <li><strong>B)</strong> 121 At</li>
+            <li><strong>C)</strong> 484 At</li>
+            <li><strong>D)</strong> 462 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 242 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 37 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 240 turns carrying 1.2 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 288 At</li>
+            <li><strong>B)</strong> 144 At</li>
+            <li><strong>C)</strong> 576 At</li>
+            <li><strong>D)</strong> 528 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 288 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 38 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 260 turns carrying 1.3 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 338 At</li>
+            <li><strong>B)</strong> 169 At</li>
+            <li><strong>C)</strong> 676 At</li>
+            <li><strong>D)</strong> 598 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 338 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 39 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 280 turns carrying 1.4 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 392 At</li>
+            <li><strong>B)</strong> 196 At</li>
+            <li><strong>C)</strong> 784 At</li>
+            <li><strong>D)</strong> 672 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 392 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 40 of 100</div>
+            <div class="topic">MMF</div>
+          </div>
+          <div class="q-text">A coil has 300 turns carrying 1.5 A. The MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 450 At</li>
+            <li><strong>B)</strong> 225 At</li>
+            <li><strong>C)</strong> 900 At</li>
+            <li><strong>D)</strong> 750 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 450 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 41 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.105 m, area 2.1×10⁻⁴ m², and μr=420. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 9.474e+05 A/Wb</li>
+            <li><strong>B)</strong> 4.737e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.895e+06 A/Wb</li>
+            <li><strong>D)</strong> 1.184e+06 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 9.474e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 42 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.11 m, area 2.2×10⁻⁴ m², and μr=440. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 9.043e+05 A/Wb</li>
+            <li><strong>B)</strong> 4.521e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.809e+06 A/Wb</li>
+            <li><strong>D)</strong> 1.130e+06 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 9.043e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 43 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.115 m, area 2.3×10⁻⁴ m², and μr=460. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 8.650e+05 A/Wb</li>
+            <li><strong>B)</strong> 4.325e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.730e+06 A/Wb</li>
+            <li><strong>D)</strong> 1.081e+06 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 8.650e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 44 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.12 m, area 2.4×10⁻⁴ m², and μr=480. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 8.289e+05 A/Wb</li>
+            <li><strong>B)</strong> 4.145e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.658e+06 A/Wb</li>
+            <li><strong>D)</strong> 1.036e+06 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 8.289e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 45 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.125 m, area 2.5×10⁻⁴ m², and μr=500. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 7.958e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.979e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.592e+06 A/Wb</li>
+            <li><strong>D)</strong> 9.947e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 7.958e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 46 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.13 m, area 2.6×10⁻⁴ m², and μr=520. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 7.652e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.826e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.530e+06 A/Wb</li>
+            <li><strong>D)</strong> 9.565e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 7.652e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 47 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.135 m, area 2.7×10⁻⁴ m², and μr=540. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 7.368e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.684e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.474e+06 A/Wb</li>
+            <li><strong>D)</strong> 9.210e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 7.368e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 48 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.14 m, area 2.8×10⁻⁴ m², and μr=560. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 7.105e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.553e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.421e+06 A/Wb</li>
+            <li><strong>D)</strong> 8.881e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 7.105e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 49 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.145 m, area 2.9×10⁻⁴ m², and μr=580. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 6.860e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.430e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.372e+06 A/Wb</li>
+            <li><strong>D)</strong> 8.575e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 6.860e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 50 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.15 m, area 3×10⁻⁴ m², and μr=600. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 6.631e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.316e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.326e+06 A/Wb</li>
+            <li><strong>D)</strong> 8.289e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 6.631e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 51 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.155 m, area 3.1×10⁻⁴ m², and μr=620. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 6.418e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.209e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.284e+06 A/Wb</li>
+            <li><strong>D)</strong> 8.022e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 6.418e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 52 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.16 m, area 3.2×10⁻⁴ m², and μr=640. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 6.217e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.108e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.243e+06 A/Wb</li>
+            <li><strong>D)</strong> 7.771e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 6.217e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 53 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.165 m, area 3.3×10⁻⁴ m², and μr=660. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 6.029e+05 A/Wb</li>
+            <li><strong>B)</strong> 3.014e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.206e+06 A/Wb</li>
+            <li><strong>D)</strong> 7.536e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 6.029e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 54 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.17 m, area 3.4×10⁻⁴ m², and μr=680. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 5.851e+05 A/Wb</li>
+            <li><strong>B)</strong> 2.926e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.170e+06 A/Wb</li>
+            <li><strong>D)</strong> 7.314e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 5.851e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 55 of 100</div>
+            <div class="topic">Reluctance</div>
+          </div>
+          <div class="q-text">A core section has length 0.175 m, area 3.5×10⁻⁴ m², and μr=700. Its reluctance is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 5.684e+05 A/Wb</li>
+            <li><strong>B)</strong> 2.842e+05 A/Wb</li>
+            <li><strong>C)</strong> 1.137e+06 A/Wb</li>
+            <li><strong>D)</strong> 7.105e+05 A/Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 5.684e+05 A/Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 56 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 225 At and total reluctance = 1.600e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.406e-03 Wb</li>
+            <li><strong>B)</strong> 0.014062 Wb</li>
+            <li><strong>C)</strong> 1.406e-04 Wb</li>
+            <li><strong>D)</strong> 2.812e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.406e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 57 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 250 At and total reluctance = 1.700e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.471e-03 Wb</li>
+            <li><strong>B)</strong> 0.014706 Wb</li>
+            <li><strong>C)</strong> 1.471e-04 Wb</li>
+            <li><strong>D)</strong> 2.941e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.471e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 58 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 275 At and total reluctance = 1.800e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.528e-03 Wb</li>
+            <li><strong>B)</strong> 0.015278 Wb</li>
+            <li><strong>C)</strong> 1.528e-04 Wb</li>
+            <li><strong>D)</strong> 3.056e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.528e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 59 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 300 At and total reluctance = 1.900e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.579e-03 Wb</li>
+            <li><strong>B)</strong> 0.015789 Wb</li>
+            <li><strong>C)</strong> 1.579e-04 Wb</li>
+            <li><strong>D)</strong> 3.158e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.579e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 60 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 325 At and total reluctance = 2.000e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.625e-03 Wb</li>
+            <li><strong>B)</strong> 0.01625 Wb</li>
+            <li><strong>C)</strong> 1.625e-04 Wb</li>
+            <li><strong>D)</strong> 3.250e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.625e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 61 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 350 At and total reluctance = 2.100e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.667e-03 Wb</li>
+            <li><strong>B)</strong> 0.016667 Wb</li>
+            <li><strong>C)</strong> 1.667e-04 Wb</li>
+            <li><strong>D)</strong> 3.333e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.667e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 62 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 375 At and total reluctance = 2.200e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.705e-03 Wb</li>
+            <li><strong>B)</strong> 0.017045 Wb</li>
+            <li><strong>C)</strong> 1.705e-04 Wb</li>
+            <li><strong>D)</strong> 3.409e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.705e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 63 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 400 At and total reluctance = 2.300e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.739e-03 Wb</li>
+            <li><strong>B)</strong> 0.017391 Wb</li>
+            <li><strong>C)</strong> 1.739e-04 Wb</li>
+            <li><strong>D)</strong> 3.478e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.739e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 64 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 425 At and total reluctance = 2.400e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.771e-03 Wb</li>
+            <li><strong>B)</strong> 0.017708 Wb</li>
+            <li><strong>C)</strong> 1.771e-04 Wb</li>
+            <li><strong>D)</strong> 3.542e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.771e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 65 of 100</div>
+            <div class="topic">Flux</div>
+          </div>
+          <div class="q-text">If MMF = 450 At and total reluctance = 2.500e+05 A/Wb, flux Φ equals:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 1.800e-03 Wb</li>
+            <li><strong>B)</strong> 0.018 Wb</li>
+            <li><strong>C)</strong> 1.800e-04 Wb</li>
+            <li><strong>D)</strong> 3.600e-03 Wb</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 1.800e-03 Wb</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 66 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 2.3 mWb and A = 3.2×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 7.187 T</li>
+            <li><strong>B)</strong> 3.594 T</li>
+            <li><strong>C)</strong> 14.375 T</li>
+            <li><strong>D)</strong> 8.188 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 7.187 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 67 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 2.6 mWb and A = 3.4×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 7.647 T</li>
+            <li><strong>B)</strong> 3.824 T</li>
+            <li><strong>C)</strong> 15.294 T</li>
+            <li><strong>D)</strong> 8.647 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 7.647 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 68 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 2.9 mWb and A = 3.6×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 8.056 T</li>
+            <li><strong>B)</strong> 4.028 T</li>
+            <li><strong>C)</strong> 16.111 T</li>
+            <li><strong>D)</strong> 9.056 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 8.056 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 69 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 3.2 mWb and A = 3.8×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 8.421 T</li>
+            <li><strong>B)</strong> 4.211 T</li>
+            <li><strong>C)</strong> 16.842 T</li>
+            <li><strong>D)</strong> 9.421 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 8.421 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 70 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 3.5 mWb and A = 4×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 8.75 T</li>
+            <li><strong>B)</strong> 4.375 T</li>
+            <li><strong>C)</strong> 17.5 T</li>
+            <li><strong>D)</strong> 9.75 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 8.75 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 71 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 3.8 mWb and A = 4.2×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 9.048 T</li>
+            <li><strong>B)</strong> 4.524 T</li>
+            <li><strong>C)</strong> 18.095 T</li>
+            <li><strong>D)</strong> 10.048 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 9.048 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 72 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 4.1 mWb and A = 4.4×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 9.318 T</li>
+            <li><strong>B)</strong> 4.659 T</li>
+            <li><strong>C)</strong> 18.636 T</li>
+            <li><strong>D)</strong> 10.318 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 9.318 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 73 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 4.4 mWb and A = 4.6×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 9.565 T</li>
+            <li><strong>B)</strong> 4.783 T</li>
+            <li><strong>C)</strong> 19.13 T</li>
+            <li><strong>D)</strong> 10.565 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 9.565 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 74 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 4.7 mWb and A = 4.8×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 9.792 T</li>
+            <li><strong>B)</strong> 4.896 T</li>
+            <li><strong>C)</strong> 19.583 T</li>
+            <li><strong>D)</strong> 10.792 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 9.792 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 75 of 100</div>
+            <div class="topic">Flux Density</div>
+          </div>
+          <div class="q-text">Given Φ = 5 mWb and A = 5×10⁻⁴ m², flux density B is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 10 T</li>
+            <li><strong>B)</strong> 5 T</li>
+            <li><strong>C)</strong> 20 T</li>
+            <li><strong>D)</strong> 11 T</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 10 T</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 76 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 0.48 T in a material with μr=550, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 694.49 A/m</li>
+            <li><strong>B)</strong> 1.389e+03 A/m</li>
+            <li><strong>C)</strong> 347.25 A/m</li>
+            <li><strong>D)</strong> 794.49 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 694.49 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 77 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 0.56 T in a material with μr=600, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 742.72 A/m</li>
+            <li><strong>B)</strong> 1.485e+03 A/m</li>
+            <li><strong>C)</strong> 371.36 A/m</li>
+            <li><strong>D)</strong> 842.72 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 742.72 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 78 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 0.64 T in a material with μr=650, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 783.53 A/m</li>
+            <li><strong>B)</strong> 1.567e+03 A/m</li>
+            <li><strong>C)</strong> 391.77 A/m</li>
+            <li><strong>D)</strong> 883.53 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 783.53 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 79 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 0.72 T in a material with μr=700, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 818.51 A/m</li>
+            <li><strong>B)</strong> 1.637e+03 A/m</li>
+            <li><strong>C)</strong> 409.26 A/m</li>
+            <li><strong>D)</strong> 918.51 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 818.51 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 80 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 0.8 T in a material with μr=750, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 848.83 A/m</li>
+            <li><strong>B)</strong> 1.698e+03 A/m</li>
+            <li><strong>C)</strong> 424.41 A/m</li>
+            <li><strong>D)</strong> 948.83 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 848.83 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 81 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 0.88 T in a material with μr=800, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 875.35 A/m</li>
+            <li><strong>B)</strong> 1.751e+03 A/m</li>
+            <li><strong>C)</strong> 437.68 A/m</li>
+            <li><strong>D)</strong> 975.35 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 875.35 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 82 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 0.96 T in a material with μr=850, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 898.76 A/m</li>
+            <li><strong>B)</strong> 1.798e+03 A/m</li>
+            <li><strong>C)</strong> 449.38 A/m</li>
+            <li><strong>D)</strong> 998.76 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 898.76 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 83 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 1.04 T in a material with μr=900, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 919.56 A/m</li>
+            <li><strong>B)</strong> 1.839e+03 A/m</li>
+            <li><strong>C)</strong> 459.78 A/m</li>
+            <li><strong>D)</strong> 1.020e+03 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 919.56 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 84 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 1.12 T in a material with μr=950, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 938.18 A/m</li>
+            <li><strong>B)</strong> 1.876e+03 A/m</li>
+            <li><strong>C)</strong> 469.09 A/m</li>
+            <li><strong>D)</strong> 1.038e+03 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 938.18 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 85 of 100</div>
+            <div class="topic">Field Strength</div>
+          </div>
+          <div class="q-text">For B = 1.2 T in a material with μr=1000, field strength H is closest to:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 954.93 A/m</li>
+            <li><strong>B)</strong> 1.910e+03 A/m</li>
+            <li><strong>C)</strong> 477.46 A/m</li>
+            <li><strong>D)</strong> 1.055e+03 A/m</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 954.93 A/m</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 86 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.55 mm carries B = 0.55 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 240.72 At</li>
+            <li><strong>B)</strong> 481.44 At</li>
+            <li><strong>C)</strong> 120.36 At</li>
+            <li><strong>D)</strong> 290.72 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 240.72 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 87 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.6 mm carries B = 0.6 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 286.48 At</li>
+            <li><strong>B)</strong> 572.96 At</li>
+            <li><strong>C)</strong> 143.24 At</li>
+            <li><strong>D)</strong> 336.48 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 286.48 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 88 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.65 mm carries B = 0.65 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 336.21 At</li>
+            <li><strong>B)</strong> 672.43 At</li>
+            <li><strong>C)</strong> 168.11 At</li>
+            <li><strong>D)</strong> 386.21 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 336.21 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 89 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.7 mm carries B = 0.7 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 389.93 At</li>
+            <li><strong>B)</strong> 779.86 At</li>
+            <li><strong>C)</strong> 194.96 At</li>
+            <li><strong>D)</strong> 439.93 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 389.93 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 90 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.75 mm carries B = 0.75 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 447.62 At</li>
+            <li><strong>B)</strong> 895.25 At</li>
+            <li><strong>C)</strong> 223.81 At</li>
+            <li><strong>D)</strong> 497.62 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 447.62 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 91 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.8 mm carries B = 0.8 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 509.3 At</li>
+            <li><strong>B)</strong> 1.019e+03 At</li>
+            <li><strong>C)</strong> 254.65 At</li>
+            <li><strong>D)</strong> 559.3 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 509.3 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 92 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.85 mm carries B = 0.85 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 574.95 At</li>
+            <li><strong>B)</strong> 1.150e+03 At</li>
+            <li><strong>C)</strong> 287.47 At</li>
+            <li><strong>D)</strong> 624.95 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 574.95 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 93 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.9 mm carries B = 0.9 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 644.58 At</li>
+            <li><strong>B)</strong> 1.289e+03 At</li>
+            <li><strong>C)</strong> 322.29 At</li>
+            <li><strong>D)</strong> 694.58 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 644.58 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 94 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 0.95 mm carries B = 0.95 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 718.19 At</li>
+            <li><strong>B)</strong> 1.436e+03 At</li>
+            <li><strong>C)</strong> 359.09 At</li>
+            <li><strong>D)</strong> 768.19 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 718.19 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 95 of 100</div>
+            <div class="topic">Air Gap</div>
+          </div>
+          <div class="q-text">An air gap of length 1 mm carries B = 1 T. Required gap MMF is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 795.77 At</li>
+            <li><strong>B)</strong> 1.592e+03 At</li>
+            <li><strong>C)</strong> 397.89 At</li>
+            <li><strong>D)</strong> 845.77 At</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 795.77 At</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 96 of 100</div>
+            <div class="topic">Inductance</div>
+          </div>
+          <div class="q-text">A magnetic circuit has N=240 turns and reluctance 2.250e+05 A/Wb. Inductance L is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 0.256 H</li>
+            <li><strong>B)</strong> 0.512 H</li>
+            <li><strong>C)</strong> 0.128 H</li>
+            <li><strong>D)</strong> 0.266 H</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 0.256 H</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 97 of 100</div>
+            <div class="topic">Inductance</div>
+          </div>
+          <div class="q-text">A magnetic circuit has N=280 turns and reluctance 2.500e+05 A/Wb. Inductance L is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 0.3136 H</li>
+            <li><strong>B)</strong> 0.6272 H</li>
+            <li><strong>C)</strong> 0.1568 H</li>
+            <li><strong>D)</strong> 0.3236 H</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 0.3136 H</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 98 of 100</div>
+            <div class="topic">Inductance</div>
+          </div>
+          <div class="q-text">A magnetic circuit has N=320 turns and reluctance 2.750e+05 A/Wb. Inductance L is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 0.3724 H</li>
+            <li><strong>B)</strong> 0.7447 H</li>
+            <li><strong>C)</strong> 0.1862 H</li>
+            <li><strong>D)</strong> 0.3824 H</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 0.3724 H</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 99 of 100</div>
+            <div class="topic">Inductance</div>
+          </div>
+          <div class="q-text">A magnetic circuit has N=360 turns and reluctance 3.000e+05 A/Wb. Inductance L is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 0.432 H</li>
+            <li><strong>B)</strong> 0.864 H</li>
+            <li><strong>C)</strong> 0.216 H</li>
+            <li><strong>D)</strong> 0.442 H</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 0.432 H</div>
+        </article>
+        <article class="question">
+          <div class="q-top">
+            <div class="q-num">Question 100 of 100</div>
+            <div class="topic">Inductance</div>
+          </div>
+          <div class="q-text">A magnetic circuit has N=400 turns and reluctance 3.250e+05 A/Wb. Inductance L is:</div>
+          <ul class="opts">
+            <li><strong>A)</strong> 0.4923 H</li>
+            <li><strong>B)</strong> 0.9846 H</li>
+            <li><strong>C)</strong> 0.2462 H</li>
+            <li><strong>D)</strong> 0.5023 H</li>
+          </ul>
+          <div class="answer">Correct Answer: A) 0.4923 H</div>
+        </article>
+    </div>
+
+    <div class="footer">Prepared as a high-volume rigorous practice set on magnetic circuits.</div>
+  </div>
+
+  <script>
+    const questions = [
+  {
+    "topic": "Conceptual",
+    "q": "The magnetic-circuit equivalent of electric current is:",
+    "opts": [
+      "MMF",
+      "Flux",
+      "Reluctance",
+      "Permeability"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "The magnetic-circuit equivalent of voltage is:",
+    "opts": [
+      "MMF",
+      "Flux density",
+      "Permeance",
+      "Magnetization"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Conceptual",
+    "q": "The SI unit of magnetomotive force (MMF) is:",
+    "opts": [
+      "A/Wb",
+      "Ampere-turn (At)",
+      "Henry",
+      "Tesla"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Reluctance of a magnetic path is directly proportional to:",
+    "opts": [
+      "Cross-sectional area",
+      "Permeability",
+      "Path length",
+      "Number of turns"
+    ],
+    "ans": 2
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Reluctance of a magnetic path is inversely proportional to:",
+    "opts": [
+      "Path length",
+      "MMF",
+      "Cross-sectional area and permeability",
+      "Current only"
+    ],
+    "ans": 2
+  },
+  {
+    "topic": "Conceptual",
+    "q": "For a given flux, adding an air gap in a magnetic circuit generally:",
+    "opts": [
+      "Decreases required MMF",
+      "Increases required MMF",
+      "Has no effect",
+      "Makes reluctance zero"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Magnetic flux density B is measured in:",
+    "opts": [
+      "A/m",
+      "Wb/m",
+      "Tesla",
+      "Ampere-turn"
+    ],
+    "ans": 2
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Magnetic field strength H is measured in:",
+    "opts": [
+      "Tesla",
+      "Wb",
+      "A/m",
+      "N"
+    ],
+    "ans": 2
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Permeability of free space μ0 is approximately:",
+    "opts": [
+      "4π × 10⁻⁷ H/m",
+      "8.85 × 10⁻¹² F/m",
+      "1.6 × 10⁻¹⁹ C",
+      "9.81 m/s²"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Conceptual",
+    "q": "In a linear magnetic material, B-H relationship is:",
+    "opts": [
+      "Exponential",
+      "Linear",
+      "Logarithmic",
+      "Independent"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Relative permeability μr of air is closest to:",
+    "opts": [
+      "0",
+      "1",
+      "100",
+      "1000"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "If cross-sectional area doubles (all else fixed), reluctance:",
+    "opts": [
+      "Doubles",
+      "Halves",
+      "Remains same",
+      "Becomes zero"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Permeance is:",
+    "opts": [
+      "Inverse of reluctance",
+      "Product of reluctance and flux",
+      "Same as MMF",
+      "Inverse of flux"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Flux leakage in magnetic circuits means:",
+    "opts": [
+      "All flux follows intended path",
+      "Part of flux takes unintended paths",
+      "Flux becomes zero",
+      "Current leakage in windings"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Fringing at an air gap tends to:",
+    "opts": [
+      "Reduce effective gap area",
+      "Increase effective gap area",
+      "Eliminate gap reluctance",
+      "Reverse flux"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Hysteresis loss mainly depends on:",
+    "opts": [
+      "Frequency and Bmax",
+      "Wire resistance only",
+      "Cross-section only",
+      "Turns only"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Eddy-current loss can be reduced by:",
+    "opts": [
+      "Using solid thick core",
+      "Laminating the core",
+      "Increasing conductivity",
+      "Removing insulation between laminations"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Saturation in a magnetic core means:",
+    "opts": [
+      "B increases linearly forever",
+      "Very large increase in H gives small increase in B",
+      "H becomes zero",
+      "Flux becomes infinite"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "In magnetic circuits, Hopkinson’s law is:",
+    "opts": [
+      "Φ = MMF / Reluctance",
+      "MMF = Φ × Reluctance",
+      "Both A and B",
+      "Neither"
+    ],
+    "ans": 2
+  },
+  {
+    "topic": "Conceptual",
+    "q": "In a series magnetic circuit, total reluctance is:",
+    "opts": [
+      "Sum of individual reluctances",
+      "Product of reluctances",
+      "Inverse sum",
+      "Equal to smallest reluctance"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Conceptual",
+    "q": "In parallel magnetic paths, flux divides according to:",
+    "opts": [
+      "Path length only",
+      "Reluctances of branches",
+      "Turns in coil only",
+      "Current density"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Core with very high μr compared with air gap implies:",
+    "opts": [
+      "Gap reluctance often dominates",
+      "Core reluctance dominates",
+      "No flux can pass",
+      "MMF is zero"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Magnetic energy in an inductor is:",
+    "opts": [
+      "(1/2)LI²",
+      "LI",
+      "I²/R",
+      "(1/2)CV²"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Unit of magnetic flux is:",
+    "opts": [
+      "Tesla",
+      "Weber",
+      "Henry",
+      "Joule"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "If number of turns N doubles at same current, MMF:",
+    "opts": [
+      "Halves",
+      "Doubles",
+      "Quadruples",
+      "Unchanged"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "For same core and flux, increasing μr generally:",
+    "opts": [
+      "Increases reluctance",
+      "Decreases reluctance",
+      "No effect",
+      "Decreases area"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "B = Φ/A indicates for fixed Φ, reducing area causes B to:",
+    "opts": [
+      "Decrease",
+      "Increase",
+      "Remain same",
+      "Become zero"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "Magnetization curve beyond knee region suggests:",
+    "opts": [
+      "Unsaturated linear region",
+      "Saturation onset",
+      "No field required",
+      "Zero permeability always"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "In practical magnetic design, air gaps are often introduced to:",
+    "opts": [
+      "Eliminate inductance",
+      "Store energy and control saturation",
+      "Increase eddy current loss",
+      "Reduce turns to zero"
+    ],
+    "ans": 1
+  },
+  {
+    "topic": "Conceptual",
+    "q": "If a magnetic path has two equal series sections, each with reluctance ℜ, total is:",
+    "opts": [
+      "ℜ/2",
+      "ℜ",
+      "2ℜ",
+      "4ℜ"
+    ],
+    "ans": 2
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 120 turns carrying 0.6 A. The MMF is:",
+    "opts": [
+      "72 At",
+      "36 At",
+      "144 At",
+      "192 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 140 turns carrying 0.7 A. The MMF is:",
+    "opts": [
+      "98 At",
+      "49 At",
+      "196 At",
+      "238 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 160 turns carrying 0.8 A. The MMF is:",
+    "opts": [
+      "128 At",
+      "64 At",
+      "256 At",
+      "288 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 180 turns carrying 0.9 A. The MMF is:",
+    "opts": [
+      "162 At",
+      "81 At",
+      "324 At",
+      "342 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 200 turns carrying 1 A. The MMF is:",
+    "opts": [
+      "200 At",
+      "100 At",
+      "400 At",
+      "420 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 220 turns carrying 1.1 A. The MMF is:",
+    "opts": [
+      "242 At",
+      "121 At",
+      "484 At",
+      "462 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 240 turns carrying 1.2 A. The MMF is:",
+    "opts": [
+      "288 At",
+      "144 At",
+      "576 At",
+      "528 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 260 turns carrying 1.3 A. The MMF is:",
+    "opts": [
+      "338 At",
+      "169 At",
+      "676 At",
+      "598 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 280 turns carrying 1.4 A. The MMF is:",
+    "opts": [
+      "392 At",
+      "196 At",
+      "784 At",
+      "672 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "MMF",
+    "q": "A coil has 300 turns carrying 1.5 A. The MMF is:",
+    "opts": [
+      "450 At",
+      "225 At",
+      "900 At",
+      "750 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.105 m, area 2.1×10⁻⁴ m², and μr=420. Its reluctance is closest to:",
+    "opts": [
+      "9.474e+05 A/Wb",
+      "4.737e+05 A/Wb",
+      "1.895e+06 A/Wb",
+      "1.184e+06 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.11 m, area 2.2×10⁻⁴ m², and μr=440. Its reluctance is closest to:",
+    "opts": [
+      "9.043e+05 A/Wb",
+      "4.521e+05 A/Wb",
+      "1.809e+06 A/Wb",
+      "1.130e+06 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.115 m, area 2.3×10⁻⁴ m², and μr=460. Its reluctance is closest to:",
+    "opts": [
+      "8.650e+05 A/Wb",
+      "4.325e+05 A/Wb",
+      "1.730e+06 A/Wb",
+      "1.081e+06 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.12 m, area 2.4×10⁻⁴ m², and μr=480. Its reluctance is closest to:",
+    "opts": [
+      "8.289e+05 A/Wb",
+      "4.145e+05 A/Wb",
+      "1.658e+06 A/Wb",
+      "1.036e+06 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.125 m, area 2.5×10⁻⁴ m², and μr=500. Its reluctance is closest to:",
+    "opts": [
+      "7.958e+05 A/Wb",
+      "3.979e+05 A/Wb",
+      "1.592e+06 A/Wb",
+      "9.947e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.13 m, area 2.6×10⁻⁴ m², and μr=520. Its reluctance is closest to:",
+    "opts": [
+      "7.652e+05 A/Wb",
+      "3.826e+05 A/Wb",
+      "1.530e+06 A/Wb",
+      "9.565e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.135 m, area 2.7×10⁻⁴ m², and μr=540. Its reluctance is closest to:",
+    "opts": [
+      "7.368e+05 A/Wb",
+      "3.684e+05 A/Wb",
+      "1.474e+06 A/Wb",
+      "9.210e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.14 m, area 2.8×10⁻⁴ m², and μr=560. Its reluctance is closest to:",
+    "opts": [
+      "7.105e+05 A/Wb",
+      "3.553e+05 A/Wb",
+      "1.421e+06 A/Wb",
+      "8.881e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.145 m, area 2.9×10⁻⁴ m², and μr=580. Its reluctance is closest to:",
+    "opts": [
+      "6.860e+05 A/Wb",
+      "3.430e+05 A/Wb",
+      "1.372e+06 A/Wb",
+      "8.575e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.15 m, area 3×10⁻⁴ m², and μr=600. Its reluctance is closest to:",
+    "opts": [
+      "6.631e+05 A/Wb",
+      "3.316e+05 A/Wb",
+      "1.326e+06 A/Wb",
+      "8.289e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.155 m, area 3.1×10⁻⁴ m², and μr=620. Its reluctance is closest to:",
+    "opts": [
+      "6.418e+05 A/Wb",
+      "3.209e+05 A/Wb",
+      "1.284e+06 A/Wb",
+      "8.022e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.16 m, area 3.2×10⁻⁴ m², and μr=640. Its reluctance is closest to:",
+    "opts": [
+      "6.217e+05 A/Wb",
+      "3.108e+05 A/Wb",
+      "1.243e+06 A/Wb",
+      "7.771e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.165 m, area 3.3×10⁻⁴ m², and μr=660. Its reluctance is closest to:",
+    "opts": [
+      "6.029e+05 A/Wb",
+      "3.014e+05 A/Wb",
+      "1.206e+06 A/Wb",
+      "7.536e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.17 m, area 3.4×10⁻⁴ m², and μr=680. Its reluctance is closest to:",
+    "opts": [
+      "5.851e+05 A/Wb",
+      "2.926e+05 A/Wb",
+      "1.170e+06 A/Wb",
+      "7.314e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Reluctance",
+    "q": "A core section has length 0.175 m, area 3.5×10⁻⁴ m², and μr=700. Its reluctance is closest to:",
+    "opts": [
+      "5.684e+05 A/Wb",
+      "2.842e+05 A/Wb",
+      "1.137e+06 A/Wb",
+      "7.105e+05 A/Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 225 At and total reluctance = 1.600e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.406e-03 Wb",
+      "0.014062 Wb",
+      "1.406e-04 Wb",
+      "2.812e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 250 At and total reluctance = 1.700e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.471e-03 Wb",
+      "0.014706 Wb",
+      "1.471e-04 Wb",
+      "2.941e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 275 At and total reluctance = 1.800e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.528e-03 Wb",
+      "0.015278 Wb",
+      "1.528e-04 Wb",
+      "3.056e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 300 At and total reluctance = 1.900e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.579e-03 Wb",
+      "0.015789 Wb",
+      "1.579e-04 Wb",
+      "3.158e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 325 At and total reluctance = 2.000e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.625e-03 Wb",
+      "0.01625 Wb",
+      "1.625e-04 Wb",
+      "3.250e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 350 At and total reluctance = 2.100e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.667e-03 Wb",
+      "0.016667 Wb",
+      "1.667e-04 Wb",
+      "3.333e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 375 At and total reluctance = 2.200e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.705e-03 Wb",
+      "0.017045 Wb",
+      "1.705e-04 Wb",
+      "3.409e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 400 At and total reluctance = 2.300e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.739e-03 Wb",
+      "0.017391 Wb",
+      "1.739e-04 Wb",
+      "3.478e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 425 At and total reluctance = 2.400e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.771e-03 Wb",
+      "0.017708 Wb",
+      "1.771e-04 Wb",
+      "3.542e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux",
+    "q": "If MMF = 450 At and total reluctance = 2.500e+05 A/Wb, flux Φ equals:",
+    "opts": [
+      "1.800e-03 Wb",
+      "0.018 Wb",
+      "1.800e-04 Wb",
+      "3.600e-03 Wb"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 2.3 mWb and A = 3.2×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "7.187 T",
+      "3.594 T",
+      "14.375 T",
+      "8.188 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 2.6 mWb and A = 3.4×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "7.647 T",
+      "3.824 T",
+      "15.294 T",
+      "8.647 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 2.9 mWb and A = 3.6×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "8.056 T",
+      "4.028 T",
+      "16.111 T",
+      "9.056 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 3.2 mWb and A = 3.8×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "8.421 T",
+      "4.211 T",
+      "16.842 T",
+      "9.421 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 3.5 mWb and A = 4×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "8.75 T",
+      "4.375 T",
+      "17.5 T",
+      "9.75 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 3.8 mWb and A = 4.2×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "9.048 T",
+      "4.524 T",
+      "18.095 T",
+      "10.048 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 4.1 mWb and A = 4.4×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "9.318 T",
+      "4.659 T",
+      "18.636 T",
+      "10.318 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 4.4 mWb and A = 4.6×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "9.565 T",
+      "4.783 T",
+      "19.13 T",
+      "10.565 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 4.7 mWb and A = 4.8×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "9.792 T",
+      "4.896 T",
+      "19.583 T",
+      "10.792 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Flux Density",
+    "q": "Given Φ = 5 mWb and A = 5×10⁻⁴ m², flux density B is:",
+    "opts": [
+      "10 T",
+      "5 T",
+      "20 T",
+      "11 T"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 0.48 T in a material with μr=550, field strength H is closest to:",
+    "opts": [
+      "694.49 A/m",
+      "1.389e+03 A/m",
+      "347.25 A/m",
+      "794.49 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 0.56 T in a material with μr=600, field strength H is closest to:",
+    "opts": [
+      "742.72 A/m",
+      "1.485e+03 A/m",
+      "371.36 A/m",
+      "842.72 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 0.64 T in a material with μr=650, field strength H is closest to:",
+    "opts": [
+      "783.53 A/m",
+      "1.567e+03 A/m",
+      "391.77 A/m",
+      "883.53 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 0.72 T in a material with μr=700, field strength H is closest to:",
+    "opts": [
+      "818.51 A/m",
+      "1.637e+03 A/m",
+      "409.26 A/m",
+      "918.51 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 0.8 T in a material with μr=750, field strength H is closest to:",
+    "opts": [
+      "848.83 A/m",
+      "1.698e+03 A/m",
+      "424.41 A/m",
+      "948.83 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 0.88 T in a material with μr=800, field strength H is closest to:",
+    "opts": [
+      "875.35 A/m",
+      "1.751e+03 A/m",
+      "437.68 A/m",
+      "975.35 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 0.96 T in a material with μr=850, field strength H is closest to:",
+    "opts": [
+      "898.76 A/m",
+      "1.798e+03 A/m",
+      "449.38 A/m",
+      "998.76 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 1.04 T in a material with μr=900, field strength H is closest to:",
+    "opts": [
+      "919.56 A/m",
+      "1.839e+03 A/m",
+      "459.78 A/m",
+      "1.020e+03 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 1.12 T in a material with μr=950, field strength H is closest to:",
+    "opts": [
+      "938.18 A/m",
+      "1.876e+03 A/m",
+      "469.09 A/m",
+      "1.038e+03 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Field Strength",
+    "q": "For B = 1.2 T in a material with μr=1000, field strength H is closest to:",
+    "opts": [
+      "954.93 A/m",
+      "1.910e+03 A/m",
+      "477.46 A/m",
+      "1.055e+03 A/m"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.55 mm carries B = 0.55 T. Required gap MMF is:",
+    "opts": [
+      "240.72 At",
+      "481.44 At",
+      "120.36 At",
+      "290.72 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.6 mm carries B = 0.6 T. Required gap MMF is:",
+    "opts": [
+      "286.48 At",
+      "572.96 At",
+      "143.24 At",
+      "336.48 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.65 mm carries B = 0.65 T. Required gap MMF is:",
+    "opts": [
+      "336.21 At",
+      "672.43 At",
+      "168.11 At",
+      "386.21 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.7 mm carries B = 0.7 T. Required gap MMF is:",
+    "opts": [
+      "389.93 At",
+      "779.86 At",
+      "194.96 At",
+      "439.93 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.75 mm carries B = 0.75 T. Required gap MMF is:",
+    "opts": [
+      "447.62 At",
+      "895.25 At",
+      "223.81 At",
+      "497.62 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.8 mm carries B = 0.8 T. Required gap MMF is:",
+    "opts": [
+      "509.3 At",
+      "1.019e+03 At",
+      "254.65 At",
+      "559.3 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.85 mm carries B = 0.85 T. Required gap MMF is:",
+    "opts": [
+      "574.95 At",
+      "1.150e+03 At",
+      "287.47 At",
+      "624.95 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.9 mm carries B = 0.9 T. Required gap MMF is:",
+    "opts": [
+      "644.58 At",
+      "1.289e+03 At",
+      "322.29 At",
+      "694.58 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 0.95 mm carries B = 0.95 T. Required gap MMF is:",
+    "opts": [
+      "718.19 At",
+      "1.436e+03 At",
+      "359.09 At",
+      "768.19 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Air Gap",
+    "q": "An air gap of length 1 mm carries B = 1 T. Required gap MMF is:",
+    "opts": [
+      "795.77 At",
+      "1.592e+03 At",
+      "397.89 At",
+      "845.77 At"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Inductance",
+    "q": "A magnetic circuit has N=240 turns and reluctance 2.250e+05 A/Wb. Inductance L is:",
+    "opts": [
+      "0.256 H",
+      "0.512 H",
+      "0.128 H",
+      "0.266 H"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Inductance",
+    "q": "A magnetic circuit has N=280 turns and reluctance 2.500e+05 A/Wb. Inductance L is:",
+    "opts": [
+      "0.3136 H",
+      "0.6272 H",
+      "0.1568 H",
+      "0.3236 H"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Inductance",
+    "q": "A magnetic circuit has N=320 turns and reluctance 2.750e+05 A/Wb. Inductance L is:",
+    "opts": [
+      "0.3724 H",
+      "0.7447 H",
+      "0.1862 H",
+      "0.3824 H"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Inductance",
+    "q": "A magnetic circuit has N=360 turns and reluctance 3.000e+05 A/Wb. Inductance L is:",
+    "opts": [
+      "0.432 H",
+      "0.864 H",
+      "0.216 H",
+      "0.442 H"
+    ],
+    "ans": 0
+  },
+  {
+    "topic": "Inductance",
+    "q": "A magnetic circuit has N=400 turns and reluctance 3.250e+05 A/Wb. Inductance L is:",
+    "opts": [
+      "0.4923 H",
+      "0.9846 H",
+      "0.2462 H",
+      "0.5023 H"
+    ],
+    "ans": 0
+  }
+];
+
+    function downloadTxt() {
+      const letters = ['A', 'B', 'C', 'D'];
+      let out = 'Magnetic Circuits — Rigorous 100 MCQ Test\n';
+      out += '='.repeat(50) + '\n\n';
+
+      questions.forEach((q, idx) => {
+        out += `${idx + 1}. ${q.q}\n`;
+        q.opts.forEach((op, i) => (out += `   ${letters[i]}) ${op}\n`));
+        out += `   Correct Answer: ${letters[q.ans]}) ${q.opts[q.ans]}\n\n`;
+      });
+
+      const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'magnetic-circuits-rigorous-100-mcq.txt';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    }
+  </script>
+</body>
+</html>
